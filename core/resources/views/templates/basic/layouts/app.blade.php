@@ -49,7 +49,7 @@
 
     <!-- Scroll To Top -->
     <a class="scroll-top show"><i class="fas fa-angle-double-up"></i></a>
-    {{-- @include('templates.basic.partials.header') --}}
+    @include('templates.basic.partials.header')
 
     @yield('panel')
 
