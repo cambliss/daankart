@@ -38,9 +38,8 @@
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^10.5",
-        "sebastian/version": "^3.0",
+        "nunomaduro/collision": "^8.0",
         "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
@@ -83,18 +82,18 @@
             "dont-discover": []
         }
     },
-"config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "allow-plugins": {
-        "pestphp/pest-plugin": true,
-        "php-http/discovery": true
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.3.19"
+        }
     },
-    "platform": {
-        "php": "8.0.30"
-    }
-},
     "minimum-stability": "stable",
     "prefer-stable": true
 }

@@ -81,6 +81,7 @@ Route::middleware('auth')->name('user.')->group(function () {
                 Route::get('fundrise', 'create')->name('create');
                 Route::get('edit/{id}', 'edit')->name('edit');
                 Route::post('store/{id?}', 'storeCampaign')->name('store');
+                Route::post('save/{id?}', 'saveCampaign')->name('save');
 
                 Route::get('approved', 'approvedCampaign')->name('approved');
                 Route::get('pending', 'pendingCampaign')->name('pending');
