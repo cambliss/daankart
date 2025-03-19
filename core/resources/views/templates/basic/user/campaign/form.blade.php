@@ -150,7 +150,6 @@
         let selectedProducts = [];
     @endif
     $(document).ready(function() {
-        document.getElementById("product_list_hidden").value = JSON.stringify(selectedProducts);
         updateProductList();
     });
     function nextStep(step) {
@@ -203,7 +202,7 @@
             listItem.innerHTML = `<span>${item.product_name} - ${item.quantity} pcs - ₹${item.total}</span><button style="float: right;" onclick="removeProduct(${index})">❌</button>`;
             list.appendChild(listItem);
         });
-        
+        document.getElementById("product_list_hidden").value = JSON.stringify(selectedProducts);
     }
 
     function removeProduct(index) {

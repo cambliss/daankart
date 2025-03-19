@@ -28,7 +28,7 @@ class CampaignController extends Controller
                 $query->where('is_kyc_varified', 0)->orWhereNull('is_kyc_varified');
             })->with('products')->find($request->id);
         } else {
-            $campaign = DaanCampaign::where('user_id', auth()->id())->with('products')->first();
+            $campaign = DaanCampaign::where('user_id', auth()->id())->where('is_kyc_varified', 0)->with('products')->first();
         }
         $user      = auth()->user();
         $isAdmin = $user->firstname == "admin";
@@ -305,6 +305,8 @@ class CampaignController extends Controller
             $document->save();
             $campaign->is_kyc_varified = 1;
             $campaign->save();
+            $notify[] = ['success', 'Campaign added successfully'];
+            return redirect()->route('user.campaign.fundrise.all')->withNotify($notify);
         }
         return redirect()->route('user.campaign.fundrise.create', ['step' => $step, 'id' => $campaign->id]);
     }
@@ -468,7 +470,10 @@ class CampaignController extends Controller
     {
         $pageTitle = "All Campaigns";
         $campaigns = Campaign::searchable(['title'])->where('user_id', auth()->user()->id)->with('donations', 'category')->orderBy('id', "desc")->paginate(getPaginate());
-        return view('Template::user.campaign.all', compact('pageTitle', 'campaigns'));
+        $daanCampaigns = DaanCampaign::where('user_id', auth()->id())->where(function($query) {
+            $query->where('is_kyc_varified', 0)->orWhereNull('is_kyc_varified');
+        })->get();
+        return view('Template::user.campaign.all', compact('pageTitle', 'campaigns', 'daanCampaigns'));
     }
 
     public function campaignUpdation($id)

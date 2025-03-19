@@ -46,7 +46,7 @@ Route::controller('CampaignController')->prefix('campaign')->name('campaign.')->
     Route::get('campaign', 'filterCampaign')->name('filter');
     Route::get('explore/{slug}', 'details')->name('details');
     Route::get('widget/{id}', 'widget')->name('widget');
-
+    Route::get('details/{id}', 'daanDetails')->name('daan_details');
     // API route to fetch donation progress dynamically
     Route::get('progress/{id}', 'getCampaignProgress')->name('progress');
 

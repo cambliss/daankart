@@ -11,12 +11,22 @@ use App\Models\Page;
 use App\Models\Product;
 use App\Models\CampaignProduct;
 use App\Models\DaanProject;
+use App\Models\DaanCampaign;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
 {
+    public function daanDetails(Request $request, $id)
+    {
+        $campaign = DaanCampaign::with('products')->find($id);
+        //dd($campaign);
+        $pageTitle = $campaign->campaign_title;
+        return view('Template::campaign.daan_details', compact('campaign'));
+    }
+
     public function index()
     {
         $pageTitle = 'Campaigns';
