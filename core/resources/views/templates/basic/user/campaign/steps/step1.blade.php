@@ -5,18 +5,9 @@
     @csrf
     <label>Select Cause</label>
     <select id="cause" class="form-control" name="cause" >
-        <option value="Medical">Medical</option>
-        <option value="Elderly">Elderly</option>
-        <option value="Education">Education</option>
-        <option value="Food & Nutrition">Animals</option>
-        <option value="Sanitary & Hygiene">Children</option>
-        <option value="Transport & Emergency">Faith</option>
-        <option value="Home Construction & Shelter">Hunger</option>
-        <option value="Home Construction & Shelter">Women</option>
-        <option value="Home Construction & Shelter">TransGender</option>
-        <option value="Home Construction & Shelter">Specially Abled</option>
-        <option value="Home Construction & Shelter">Covid 19</option>
-        <option value="Home Construction & Shelter">Others</option>
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
     </select>
 
     <label>Name</label>

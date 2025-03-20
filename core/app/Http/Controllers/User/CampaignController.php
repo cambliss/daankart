@@ -17,6 +17,8 @@ use App\Rules\FileTypeValidate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
+define('DAAN_CAMPAIGN_FINAL_STEP', 5);
+
 class CampaignController extends Controller
 {
     public function create(Request $request)
@@ -28,11 +30,18 @@ class CampaignController extends Controller
                 $query->where('is_kyc_varified', 0)->orWhereNull('is_kyc_varified');
             })->with('products')->find($request->id);
         } else {
-            $campaign = DaanCampaign::where('user_id', auth()->id())->where('is_kyc_varified', 0)->with('products')->first();
+            $campaign = DaanCampaign::where('user_id', auth()->id())->where('is_kyc_varified', 0)
+            ->with('products')
+            ->orderBy('id', 'DESC')
+            ->first();
         }
         $user      = auth()->user();
         $isAdmin = $user->firstname == "admin";
-        $step = ($request->step ?? 1);
+        if(isset($campaign->tab)) {
+            $step = $campaign->tab ?? 1;
+        } else {
+            $step = ($request->step ?? 1) + 1;
+        }
         $id = ($request->id ?? 0);
         if($isAdmin) {
             return view('Template::admin.campaign.form', compact('pageTitle', 'categories','isAdmin','step','id','campaign'));
@@ -233,12 +242,12 @@ class CampaignController extends Controller
         $campaign->user_id = $user->id;
         if($step == 1 ){
             $request->validate([
-                'cause' => 'required|string',
+                'category_id' => 'required|string',
                 'campaigner_name' => 'required|string',
                 'mobile_number' => 'required|string',
                 'email' => 'required|string'
             ]);
-            $campaign->cause = $request->cause;
+            $campaign->category_id = $request->category_id;
             $campaign->campaigner_name = $request->campaigner_name;
             $campaign->mobile_number = $request->mobile_number;
             $campaign->email = $request->email;
@@ -265,7 +274,7 @@ class CampaignController extends Controller
             $campaign->campaign_description = $request->campaign_description;
             $campaign->image = fileUploader($request->campaign_image, getFilePath('campaign'), getFileSize('campaign'));
             $campaign->save();
-        } else if($step == 4){
+        } else if($step == 4) {
             $request->validate([
                 'product_list' => 'required|string',
             ]);
@@ -282,8 +291,15 @@ class CampaignController extends Controller
             }
             $campaign->status = "Completed";
             $campaign->save();
+        } else if($step == DAAN_CAMPAIGN_FINAL_STEP) {
+            $request->validate([
+                'page_json' => 'required|string',
+            ]);   
+            $page_json = json_decode($request->page_json);
+            $campaign->page_json = json_encode($page_json);
+            $campaign->save();
         }
-        if($step < 4) $step = $step + 1;
+        if($step < DAAN_CAMPAIGN_FINAL_STEP) $step = $step + 1;
         if($step != $campaign->tab) {
             $campaign->tab = $step;
             $campaign->save();

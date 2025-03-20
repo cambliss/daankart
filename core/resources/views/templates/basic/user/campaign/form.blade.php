@@ -27,6 +27,7 @@
         justify-content: center;
         font-weight: bold;
         font-size: 18px;
+        margin: auto;
     }
 
     .active-step {
@@ -84,11 +85,14 @@
         border-radius: 12px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
+    .fundraiser-container {
+        padding-top: 50px;
+    }
 </style>
 
 <div class="container p-5">
     @if(!$campaign || $campaign->status != "Completed")
-    <div class="row">
+    <div class="row fundraiser-container">
         <!-- Left Half: Form -->
         <div class="col-lg-6">
             <div class="card">
@@ -109,12 +113,17 @@
                         <div class="step {{ $step == 4 ? 'active-step' : '' }}" id="step4">4</div>
                         <div>Products</div>
                     </div>
+                    <div>
+                        <div class="step {{ $step == 5 ? 'active-step' : '' }}" id="step5">5</div>
+                        <div>Project</div>
+                    </div>
                 </div>
                 @include('templates.basic.user.campaign.steps.step1')
                 @if($campaign)
                     @include('templates.basic.user.campaign.steps.step2')
                     @include('templates.basic.user.campaign.steps.step3')
                     @include('templates.basic.user.campaign.steps.step4')
+                    @include('templates.basic.user.campaign.steps.step5')
                 @endif
             </div>
         </div>

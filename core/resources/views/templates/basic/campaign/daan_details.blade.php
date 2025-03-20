@@ -84,9 +84,9 @@
                                         class="las la-desktop d-block text-center mb-1"></span>PRODUCTS</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="description-tab" data-bs-toggle="tab"
-                                    data-bs-target="#description" href="#description" role="tab"
-                                    aria-controls="description" aria-selected="true"><span
+                                <a class="nav-link" id="description-tab" data-bs-toggle="tab" data-bs-target="#description"
+                                    href="#description" role="tab" aria-controls="description"
+                                    aria-selected="true"><span
                                         class="las la-desktop d-block text-center mb-1"></span>PROJECT</a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -204,11 +204,12 @@
 
                                         <div class="form-group col-lg-6">
                                             <input class="form-control" name="reviewer_name" type="text"
-                                                value="{{ $campaign->campaigner_name }}" placeholder="Enter name" disabled required>
+                                                value="{{ $campaign->campaigner_name }}" placeholder="Enter name" disabled
+                                                required>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <input class="form-control" name="reviewer_email" type="email"
-                                                value="anilkumarkrishna027@gmail.com" placeholder="Enter email" disabled
+                                                value="{{ $campaign->email }}" placeholder="Enter email" disabled
                                                 required>
                                         </div>
 
@@ -251,41 +252,41 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($campaign->products as $product)
-                                    <tr>
-                                        <td>{{ $product->product_name }}</td>
-                                        <td>{{ $product->price_per_unit }}</td>
-                                        <td>{{ $product->required_quantity }}</td>
-                                        <td>{{ $product->price_per_unit * $product->required_quantity }}</td>
-                                        <td>{{ $product->comments }}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $product->product_name }}</td>
+                                            <td>{{ $product->price_per_unit }}</td>
+                                            <td>{{ $product->required_quantity }}</td>
+                                            <td>{{ $product->price_per_unit * $product->required_quantity }}</td>
+                                            <td>{{ $product->comments }}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <?php
-                            $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
+                        $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
                         ?>
                         <!-- Donation Section -->
                         <div class="p-4 text-center" style="background-color: #f0f0f5; border-radius: 10px;">
                             <h4 class="fw-bold mb-3">
-                                Total Campaign Goal 
+                                Total Campaign Goal
                                 <span style="float:right;">
                                     ₹ {{ number_format($total_amount, 2) }}
                                 </span>
                             </h4>
                             <div class="d-flex justify-content-center gap-3">
-                                <button class="btn btn-outline-primary px-4 py-2">₹ {{ number_format($total_amount * 0.1, 2) }}</button>
+                                <button class="btn btn-outline-primary px-4 py-2">₹
+                                    {{ number_format($total_amount * 0.1, 2) }}</button>
                                 <button class="btn btn-outline-primary px-4 py-2"
                                     style="border: 2px solid #FF5F1F; position: relative;">
                                     👏 ₹ {{ number_format($total_amount * 0.2, 2) }}
-                                    <span 
-                                        class="badge bg-orange text-white"
-                                        style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #FF5F1F; padding: 5px 10px; border-radius: 5px;"
-                                        >
+                                    <span class="badge bg-orange text-white"
+                                        style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #FF5F1F; padding: 5px 10px; border-radius: 5px;">
                                         Most Donated
                                     </span>
                                 </button>
-                                <button class="btn btn-outline-primary px-4 py-2">₹ {{ number_format($total_amount * 0.5, 2) }}</button>
+                                <button class="btn btn-outline-primary px-4 py-2">₹
+                                    {{ number_format($total_amount * 0.5, 2) }}</button>
                                 {{-- <button class="btn btn-outline-primary px-4 py-2">Enter Amount</button> --}}
                             </div>
                         </div>
@@ -300,7 +301,8 @@
                                         <h5 class="fw-bold">{{ $product->product_name }}</h5>
                                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
                                             class="img-fluid mb-2" alt="Groceries Kit">
-                                            <p>{{ $product->sold_quantity }} of {{ $product->required_quantity }} Quantity Obtained</p>
+                                        <p>{{ $product->sold_quantity }} of {{ $product->required_quantity }} Quantity
+                                            Obtained</p>
                                         <h5 class="text-primary">₹{{ $product->price_per_unit }}/unit</h5>
                                         <button class="btn btn-outline-primary w-100">ADD +</button>
                                     </div>
@@ -362,6 +364,68 @@
                         </div>
                     </section>
 
+                    <section class="video-text-image-section">
+                        @foreach ($campaign->sections as $section)
+                            @if ($section->type == 'heading')
+                                <h2 class="fw-bold text-center mb-4">{{ $section->content }}</h2>
+                            @elseif($section->type == 'video')
+                                <section class="video-text-image-section">
+                                    <div class="video-container">
+                                        <video autoplay muted loop playsinline
+                                            style="width: 100%; height: auto; display: block;">
+                                            <source src="{{ $section->content }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </section>
+                            @elseif($section->type == 'image')
+                                <div class="image-container">
+                                    <img src="{{ $section->content }}" alt="Image Description" width="100%">
+                                </div>
+                            @elseif($section->type == 'paragraph')
+                                <p>{{ $section->content }}</p>
+                            @elseif($section->type == 'subheading')
+                                <h3 class="fw-bold text-center mb-4">{{ $section->content }}</h3>
+                            @elseif($section->type == 'image_slider')
+                                <div class="image-slider-container">
+                                    @foreach ($section->content as $image)
+                                        <div class="image-container">
+                                            <img src="{{ $image }}" alt="Image Description" width="100%">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @elseif($section->type == 'faq')
+                                <div class="accordion custom--accordion">
+                                    @foreach ($section->content as $faq)
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
+                                                    data-bs-target="#campaign-details-faq-item-1" type="button">
+                                                    {{ $faq->question }}
+                                                </button>
+                                            </h2>
+                                            <div class="accordion-collapse collapse" id="campaign-details-faq-item-1">
+                                                <div class="accordion-body">
+                                                    {{ $faq->answer }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @elseif($section->type == 'youtube')
+                                {{-- embed youtube video --}}
+                                <div class="video-container">
+                                    <section class="video-text-image-section">
+                                        <div class="video-container">
+                                            <iframe src="{{ $section->content }}" width="100%" height="315"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    </section>
+                            @endif
+                        @endforeach
+                    </section>
                     <style>
                         .video-container,
                         .text-container,
