@@ -1,3 +1,6 @@
+<?php
+    use Illuminate\Support\Str;
+?>
 @push('style')
     <style>
         .iframe-inside {
@@ -38,15 +41,13 @@
         <div class="container">
             <div class="row">
                 <div class="mb-4">
-                    <h2>Help Chandni Feed Warm Meals To 3000+ Slum Kids In This Holy Month
-                        </h3>
+                    <h2>{{$campaign->campaign_title}}</h2>
                 </div>
                 <div class="col-lg-8">
 
                     <div class="event-details-wrapper border--radius">
                         <div class="event-details-thumb">
-                            <img class="border--radius"
-                                src="https://daankart.com/assets/images/campaign/67c918cdda4da1741232333.jpg" alt="image">
+                            <img class="border--radius" src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}" alt="image">
                         </div>
                         <div class="event-details__user">
                             <span class="icon border--radius heart-icon favoriteBtn " data-id="27"
@@ -72,8 +73,6 @@
                             alt="Small Image 5">
                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
                             alt="Small Image 5">
-
-
                     </div>
                     <div class="event-details-area mt-50">
                         <ul class="nav nav-tabs custom--tab" id="myTab" role="tablist">
@@ -84,9 +83,9 @@
                                         class="las la-desktop d-block text-center mb-1"></span>PRODUCTS</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="description-tab" data-bs-toggle="tab" data-bs-target="#description"
-                                    href="#description" role="tab" aria-controls="description"
-                                    aria-selected="true"><span
+                                <a class="nav-link" id="description-tab" data-bs-toggle="tab"
+                                    data-bs-target="#description" href="#description" role="tab"
+                                    aria-controls="description" aria-selected="true"><span
                                         class="las la-desktop d-block text-center mb-1"></span>PROJECT</a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -98,9 +97,7 @@
                         <div class="tab-content mt-4" id="myTabContent">
                             <div class="tab-pane fade show active" id="description" role="tabpanel"
                                 aria-labelledby="description-tab">
-                                <p class="text-justify">Thanks to your generosity, over 1 lakh abandoned elderly
-                                    have found safety, care, and dignity — no longer left to survive on the streets.
-                                    Together, let’s reach and transform the lives of 10 lakh more</p>
+                                <p class="text-justify">{{$campaign->campaign_description}}</p>
                             </div><!-- tab-pane end -->
                             <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
                                 <div class="row gy-4">
@@ -124,67 +121,6 @@
                                     allowfullscreen></iframe>
 
                             </div><!-- tab-pane end -->
-                            <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-                                <div class="mb-60">
-                                    <div class="accordion custom--accordion">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                    data-bs-target="#campaign-details-faq-item-1" type="button"
-                                                    aria-expanded="false">
-                                                    What is the Elders Initiative?
-                                                </button>
-                                            </h2>
-                                            <div class="accordion-collapse collapse" id="campaign-details-faq-item-1"
-                                                data-bs-parent="#campaign-details-faq">
-                                                <div class="accordion-body">
-                                                    The Elders Initiative is a campaign designed to empower and
-                                                    support seniors in our community. We provide resources, raise
-                                                    awareness about senior issues, and work toward building a more
-                                                    inclusive, supportive environment for older adults.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                    data-bs-target="#campaign-details-faq-item-2" type="button"
-                                                    aria-expanded="false">
-                                                    How can I get involved in the campaign?
-                                                </button>
-                                            </h2>
-                                            <div class="accordion-collapse collapse" id="campaign-details-faq-item-2"
-                                                data-bs-parent="#campaign-details-faq">
-                                                <div class="accordion-body">
-                                                    Volunteer: Help seniors by assisting with tasks or providing
-                                                    companionship.
-                                                    Donate: Contribute financial resources or items to help seniors
-                                                    in need.
-                                                    Mentor: Share your experiences and knowledge with an elder
-                                                    through one-on-one interactions.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                    data-bs-target="#campaign-details-faq-item-3" type="button"
-                                                    aria-expanded="false">
-                                                    Who can participate in the Elders Initiative?
-                                                </button>
-                                            </h2>
-                                            <div class="accordion-collapse collapse" id="campaign-details-faq-item-3"
-                                                data-bs-parent="#campaign-details-faq">
-                                                <div class="accordion-body">
-                                                    Anyone can get involved! The initiative is open to individuals
-                                                    of all ages, as we encourage intergenerational connections and
-                                                    collaboration.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- tab-pane end -->
                             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="review-tab">
                                 <ul class="review-list mb-50">
                                     <span class="empty-slip-message">
@@ -204,8 +140,7 @@
 
                                         <div class="form-group col-lg-6">
                                             <input class="form-control" name="reviewer_name" type="text"
-                                                value="{{ $campaign->campaigner_name }}" placeholder="Enter name" disabled
-                                                required>
+                                                value="{{ $campaign->campaigner_name }}" placeholder="Enter name" disabled required>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <input class="form-control" name="reviewer_email" type="email"
@@ -252,41 +187,41 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($campaign->products as $product)
-                                        <tr>
-                                            <td>{{ $product->product_name }}</td>
-                                            <td>{{ $product->price_per_unit }}</td>
-                                            <td>{{ $product->required_quantity }}</td>
-                                            <td>{{ $product->price_per_unit * $product->required_quantity }}</td>
-                                            <td>{{ $product->comments }}</td>
-                                        </tr>
+                                    <tr>
+                                        <td>{{ $product->product_name }}</td>
+                                        <td>{{ $product->price_per_unit }}</td>
+                                        <td>{{ $product->required_quantity }}</td>
+                                        <td>{{ $product->price_per_unit * $product->required_quantity }}</td>
+                                        <td>{{ $product->comments }}</td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <?php
-                        $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
+                            $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
                         ?>
                         <!-- Donation Section -->
                         <div class="p-4 text-center" style="background-color: #f0f0f5; border-radius: 10px;">
                             <h4 class="fw-bold mb-3">
-                                Total Campaign Goal
+                                Total Campaign Goal 
                                 <span style="float:right;">
                                     ₹ {{ number_format($total_amount, 2) }}
                                 </span>
                             </h4>
                             <div class="d-flex justify-content-center gap-3">
-                                <button class="btn btn-outline-primary px-4 py-2">₹
-                                    {{ number_format($total_amount * 0.1, 2) }}</button>
+                                <button class="btn btn-outline-primary px-4 py-2">₹ {{ number_format($total_amount * 0.1, 2) }}</button>
                                 <button class="btn btn-outline-primary px-4 py-2"
                                     style="border: 2px solid #FF5F1F; position: relative;">
                                     👏 ₹ {{ number_format($total_amount * 0.2, 2) }}
-                                    <span class="badge bg-orange text-white"
-                                        style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #FF5F1F; padding: 5px 10px; border-radius: 5px;">
+                                    <span 
+                                        class="badge bg-orange text-white"
+                                        style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #FF5F1F; padding: 5px 10px; border-radius: 5px;"
+                                        >
                                         Most Donated
                                     </span>
                                 </button>
-                                <button class="btn btn-outline-primary px-4 py-2">₹
-                                    {{ number_format($total_amount * 0.5, 2) }}</button>
+                                <button class="btn btn-outline-primary px-4 py-2">₹ {{ number_format($total_amount * 0.5, 2) }}</button>
                                 {{-- <button class="btn btn-outline-primary px-4 py-2">Enter Amount</button> --}}
                             </div>
                         </div>
@@ -301,8 +236,7 @@
                                         <h5 class="fw-bold">{{ $product->product_name }}</h5>
                                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
                                             class="img-fluid mb-2" alt="Groceries Kit">
-                                        <p>{{ $product->sold_quantity }} of {{ $product->required_quantity }} Quantity
-                                            Obtained</p>
+                                            <p>{{ $product->sold_quantity }} of {{ $product->required_quantity }} Quantity Obtained</p>
                                         <h5 class="text-primary">₹{{ $product->price_per_unit }}/unit</h5>
                                         <button class="btn btn-outline-primary w-100">ADD +</button>
                                     </div>
@@ -312,77 +246,36 @@
                     </div>
 
                     <section class="video-text-image-section">
-                        <!-- Video Section -->
-                        <div class="video-container">
-                            <video autoplay muted loop playsinline style="width: 100%; height: auto; display: block;">
-                                <source src="https://daankart.com/core/public/videos/eldercare.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
-                        <!-- Text Section -->
-                        <div class="text-container">
-                            <p>
-                                Fasting during the holy month of Ramadan means different things to different people.
-                                To some, it is an act of devotion, to others, it is an exercise in gratitude, to the
-                                underprivileged, it is an endurance test.
-                            </p>
-                        </div>
-
-                        <!-- Image Section -->
-                        <div class="image-container">
-                            <img src="https://dkprodimages.gumlet.io/campaign/13173/atp%205-01%20(1)%20(1).jpg?format=webp&w=700&dpr=1.0"
-                                alt="Image Description" width="100%">
-                        </div>
-
-                        <!-- Another Text Section -->
-                        <div class="text-container">
-                            <p>
-                                Due to the children in the slums across India, Ramadan is a time of desperation,
-                                hope, and heart-wrenching hunger. A meal, their first, stopped shocking their veins
-                                for all too brief that their heart had to forget the taste.
-                            </p>
-                        </div>
-
-                        <!-- Another Image Section -->
-                        <div class="image-container">
-                            <img src="https://dkprodimages.gumlet.io/campaign/13173/atp%205-01%20(1)%20(1).jpg?format=webp&w=700&dpr=1.0"
-                                alt="Image Description" width="100%">
-                        </div>
-
-                        <!-- More Text Sections and Images in Alternating Pattern -->
-                        <div class="text-container">
-                            <p>
-                                Many children have no parents and are left to fend for themselves and rely on odd
-                                jobs. The food they get is hardly enough to sustain them.
-                            </p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="https://dkprodimages.gumlet.io/campaign/13173/atp%205-01%20(1)%20(1).jpg?format=webp&w=700&dpr=1.0"
-                                alt="Image Description" width="100%">
-                        </div>
-                    </section>
-
-                    <section class="video-text-image-section">
                         @foreach ($campaign->sections as $section)
-                            @if ($section->type == 'heading')
+
+                            @if($section->type == 'heading')
                                 <h2 class="fw-bold text-center mb-4">{{ $section->content }}</h2>
-                            @elseif($section->type == 'video')
+                            @elseif($section->type == 'video' || $section->type == 'video_url')
                                 <section class="video-text-image-section">
                                     <div class="video-container">
-                                        <video autoplay muted loop playsinline
-                                            style="width: 100%; height: auto; display: block;">
+                                        <video autoplay muted loop playsinline style="width: 100%; height: auto; display: block;">
                                             <source src="{{ $section->content }}" type="video/mp4">
                                         </video>
                                     </div>
                                 </section>
-                            @elseif($section->type == 'image')
+                            @elseif($section->type == 'image' || $section->type == 'image_url')
                                 <div class="image-container">
                                     <img src="{{ $section->content }}" alt="Image Description" width="100%">
                                 </div>
+                            @elseif($section->type == 'document_url')
+                                <div class="document-container">
+                                    <div class="mb-4">
+                                        <iframe 
+                                            class="iframe-inside"
+                                            src="{{ $section->content }}"
+                                            height="800" allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
                             @elseif($section->type == 'paragraph')
-                                <p>{{ $section->content }}</p>
+                                <div class="text-container">
+                                    <p>{{ $section->content }}</p>
+                                </div>
                             @elseif($section->type == 'subheading')
                                 <h3 class="fw-bold text-center mb-4">{{ $section->content }}</h3>
                             @elseif($section->type == 'image_slider')
@@ -394,35 +287,41 @@
                                     @endforeach
                                 </div>
                             @elseif($section->type == 'faq')
-                                <div class="accordion custom--accordion">
-                                    @foreach ($section->content as $faq)
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                    data-bs-target="#campaign-details-faq-item-1" type="button">
-                                                    {{ $faq->question }}
-                                                </button>
-                                            </h2>
-                                            <div class="accordion-collapse collapse" id="campaign-details-faq-item-1">
-                                                <div class="accordion-body">
-                                                    {{ $faq->answer }}
+                                <div class="faq-container mb-4">
+                                    <h3 class="section-title">FAQ</h3>
+                                    <div class="accordion custom--accordion">
+                                        @foreach ($section->content as $faq)
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed" data-bs-toggle="collapse"
+                                                        data-bs-target="#campaign-details-faq-item-{{ Str::slug($faq->question) }}" type="button">
+                                                        {{ $faq->question }}
+                                                    </button>
+                                                </h2>
+                                                <div class="accordion-collapse collapse" id="campaign-details-faq-item-{{ Str::slug($faq->question) }}">
+                                                    <div class="accordion-body">
+                                                        {{ $faq->answer }}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
                             @elseif($section->type == 'youtube')
-                                {{-- embed youtube video --}}
-                                <div class="video-container">
-                                    <section class="video-text-image-section">
-                                        <div class="video-container">
-                                            <iframe src="{{ $section->content }}" width="100%" height="315"
-                                                frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen>
-                                            </iframe>
-                                        </div>
-                                    </section>
+                            {{-- embed youtube video --}}
+                            <div class="video-container">
+                                <section class="video-text-image-section">
+                                    <div class="video-container">
+                                        <iframe 
+                                            src="{{ $section->content }}" 
+                                            width="100%" 
+                                            height="315" 
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </section>
                             @endif
                         @endforeach
                     </section>
@@ -448,61 +347,6 @@
                     </style>
                     <div class="event-details-area mt-50">
                         <div class="tab-content mt-4" id="myTabContent">
-                            <!-- Document Section -->
-                            <div class="mb-4">
-                                <h3 class="section-title">FAQ</h3>
-                                <div class="accordion custom--accordion">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                data-bs-target="#campaign-details-faq-item-1" type="button">
-                                                What is the Elders Initiative?
-                                            </button>
-                                        </h2>
-                                        <div class="accordion-collapse collapse" id="campaign-details-faq-item-1">
-                                            <div class="accordion-body">
-                                                The Elders Initiative is a campaign designed to empower and support
-                                                seniors in our community. We provide resources, raise awareness
-                                                about senior issues, and work toward building a more inclusive,
-                                                supportive environment for older adults.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                data-bs-target="#campaign-details-faq-item-2" type="button">
-                                                How can I get involved in the campaign?
-                                            </button>
-                                        </h2>
-                                        <div class="accordion-collapse collapse" id="campaign-details-faq-item-2">
-                                            <div class="accordion-body">
-                                                Volunteer: Help seniors by assisting with tasks or providing
-                                                companionship.
-                                                Donate: Contribute financial resources or items to help seniors in
-                                                need.
-                                                Mentor: Share your experiences and knowledge with an elder through
-                                                one-on-one interactions.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                            <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                data-bs-target="#campaign-details-faq-item-3" type="button">
-                                                Who can participate in the Elders Initiative?
-                                            </button>
-                                        </h2>
-                                        <div class="accordion-collapse collapse" id="campaign-details-faq-item-3">
-                                            <div class="accordion-body">
-                                                Anyone can get involved! The initiative is open to individuals of
-                                                all ages, as we encourage intergenerational connections and
-                                                collaboration.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="mb-4">
                                 <h3 class="section-title">REVIEW</h3>
                                 <ul class="review-list mb-50">
@@ -537,18 +381,6 @@
                                 </span>
 
                             </div>
-
-                            <div class="mb-4">
-                                <h3 class="section-title">DOCUMENT</h3>
-                                <iframe class="iframe-inside"
-                                    src="https://daankart.com/assets/images/campaign/proof/67c918cdee23d1741232333.pdf"
-                                    height="800" allowfullscreen></iframe>
-                            </div>
-
-
-                            <!-- Review Section -->
-
-                            <!-- Update Section -->
                         </div>
                     </div>
                 </div>
@@ -556,8 +388,10 @@
                     <div class="donation-sidebar">
                         <div class="donation-widget">
                             <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
-                            <h4 class="title py-3"><i class="las la-thumbtack"></i> Elders Initiative: Empowering,
-                                Supporting, and Celebrating Our Seniors</h4>
+                            <h4 class="title py-3"><i class="las la-thumbtack"></i> 
+                                {{$campaign->category->name}} Initiative: 
+                                {{$campaign->campaign_title}}
+                            </h4>
                             <div class="skill-bar mt-2">
 
                                 <div class="progressbar" data-perc="0%">
@@ -572,7 +406,7 @@
                                         <span class="icon"><i class="lab la-telegram-plane"></i></span>
                                         <span class="text">Goal</span>
                                     </div>
-                                    <p class="number">10,000,000.00 INR</p>
+                                    <p class="number">{{number_format($total_amount, 2)}} INR</p>
                                 </div>
                                 <div class="donation-content">
                                     <div>
@@ -587,7 +421,7 @@
                                         <span class="text">Also To Go</span>
                                     </div>
                                     <p class="number">
-                                        10,000,000.00 INR
+                                        {{ number_format($total_amount, 2) }} INR
                                     </p>
                                 </div>
                                 <div class="donation-content">
@@ -608,7 +442,7 @@
                                                 alt="user-avatar">
                                         </div>
                                         <span class="name">
-                                            admin Daankart
+                                            {{$campaign->campaigner_name}}
                                         </span>
                                     </a>
                                 </div>

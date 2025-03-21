@@ -40,7 +40,7 @@ class CampaignController extends Controller
         if(isset($campaign->tab)) {
             $step = $campaign->tab ?? 1;
         } else {
-            $step = ($request->step ?? 1) + 1;
+            $step = ($request->step ?? 0) + 1;
         }
         $id = ($request->id ?? 0);
         if($isAdmin) {
@@ -289,7 +289,6 @@ class CampaignController extends Controller
                 $product->comments = $prod->comments ?? '';
                 $product->save();
             }
-            $campaign->status = "Completed";
             $campaign->save();
         } else if($step == DAAN_CAMPAIGN_FINAL_STEP) {
             $request->validate([
@@ -297,6 +296,7 @@ class CampaignController extends Controller
             ]);   
             $page_json = json_decode($request->page_json);
             $campaign->page_json = json_encode($page_json);
+            $campaign->status = "Completed";
             $campaign->save();
         }
         if($step < DAAN_CAMPAIGN_FINAL_STEP) $step = $step + 1;

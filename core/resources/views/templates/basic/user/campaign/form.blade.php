@@ -169,7 +169,7 @@
     }
 
     function updateCause() {
-        var selectedCause = document.getElementById("cause").value;
+        var selectedCause = document.getElementById("campaign->id").value;
         document.getElementById("selected-cause").innerText = selectedCause;
     }
 
@@ -205,13 +205,15 @@
 
     function updateProductList() {
         let list = document.getElementById("product-list");
-        list.innerHTML = "";
-        selectedProducts.forEach((item, index) => {
-            let listItem = document.createElement("li");
-            listItem.innerHTML = `<span>${item.product_name} - ${item.quantity} pcs - ₹${item.total}</span><button style="float: right;" onclick="removeProduct(${index})">❌</button>`;
-            list.appendChild(listItem);
-        });
-        document.getElementById("product_list_hidden").value = JSON.stringify(selectedProducts);
+        if(list && selectedProducts.length > 0) {
+            list.innerHTML = "";
+            selectedProducts.forEach((item, index) => {
+                let listItem = document.createElement("li");
+                listItem.innerHTML = `<span>${item.product_name} - ${item.quantity} pcs - ₹${item.total}</span><button style="float: right;" onclick="removeProduct(${index})">❌</button>`;
+                list.appendChild(listItem);
+            });
+            document.getElementById("product_list_hidden").value = JSON.stringify(selectedProducts);
+        }
     }
 
     function removeProduct(index) {

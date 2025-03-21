@@ -3,21 +3,25 @@
     <h4 class="text-center">Basic Details</h4>
     <p class="text-center">I am raising funds for a <span id="selected-cause" class="fw-bold">Social</span> cause</p>
     @csrf
+
     <label>Select Cause</label>
-    <select id="cause" class="form-control" name="cause" >
+    <select id="cause" class="form-control" name="category_id" required>
+        <option value="">-- Select a Cause --</option> <!-- Default option -->
         @foreach ($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
         @endforeach
     </select>
 
     <label>Name</label>
-    <input type="text" class="form-control" placeholder="Enter your name" name="campaigner_name">
+    <input type="text" class="form-control" placeholder="Enter your name" name="campaigner_name" value="{{ auth()->user()->username ?? '' }}">
 
-    <label>Email</label>
-    <input type="email" class="form-control" placeholder="Enter your email" name="email">
+    <label>Email</label> 
+    <input type="email" class="form-control" placeholder="Enter your email" name="email" value="{{ auth()->user()->email ?? '' }}">
 
     <label>Mobile No</label>
-    <input type="number" class="form-control" placeholder="Enter mobile number" name="mobile_number">
+    <input type="number" class="form-control" placeholder="Enter mobile number" name="mobile_number" value="{{ auth()->user()->mobile ?? '' }}">
 
-    <button type="submit" class="btn btn-primary w-100 mt-3" >Continue</button>
+    <button type="submit" class="btn btn-primary w-100 mt-3">Continue</button>
 </form>
