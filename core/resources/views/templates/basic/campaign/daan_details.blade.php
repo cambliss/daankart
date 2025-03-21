@@ -1,5 +1,5 @@
 <?php
-    use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 ?>
 @push('style')
     <style>
@@ -41,13 +41,15 @@
         <div class="container">
             <div class="row">
                 <div class="mb-4">
-                    <h2>{{$campaign->campaign_title}}</h2>
+                    <h2>{{ $campaign->campaign_title }}</h2>
                 </div>
                 <div class="col-lg-8">
 
                     <div class="event-details-wrapper border--radius">
                         <div class="event-details-thumb">
-                            <img class="border--radius" src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}" alt="image">
+                            <img class="border--radius"
+                                src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}"
+                                alt="image">
                         </div>
                         <div class="event-details__user">
                             <span class="icon border--radius heart-icon favoriteBtn " data-id="27"
@@ -56,7 +58,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="scrollable-images mt-4">
+                    {{-- <div class="scrollable-images mt-4">
                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
                             alt="Small Image 1">
                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
@@ -73,7 +75,7 @@
                             alt="Small Image 5">
                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
                             alt="Small Image 5">
-                    </div>
+                    </div> --}}
                     <div class="event-details-area mt-50">
                         <ul class="nav nav-tabs custom--tab" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -83,9 +85,9 @@
                                         class="las la-desktop d-block text-center mb-1"></span>PRODUCTS</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="description-tab" data-bs-toggle="tab"
-                                    data-bs-target="#description" href="#description" role="tab"
-                                    aria-controls="description" aria-selected="true"><span
+                                <a class="nav-link" id="description-tab" data-bs-toggle="tab" data-bs-target="#description"
+                                    href="#description" role="tab" aria-controls="description"
+                                    aria-selected="true"><span
                                         class="las la-desktop d-block text-center mb-1"></span>PROJECT</a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -97,7 +99,7 @@
                         <div class="tab-content mt-4" id="myTabContent">
                             <div class="tab-pane fade show active" id="description" role="tabpanel"
                                 aria-labelledby="description-tab">
-                                <p class="text-justify">{{$campaign->campaign_description}}</p>
+                                <p class="text-justify">{{ $campaign->campaign_description }}</p>
                             </div><!-- tab-pane end -->
                             <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
                                 <div class="row gy-4">
@@ -140,7 +142,8 @@
 
                                         <div class="form-group col-lg-6">
                                             <input class="form-control" name="reviewer_name" type="text"
-                                                value="{{ $campaign->campaigner_name }}" placeholder="Enter name" disabled required>
+                                                value="{{ $campaign->campaigner_name }}" placeholder="Enter name" disabled
+                                                required>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <input class="form-control" name="reviewer_email" type="email"
@@ -187,41 +190,41 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($campaign->products as $product)
-                                    <tr>
-                                        <td>{{ $product->product_name }}</td>
-                                        <td>{{ $product->price_per_unit }}</td>
-                                        <td>{{ $product->required_quantity }}</td>
-                                        <td>{{ $product->price_per_unit * $product->required_quantity }}</td>
-                                        <td>{{ $product->comments }}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $product->product_name }}</td>
+                                            <td>{{ $product->price_per_unit }}</td>
+                                            <td>{{ $product->required_quantity }}</td>
+                                            <td>{{ $product->price_per_unit * $product->required_quantity }}</td>
+                                            <td>{{ $product->comments }}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <?php
-                            $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
+                        $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
                         ?>
                         <!-- Donation Section -->
                         <div class="p-4 text-center" style="background-color: #f0f0f5; border-radius: 10px;">
                             <h4 class="fw-bold mb-3">
-                                Total Campaign Goal 
+                                Total Campaign Goal
                                 <span style="float:right;">
                                     ₹ {{ number_format($total_amount, 2) }}
                                 </span>
                             </h4>
                             <div class="d-flex justify-content-center gap-3">
-                                <button class="btn btn-outline-primary px-4 py-2">₹ {{ number_format($total_amount * 0.1, 2) }}</button>
+                                <button class="btn btn-outline-primary px-4 py-2">₹
+                                    {{ number_format($total_amount * 0.1, 2) }}</button>
                                 <button class="btn btn-outline-primary px-4 py-2"
                                     style="border: 2px solid #FF5F1F; position: relative;">
                                     👏 ₹ {{ number_format($total_amount * 0.2, 2) }}
-                                    <span 
-                                        class="badge bg-orange text-white"
-                                        style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #FF5F1F; padding: 5px 10px; border-radius: 5px;"
-                                        >
+                                    <span class="badge bg-orange text-white"
+                                        style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #FF5F1F; padding: 5px 10px; border-radius: 5px;">
                                         Most Donated
                                     </span>
                                 </button>
-                                <button class="btn btn-outline-primary px-4 py-2">₹ {{ number_format($total_amount * 0.5, 2) }}</button>
+                                <button class="btn btn-outline-primary px-4 py-2">₹
+                                    {{ number_format($total_amount * 0.5, 2) }}</button>
                                 {{-- <button class="btn btn-outline-primary px-4 py-2">Enter Amount</button> --}}
                             </div>
                         </div>
@@ -236,7 +239,8 @@
                                         <h5 class="fw-bold">{{ $product->product_name }}</h5>
                                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
                                             class="img-fluid mb-2" alt="Groceries Kit">
-                                            <p>{{ $product->sold_quantity }} of {{ $product->required_quantity }} Quantity Obtained</p>
+                                        <p>{{ $product->sold_quantity }} of {{ $product->required_quantity }} Quantity
+                                            Obtained</p>
                                         <h5 class="text-primary">₹{{ $product->price_per_unit }}/unit</h5>
                                         <button class="btn btn-outline-primary w-100">ADD +</button>
                                     </div>
@@ -245,86 +249,86 @@
                         </div>
                     </div>
 
-                    <section class="video-text-image-section">
-                        @foreach ($campaign->sections as $section)
-
-                            @if($section->type == 'heading')
-                                <h2 class="fw-bold text-center mb-4">{{ $section->content }}</h2>
-                            @elseif($section->type == 'video' || $section->type == 'video_url')
-                                <section class="video-text-image-section">
-                                    <div class="video-container">
-                                        <video autoplay muted loop playsinline style="width: 100%; height: auto; display: block;">
-                                            <source src="{{ $section->content }}" type="video/mp4">
-                                        </video>
-                                    </div>
-                                </section>
-                            @elseif($section->type == 'image' || $section->type == 'image_url')
-                                <div class="image-container">
-                                    <img src="{{ $section->content }}" alt="Image Description" width="100%">
-                                </div>
-                            @elseif($section->type == 'document_url')
-                                <div class="document-container">
-                                    <div class="mb-4">
-                                        <iframe 
-                                            class="iframe-inside"
-                                            src="{{ $section->content }}"
-                                            height="800" allowfullscreen>
-                                        </iframe>
-                                    </div>
-                                </div>
-                            @elseif($section->type == 'paragraph')
-                                <div class="text-container">
-                                    <p>{{ $section->content }}</p>
-                                </div>
-                            @elseif($section->type == 'subheading')
-                                <h3 class="fw-bold text-center mb-4">{{ $section->content }}</h3>
-                            @elseif($section->type == 'image_slider')
-                                <div class="image-slider-container">
-                                    @foreach ($section->content as $image)
-                                        <div class="image-container">
-                                            <img src="{{ $image }}" alt="Image Description" width="100%">
+                    @if ($campaign->sections)
+                        <section class="video-text-image-section">
+                            @foreach ($campaign->sections as $section)
+                                @if ($section->type == 'heading')
+                                    <h2 class="fw-bold text-center mb-4">{{ $section->content }}</h2>
+                                @elseif($section->type == 'video' || $section->type == 'video_url')
+                                    <section class="video-text-image-section">
+                                        <div class="video-container">
+                                            <video autoplay muted loop playsinline
+                                                style="width: 100%; height: auto; display: block;">
+                                                <source src="{{ $section->content }}" type="video/mp4">
+                                            </video>
                                         </div>
-                                    @endforeach
-                                </div>
-                            @elseif($section->type == 'faq')
-                                <div class="faq-container mb-4">
-                                    <h3 class="section-title">FAQ</h3>
-                                    <div class="accordion custom--accordion">
-                                        @foreach ($section->content as $faq)
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header">
-                                                    <button class="accordion-button collapsed" data-bs-toggle="collapse"
-                                                        data-bs-target="#campaign-details-faq-item-{{ Str::slug($faq->question) }}" type="button">
-                                                        {{ $faq->question }}
-                                                    </button>
-                                                </h2>
-                                                <div class="accordion-collapse collapse" id="campaign-details-faq-item-{{ Str::slug($faq->question) }}">
-                                                    <div class="accordion-body">
-                                                        {{ $faq->answer }}
-                                                    </div>
-                                                </div>
+                                    </section>
+                                @elseif($section->type == 'image' || $section->type == 'image_url')
+                                    <div class="image-container">
+                                        <img src="{{ $section->content }}" alt="Image Description" width="100%">
+                                    </div>
+                                @elseif($section->type == 'document_url')
+                                    <div class="document-container">
+                                        <div class="mb-4">
+                                            <iframe class="iframe-inside" src="{{ $section->content }}" height="800"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                @elseif($section->type == 'paragraph')
+                                    <div class="text-container">
+                                        <p>{{ $section->content }}</p>
+                                    </div>
+                                @elseif($section->type == 'subheading')
+                                    <h3 class="fw-bold text-center mb-4">{{ $section->content }}</h3>
+                                @elseif($section->type == 'image_slider')
+                                    <div class="image-slider-container">
+                                        @foreach ($section->content as $image)
+                                            <div class="image-container">
+                                                <img src="{{ $image }}" alt="Image Description" width="100%">
                                             </div>
                                         @endforeach
                                     </div>
-                                </div>
-                            @elseif($section->type == 'youtube')
-                            {{-- embed youtube video --}}
-                            <div class="video-container">
-                                <section class="video-text-image-section">
-                                    <div class="video-container">
-                                        <iframe 
-                                            src="{{ $section->content }}" 
-                                            width="100%" 
-                                            height="315" 
-                                            frameborder="0" 
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                            allowfullscreen>
-                                        </iframe>
+                                @elseif($section->type == 'faq')
+                                    <div class="faq-container mb-4">
+                                        <h3 class="section-title">FAQ</h3>
+                                        <div class="accordion custom--accordion">
+                                            @foreach ($section->content as $faq)
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button collapsed"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#campaign-details-faq-item-{{ Str::slug($faq->question) }}"
+                                                            type="button">
+                                                            {{ $faq->question }}
+                                                        </button>
+                                                    </h2>
+                                                    <div class="accordion-collapse collapse"
+                                                        id="campaign-details-faq-item-{{ Str::slug($faq->question) }}">
+                                                        <div class="accordion-body">
+                                                            {{ $faq->answer }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </section>
-                            @endif
-                        @endforeach
-                    </section>
+                                @elseif($section->type == 'youtube')
+                                    {{-- embed youtube video --}}
+                                    <div class="video-container">
+                                        <section class="video-text-image-section">
+                                            <div class="video-container">
+                                                <iframe src="{{ $section->content }}" width="100%" height="315"
+                                                    frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen>
+                                                </iframe>
+                                            </div>
+                                        </section>
+                                @endif
+                            @endforeach
+                        </section>
+                    @endif
                     <style>
                         .video-container,
                         .text-container,
@@ -388,9 +392,9 @@
                     <div class="donation-sidebar">
                         <div class="donation-widget">
                             <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
-                            <h4 class="title py-3"><i class="las la-thumbtack"></i> 
-                                {{$campaign->category->name}} Initiative: 
-                                {{$campaign->campaign_title}}
+                            <h4 class="title py-3"><i class="las la-thumbtack"></i>
+                                {{ $campaign->category ? $campaign->category->name : 'Campaign' }} Initiative:
+                                {{ $campaign->campaign_title }}
                             </h4>
                             <div class="skill-bar mt-2">
 
@@ -406,7 +410,7 @@
                                         <span class="icon"><i class="lab la-telegram-plane"></i></span>
                                         <span class="text">Goal</span>
                                     </div>
-                                    <p class="number">{{number_format($total_amount, 2)}} INR</p>
+                                    <p class="number">{{ number_format($total_amount, 2) }} INR</p>
                                 </div>
                                 <div class="donation-content">
                                     <div>
@@ -442,7 +446,7 @@
                                                 alt="user-avatar">
                                         </div>
                                         <span class="name">
-                                            {{$campaign->campaigner_name}}
+                                            {{ $campaign->campaigner_name }}
                                         </span>
                                     </a>
                                 </div>
@@ -530,51 +534,72 @@
                             <div class="donation-widget-2 my-3">
                                 <h3>Share Campaign</h3>
                                 <div class="form-group copy-link">
-
-
-                                    <input class="copyURL" class="form-control form--control" id="profile"
-                                        name="profile" type="text"
-                                        value="https://daankart.com/campaign/details/copy/27" readonly="">
+                                    <input class="copyURL" id="profile" name="profile" type="text"
+                                        value="https://daankart.com/campaign/details/{{ $campaign->id }}" readonly>
                                     <span class="copy" data-id="profile">
                                         <i class="las la-copy"></i> <strong class="copyText">Copy</strong>
                                     </span>
-
                                 </div>
 
                                 <div class="form-group">
                                     <button class="btn cmn-outline-btn w-100" id="copyButton"
-                                        data-profile="https://daankart.com/campaign/details/copy/27"
-                                        data-url="https://daankart.com/campaign/widget/27" type="button">Copy Widget
-                                        for WebPage&nbsp;<i class="far fa-copy"></i></span></button>
+                                        data-profile="https://daankart.com/campaign/details/{{ $campaign->id }}"
+                                        data-url="https://daankart.com/campaign/widget/{{ $campaign->id }}"
+                                        type="button">
+                                        Copy Widget for WebPage <i class="far fa-copy"></i>
+                                    </button>
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control form--control mt-3 mb-2" id="embedCode" readonly><iframe src="https://daankart.com/campaign/details/copy/27" width="768" height="415"></iframe></textarea>
-                                    <button class="btn cmn-outline-btn w-100 copyEmbed" data-embed="">Copy Embed
-                                        Code</button>
+                                    <textarea class="form-control form--control mt-3 mb-2" id="embedCode" readonly><iframe src="https://daankart.com/campaign/details/{{ $campaign->id }}" width="768" height="415"></iframe></textarea>
+                                    <button class="btn cmn-outline-btn w-100 copyEmbed">
+                                        Copy Embed Code
+                                    </button>
                                 </div>
-
                                 <ul class="social-links mt-2 d-flex justify-content-center">
-                                    <li class="facebook face"><a
-                                            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdaankart.com%2Fcampaign%2Fdetails%2Fcopy%2F27"
-                                            target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li class="twitter twi"><a
-                                            href="https://twitter.com/intent/tweet?text=Elders Initiative: Empowering, Supporting, and Celebrating Our Seniors&amp;url=https%3A%2F%2Fdaankart.com%2Fcampaign%2Fdetails%2Fcopy%2F27"
-                                            target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="linkedin lin"><a
-                                            href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fdaankart.com%2Fcampaign%2Fdetails%2Fcopy%2F27"
-                                            target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li class="whatsapp what"><a
-                                            href="https://wa.me/?text=https%3A%2F%2Fdaankart.com%2Fcampaign%2Fdetails%2Fcopy%2F27"
-                                            target="_blank"><i class="fab fa-whatsapp"></i></a></li>
-                                    <li class="telegram"><a
-                                            href="https://t.me/share/url?url=https%3A%2F%2Fdaankart.com%2Fcampaign%2Fdetails%2Fcopy%2F27&text=Elders+Initiative%3A+Empowering%2C+Supporting%2C+and+Celebrating+Our+Seniors"
-                                            target="_blank"><i class="fab fa-telegram"></i></a></li>
-                                    <li class="pinterest"><a
-                                            href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fdaankart.com%2Fcampaign%2Fdetails%2Fcopy%2F27&media=https%3A%2F%2Fdaankart.com%2Fassets%2Fimages%2Fcampaign%2F67c918cdda4da1741232333.jpg&description=Thanks+to+your+generosity%2C+over+1+lakh+a..."
-                                            target="_blank"><i class="fab fa-pinterest"></i></a></li>
+                                    @php
+                                        $shareUrl = urlencode("https://daankart.com/campaign/details/{$campaign->id}");
+                                        $title = urlencode($campaign->title);
+                                        $image = urlencode(asset("assets/images/campaign/{$campaign->image}"));
+                                    @endphp
+
+                                    <li class="facebook face">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}"
+                                            target="_blank">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li class="twitter twi">
+                                        <a href="https://twitter.com/intent/tweet?text={{ $title }}&url={{ $shareUrl }}"
+                                            target="_blank">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="linkedin lin">
+                                        <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ $shareUrl }}"
+                                            target="_blank">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </a>
+                                    </li>
+                                    <li class="whatsapp what">
+                                        <a href="https://wa.me/?text={{ $shareUrl }}" target="_blank">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                    </li>
+                                    <li class="telegram">
+                                        <a href="https://t.me/share/url?url={{ $shareUrl }}&text={{ $title }}"
+                                            target="_blank">
+                                            <i class="fab fa-telegram"></i>
+                                        </a>
+                                    </li>
+                                    <li class="pinterest">
+                                        <a href="https://pinterest.com/pin/create/button/?url={{ $shareUrl }}&media={{ $image }}&description={{ $title }}"
+                                            target="_blank">
+                                            <i class="fab fa-pinterest"></i>
+                                        </a>
+                                    </li>
                                 </ul>
-                            </div><!-- donation-widget end -->
+                            </div>
                             <div class="my-3">
                                 <div class="mb-4 d-flex d-inline"><span class="milestone-icon"><i
                                             class="lab la-gratipay"></i></span>
