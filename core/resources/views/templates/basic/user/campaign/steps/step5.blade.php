@@ -9,6 +9,13 @@
         background-color: white;
         color: black;
     }
+
+    #step-content-5 .content-container img {
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
+    }
+    
 </style>
 <form method="POST" action="{{ route('user.campaign.fundrise.save', ['step' => 5, 'id' => $id ?? 0]) }}"
     id="step-content-5" class="step-content {{ $step == 5 ? 'active' : '' }}">
@@ -59,7 +66,7 @@
                 type: "image",
                 content: "https://via.placeholder.com/150"
             }];
-            
+
             // Load existing campaign data if available
             @if ($campaign && $campaign->page_json)
                 try {
@@ -80,14 +87,14 @@
         // Update the UI based on the sections data
         function updatePageJson() {
             $('#page_json_container').html('');
-            
+
             sections.forEach((section, index) => {
                 const uuid = `section_${new Date().getTime()}_${index}`;
                 $('#page_json_container').append(getSectionTemplate(section.type, section.content, index, uuid));
-                
+
                 // Set the correct section type in the dropdown
                 $(`#${uuid} select`).val(section.type);
-                
+
                 // Initialize content based on type
                 if (section.type === 'paragraph' || section.type === 'heading' || section.type === 'subheading') {
                     // Will be handled in initializeQuillEditors
@@ -95,15 +102,15 @@
                     renderFaqItems(uuid, section.content);
                 } else if ((section.type === 'image' || section.type === 'video') && section.content) {
                     $(`#uploaded-file-preview-${uuid}`).html(
-                        section.type === 'image' 
-                            ? `<img src="${section.content}" class="img-fluid" />` 
-                            : `<video src="${section.content}" class="img-fluid" controls></video>`
+                        section.type === 'image' ?
+                        `<img src="${section.content}" class="img-fluid" />` :
+                        `<video src="${section.content}" class="img-fluid" controls></video>`
                     );
                 } else if (section.type === 'image_slider' && Array.isArray(section.content)) {
                     renderImageSlider(uuid, section.content);
                 }
             });
-            
+
             initializeQuillEditors();
             updateSectionData(); // Set initial JSON data
         }
@@ -111,8 +118,11 @@
         // Add a new section to the page builder
         function addSection() {
             const uuid = `section_${new Date().getTime()}`;
-            sections.push({ type: "paragraph", content: "" });
-            
+            sections.push({
+                type: "paragraph",
+                content: ""
+            });
+
             $('#page_json_container').append(getSectionTemplate("paragraph", "", sections.length - 1, uuid));
             initializeQuillEditors();
             updateSectionData();
@@ -145,13 +155,13 @@
 
         // Generate appropriate input fields based on section type
         function getContentInput(type, content, uuid) {
-            switch(type) {
+            switch (type) {
                 case 'youtube':
                 case 'image_url':
                 case 'video_url':
                 case 'document_url':
                     return `<input type="url" class="form-control section-content" data-type="${type}" placeholder="Enter a valid URL" value="${content || ''}" oninput="updateContentValue('${uuid}', this.value)" />`;
-                
+
                 case 'image':
                 case 'video':
                     return `
@@ -163,7 +173,7 @@
                             ${content ? (type === 'image' ? `<img src="${content}" class="img-fluid" />` : `<video src="${content}" class="img-fluid" controls></video>`) : ''}
                         </div>
                     `;
-                
+
                 case 'image_slider':
                     return `
                         <div class="mb-3">
@@ -174,12 +184,12 @@
                             <input type="hidden" class="section-content" data-type="${type}" value="${Array.isArray(content) ? JSON.stringify(content) : '[]'}" />
                         </div>
                     `;
-                
+
                 case 'paragraph':
                 case 'heading':
                 case 'subheading':
                     return `<div id="editor-${uuid}" class="quill-editor" data-content="${content || ''}" data-type="${type}"></div>`;
-                
+
                 case 'faq':
                     // Ensure proper initialization of FAQ content
                     let faqItems = [];
@@ -193,7 +203,7 @@
                             faqItems = [];
                         }
                     }
-                    
+
                     return `
                         <div class="faq-container" id="faq-container-${uuid}">
                             ${faqItems.length > 0 ? 
@@ -202,7 +212,7 @@
                         </div>
                         <button type="button" class="btn btn-primary mt-2" onclick="addFaqItem('${uuid}')">Add Question</button>
                     `;
-                
+
                 default:
                     return `<textarea class="form-control section-content" data-type="${type}" oninput="updateContentValue('${uuid}', this.value)">${content || ''}</textarea>`;
             }
@@ -213,35 +223,46 @@
             $('.quill-editor').each(function() {
                 const editorId = $(this).attr('id');
                 const uuid = editorId.replace('editor-', '');
-                
-                if (!quillEditors[editorId]) {
-                    const editor = new Quill(`#${editorId}`, {
-                        theme: 'snow',
-                        placeholder: 'Start writing here...',
-                        modules: {
-                            toolbar: [
-                                ['bold', 'italic', 'underline'],
-                                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                                [{ 'align': [] }],
-                                ['link']
-                            ]
-                        }
-                    });
-                    
-                    // Set initial content
-                    editor.root.innerHTML = $(this).attr('data-content') || '';
-                    
-                    // Update section data when editor content changes
-                    editor.on('text-change', function() {
-                        const sectionIndex = $(`#${uuid}`).data('index');
-                        if (typeof sectionIndex !== 'undefined') {
-                            sections[sectionIndex].content = editor.root.innerHTML;
-                            updateSectionData();
-                        }
-                    });
-                    
-                    quillEditors[editorId] = editor;
+
+                // Destroy existing editor if it exists
+                if (quillEditors[editorId]) {
+                    quillEditors[editorId].destroy();
+                    delete quillEditors[editorId];
                 }
+
+                // Initialize new editor
+                const editor = new Quill(`#${editorId}`, {
+                    theme: 'snow',
+                    placeholder: 'Start writing here...',
+                    modules: {
+                        toolbar: [
+                            ['bold', 'italic', 'underline'],
+                            [{
+                                'list': 'ordered'
+                            }, {
+                                'list': 'bullet'
+                            }],
+                            [{
+                                'align': []
+                            }],
+                            ['link']
+                        ]
+                    }
+                });
+
+                // Set initial content
+                editor.root.innerHTML = $(this).attr('data-content') || '';
+
+                // Update section data when editor content changes
+                editor.on('text-change', function() {
+                    const sectionIndex = $(`#${uuid}`).data('index');
+                    if (typeof sectionIndex !== 'undefined') {
+                        sections[sectionIndex].content = editor.root.innerHTML;
+                        updateSectionData();
+                    }
+                });
+
+                quillEditors[editorId] = editor;
             });
         }
 
@@ -251,10 +272,10 @@
             const accordionItem = $(this).closest('.accordion-item');
             const uuid = accordionItem.attr('id');
             const index = accordionItem.data('index');
-            
+
             // Update section type
             sections[index].type = selectedType;
-            
+
             // Initialize content based on type
             if (selectedType === 'faq') {
                 sections[index].content = [];
@@ -263,16 +284,17 @@
             } else {
                 sections[index].content = '';
             }
-            
+
             // Update content container
             const contentContainer = accordionItem.find('.content-container');
             contentContainer.html(getContentInput(selectedType, sections[index].content, uuid));
             contentContainer.attr('data-section-type', selectedType);
-            
+
             if (selectedType === 'paragraph' || selectedType === 'heading' || selectedType === 'subheading') {
+                // Initialize Quill editors if not already initialized
                 initializeQuillEditors();
             }
-            
+
             updateSectionData();
         });
 
@@ -282,38 +304,51 @@
             $('.faq-container').each(function() {
                 const uuid = $(this).attr('id').replace('faq-container-', '');
                 const sectionIndex = $(`#${uuid}`).data('index');
-                
+
                 if (typeof sectionIndex !== 'undefined' && sections[sectionIndex].type === 'faq') {
                     collectFaqItems(uuid);
                 }
             });
-            
+
             $('#page_json_hidden').val(JSON.stringify(sections));
+        }
+
+        function uploadFile(file) {
+            return new Promise((resolve, reject) => {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                fetch('{{ route('upload.file') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        resolve(data.path);
+                    })
+                    .catch(error => {
+                        console.error('Error uploading file:', error);
+                        reject(error);
+                    });
+            });
         }
 
         // Handle file selection for image and video sections
         function handleFileSelection(uuid, type) {
+            const container = $(`#${uuid} .content-container`);
             const file = $(`#${uuid} input[type="file"]`)[0].files[0];
             if (file) {
-                // In a real implementation, you would upload the file to the server here
-                // For demo purposes, we'll use a local URL
-                const objectUrl = URL.createObjectURL(file);
-                
-                // Update preview
-                const previewContainer = $(`#uploaded-file-preview-${uuid}`);
-                previewContainer.html(
-                    type === 'image' 
-                        ? `<img src="${objectUrl}" class="img-fluid" />` 
-                        : `<video src="${objectUrl}" class="img-fluid" controls></video>`
-                );
-                
-                // In real implementation, after successful upload, you'd set the actual URL
-                // For now, we'll use the object URL as a placeholder
-                const sectionIndex = $(`#${uuid}`).data('index');
-                sections[sectionIndex].content = objectUrl;
-                $(`#${uuid} .section-content`).val(objectUrl);
-                
-                updateSectionData();
+                uploadFile(file).then(path => {
+                    const sectionIndex = $(`#${uuid}`).data('index');
+                    sections[sectionIndex].content = path;
+                    container.html(`<img src="${path}" class="img-fluid" />`);
+                    $(`#${uuid} .section-content`).val(path);
+                    updateSectionData();
+                });
             }
         }
 
@@ -325,13 +360,11 @@
                 const imageUrls = [];
                 const container = $(`#image-slider-container-${uuid}`);
                 container.html('');
-                
-                // In a real implementation, you would upload all files to the server
-                // For demo purposes, we'll use local URLs
+
                 for (let i = 0; i < files.length; i++) {
                     const objectUrl = URL.createObjectURL(files[i]);
                     imageUrls.push(objectUrl);
-                    
+
                     container.append(`
                         <div class="position-relative me-2 mb-2">
                             <img src="${objectUrl}" class="img-thumbnail" style="height:100px"/>
@@ -339,7 +372,7 @@
                         </div>
                     `);
                 }
-                
+
                 sections[sectionIndex].content = imageUrls;
                 
                 updateSectionData();
@@ -350,14 +383,14 @@
         function removeSliderImage(uuid, imageUrl) {
             const sectionIndex = $(`#${uuid}`).data('index');
             const content = sections[sectionIndex].content;
-            
+
             if (Array.isArray(content)) {
                 const updatedContent = content.filter(url => url !== imageUrl);
                 sections[sectionIndex].content = updatedContent;
-                
+
                 // Update UI
                 $(`#image-slider-container-${uuid}`).find(`img[src="${imageUrl}"]`).closest('div').remove();
-                
+
                 updateSectionData();
             }
         }
@@ -393,7 +426,7 @@
             const container = $(`#faq-container-${uuid}`);
             const itemCount = container.children().length;
             container.append(getFaqItemTemplate(uuid, itemCount));
-            
+
             updateFaqItem(uuid);
         }
 
@@ -401,13 +434,16 @@
         function collectFaqItems(uuid) {
             const sectionIndex = $(`#${uuid}`).data('index');
             const faqItems = [];
-            
+
             $(`#faq-container-${uuid} .faq-item`).each(function() {
                 const question = $(this).find('.faq-question').val() || '';
                 const answer = $(this).find('.faq-answer').val() || '';
-                faqItems.push({ question, answer });
+                faqItems.push({
+                    question,
+                    answer
+                });
             });
-            
+
             sections[sectionIndex].content = faqItems;
         }
 
@@ -420,13 +456,13 @@
         // Remove a FAQ item
         function removeFaqItem(uuid, itemIndex) {
             $(`#faq-container-${uuid} .faq-item[data-faq-index="${itemIndex}"]`).remove();
-            
+
             // Re-index remaining FAQ items
             $(`#faq-container-${uuid} .faq-item`).each(function(idx) {
                 $(this).attr('data-faq-index', idx);
                 $(this).find('button').attr('onclick', `removeFaqItem('${uuid}', ${idx})`);
             });
-            
+
             updateFaqItem(uuid);
         }
 
@@ -434,7 +470,7 @@
         function renderFaqItems(uuid, items) {
             const container = $(`#faq-container-${uuid}`);
             container.html('');
-            
+
             if (Array.isArray(items) && items.length > 0) {
                 items.forEach((item, index) => {
                     container.append(getFaqItemTemplate(uuid, index, item.question, item.answer));
@@ -448,7 +484,7 @@
         function renderImageSlider(uuid, images) {
             const container = $(`#image-slider-container-${uuid}`);
             container.html('');
-            
+
             if (Array.isArray(images)) {
                 images.forEach(imgSrc => {
                     container.append(`
@@ -464,44 +500,46 @@
         // Remove a section
         function removeSection(uuid) {
             const index = $(`#${uuid}`).data('index');
-            
+
             // Remove from sections array
             sections.splice(index, 1);
-            
+
             // Remove from DOM
             $(`#${uuid}`).remove();
-            
+
             // Re-index remaining sections and update their headers
             $('#page_json_container .accordion-item').each(function(idx) {
                 $(this).data('index', idx);
                 $(this).attr('data-index', idx);
-                $(this).find('.accordion-button').text(`Section ${idx + 1}: ${sections[idx].type.charAt(0).toUpperCase() + sections[idx].type.slice(1)}`);
+                $(this).find('.accordion-button').text(
+                    `Section ${idx + 1}: ${sections[idx].type.charAt(0).toUpperCase() + sections[idx].type.slice(1)}`
+                    );
             });
-            
+
             updateSectionData();
         }
 
         // Form submission handler
         $('form').on('submit', function(e) {
             e.preventDefault();
-            
+
             // Ensure all Quill editors are updated in the sections data
             $('.quill-editor').each(function() {
                 const editorId = $(this).attr('id');
                 const uuid = editorId.replace('editor-', '');
                 const sectionIndex = $(`#${uuid}`).data('index');
-                
+
                 if (quillEditors[editorId] && typeof sectionIndex !== 'undefined') {
                     sections[sectionIndex].content = quillEditors[editorId].root.innerHTML;
                 }
             });
-            
+
             // Ensure all FAQ items are properly collected
             $('.faq-container').each(function() {
                 const uuid = $(this).attr('id').replace('faq-container-', '');
                 collectFaqItems(uuid);
             });
-            
+
             updateSectionData();
             const pageJson = $('#page_json_hidden').val();
             console.log(pageJson);

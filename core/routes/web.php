@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileUploadController;
 
 Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
@@ -39,6 +40,8 @@ Route::controller('SiteController')->group(function () {
     Route::get('/', 'index')->name('home');
 });
 
+
+Route::post('upload-file',[FileUploadController::class,'uploadFile'])->name('upload.file');
 
 //campaigns
 Route::controller('CampaignController')->prefix('campaign')->name('campaign.')->group(function () {
