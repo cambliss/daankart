@@ -6,6 +6,9 @@ use Exception;
 use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Campaign;
+use App\Models\DaanCampaign;
+use App\Models\DaanProduct;
+use App\Models\Document;
 use App\Models\Category;
 use App\Constants\Status;
 use Illuminate\Http\Request;
@@ -14,13 +17,37 @@ use App\Rules\FileTypeValidate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
+define('DAAN_CAMPAIGN_FINAL_STEP', 5);
+
 class CampaignController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
         $pageTitle = 'Create New Campaign';
         $categories = Category::active()->orderBy('id', 'DESC')->get();
-        return view('Template::user.campaign.form', compact('pageTitle', 'categories'));
+        if($request->has('id')) {
+            $campaign = DaanCampaign::where('user_id', auth()->id())->where(function($query) {
+                $query->where('is_kyc_varified', 0)->orWhereNull('is_kyc_varified');
+            })->with('products')->find($request->id);
+        } else {
+            $campaign = DaanCampaign::where('user_id', auth()->id())->where('is_kyc_varified', 0)
+            ->with('products')
+            ->orderBy('id', 'DESC')
+            ->first();
+        }
+        $user      = auth()->user();
+        $isAdmin = $user->firstname == "admin";
+        if(isset($campaign->tab)) {
+            $step = $campaign->tab ?? 1;
+        } else {
+            $step = ($request->step ?? 0) + 1;
+        }
+        $id = ($request->id ?? 0);
+        if($isAdmin) {
+            return view('Template::admin.campaign.form', compact('pageTitle', 'categories','isAdmin','step','id','campaign'));
+        } else {
+            return view('Template::user.campaign.form', compact('pageTitle', 'categories','isAdmin','step','id','campaign'));
+        }
     }
 
     public function storeCampaign(Request $request, $id = 0)
@@ -201,6 +228,106 @@ class CampaignController extends Controller
         return back()->withNotify($notify);
     }
 
+    public function saveCampaign(Request $request, $id = 0)
+    {   $pageTitle = 'Create New Campaign';
+        $categories = Category::active()->orderBy('id', 'DESC')->get();
+        if($id == 0) {
+            $campaign = new DaanCampaign();
+        }else {
+            $campaign = DaanCampaign::findOrFail($id);
+        }
+        $user      = auth()->user();
+        $isAdmin = $user->firstname == "admin";
+        $step = $request->step;
+        $campaign->user_id = $user->id;
+        if($step == 1 ){
+            
+            $request->validate([
+                'category_id' => 'required|integer|min:1',
+                'campaigner_name' => 'required|string',
+                'mobile_number' => 'required|string',
+                'email' => 'required|string'
+            ]);
+            $campaign->category_id = $request->category_id;
+            $campaign->campaigner_name = $request->campaigner_name;
+            $campaign->mobile_number = $request->mobile_number;
+            $campaign->email = $request->email;
+            $campaign->save();
+        } else if($step == 2) {
+            $request->validate([
+                'beneficiary_type' => 'required|string',
+                'beneficiary_name' => 'required|string',
+                'beneficiary_location' => 'required|string',
+                'beneficiary_mobile' => 'required|string',
+            ]);
+            $campaign->beneficiary_type = $request->beneficiary_type;
+            $campaign->beneficiary_name = $request->beneficiary_name;
+            $campaign->beneficiary_location = $request->beneficiary_location;
+            $campaign->beneficiary_mobile = $request->beneficiary_mobile;
+            $campaign->save();
+        } else if($step == 3) {
+            $request->validate([
+                'campaign_title' => 'required|string',
+                'campaign_description' => 'required|string',
+                'campaign_image' => 'required|image',
+            ]);
+            $campaign->campaign_title = $request->campaign_title;
+            $campaign->campaign_description = $request->campaign_description;
+            $campaign->image = fileUploader($request->campaign_image, getFilePath('campaign'));
+            $campaign->save();
+        } else if($step == 4) {
+            $request->validate([
+                'product_list' => 'required|string',
+            ]);
+            $product_list = json_decode($request->product_list);
+            // dd($product_list);
+            foreach($product_list as $prod) {
+                $product = new DaanProduct();
+                $product->campaign_id = $campaign->id;
+                $product->product_name = $prod->product_name;
+                $product->price_per_unit = $prod->price;
+                $product->required_quantity = $prod->quantity;
+                $product->comments = $prod->comments ?? '';
+                $product->save();
+            }
+            $campaign->save();
+        } else if($step == DAAN_CAMPAIGN_FINAL_STEP) {
+            $request->validate([
+                'page_json' => 'required|string',
+            ]);   
+            $page_json = json_decode($request->page_json);
+            $campaign->page_json = json_encode($page_json);
+            $campaign->status = "Completed";
+            $campaign->save();
+        }
+        if($step < DAAN_CAMPAIGN_FINAL_STEP) $step = $step + 1;
+        if($step != $campaign->tab) {
+            $campaign->tab = $step;
+            $campaign->save();
+        }
+        if($request->has('action') && $request->action == 'upload-kyc') {
+            $request->validate([
+                'kyc_document' => 'required|image',
+                'document_type' => 'required|string',
+            ]);
+            $file = fileUploader($request->kyc_document, getFilePath('campaign'), getFileSize('campaign'));
+            $document = new Document();
+            $document->targetable_id = $campaign->id;
+            $document->targetable_type = "App\Models\DaanCampaign";
+            $document->file_type = $request->document_type;
+            $document->file_path = $file;
+            $document->file_ext = $request->kyc_document->getClientOriginalExtension();
+            $document->file_size = $request->kyc_document->getSize();
+            $document->uploaded_by = auth()->user()->id;
+            $document->save();
+            $campaign->is_kyc_varified = 1;
+            $campaign->save();
+            $notify[] = ['success', 'Campaign added successfully'];
+            return redirect()->route('user.campaign.fundrise.all')->withNotify($notify);
+        }
+        return redirect()->route('user.campaign.fundrise.create', ['step' => $step, 'id' => $campaign->id]);
+    }
+
     protected function validation($request, $id)
     {
         $image          = $id ? 'nullable' : 'required';
@@ -360,7 +487,10 @@ class CampaignController extends Controller
     {
         $pageTitle = "All Campaigns";
         $campaigns = Campaign::searchable(['title'])->where('user_id', auth()->user()->id)->with('donations', 'category')->orderBy('id', "desc")->paginate(getPaginate());
-        return view('Template::user.campaign.all', compact('pageTitle', 'campaigns'));
+        $daanCampaigns = DaanCampaign::where('user_id', auth()->id())->where(function($query) {
+            $query->where('is_kyc_varified', 0)->orWhereNull('is_kyc_varified');
+        })->get();
+        return view('Template::user.campaign.all', compact('pageTitle', 'campaigns', 'daanCampaigns'));
     }
 
     public function campaignUpdation($id)

@@ -8,19 +8,19 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.3",
+        "php": "^8.1",
         "authorizenet/authorizenet": "^2.0",
         "btcpayserver/btcpayserver-greenfield-php": "^2.3",
         "coingate/coingate-php": "^4.1",
         "ezyang/htmlpurifier": "^4.17",
         "google/apiclient": "^2.15",
         "guzzlehttp/guzzle": "^7.8",
-        "intervention/image": "^3.6",
+        "intervention/image": "^2.7",
         "laramin/utility": "^1.0",
-        "laravel/framework": "^11.0",
-        "laravel/sanctum": "^4.0",
+        "laravel/framework": "^10.0",
+        "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.6",
-        "laravel/tinker": "^2.9",
+        "laravel/tinker": "^2.8",
         "laravel/ui": "^4.5",
         "mailjet/mailjet-apiv3-php": "^1.6",
         "messagebird/php-rest-api": "^3.1",
@@ -28,20 +28,19 @@
         "phpmailer/phpmailer": "^6.9",
         "razorpay/razorpay": "^2.9",
         "sendgrid/sendgrid": "^8.1",
-        "stripe/stripe-php": "^13.13",
+        "stripe/stripe-php": "^12.0",
         "twilio/sdk": "^7.16",
         "vonage/client": "^4.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.13",
+        "barryvdh/laravel-debugbar": "^3.7",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.0",
-        "phpunit/phpunit": "^10.5",
-        "sebastian/version": "^3.0",
-        "spatie/laravel-ignition": "^2.4"
+        "nunomaduro/collision": "^6.4",
+        "phpunit/phpunit": "^9.6",
+        "spatie/laravel-ignition": "^2.3"
     },
     "autoload": {
         "psr-4": {
@@ -77,24 +76,24 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "11.x-dev"
+            "dev-master": "10.x-dev"
         },
         "laravel": {
             "dont-discover": []
         }
     },
-"config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "allow-plugins": {
-        "pestphp/pest-plugin": true,
-        "php-http/discovery": true
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.1.10"
+        }
     },
-    "platform": {
-        "php": "8.0.30"
-    }
-},
     "minimum-stability": "stable",
     "prefer-stable": true
 }
