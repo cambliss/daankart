@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileUploadController;
 
 Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
@@ -40,13 +41,16 @@ Route::controller('SiteController')->group(function () {
 });
 
 
+Route::post('upload-file',[FileUploadController::class,'uploadFile'])->name('upload.file');
+
 //campaigns
 Route::controller('CampaignController')->prefix('campaign')->name('campaign.')->group(function () {
     Route::get('index', 'index')->name('index');
     Route::get('campaign', 'filterCampaign')->name('filter');
     Route::get('explore/{slug}', 'details')->name('details');
     Route::get('widget/{id}', 'widget')->name('widget');
-
+    Route::get('details/{id}', 'daanDetails')->name('daan_details');
+    Route::get('all', 'getAllCampaigns')->name('all');
     // API route to fetch donation progress dynamically
     Route::get('progress/{id}', 'getCampaignProgress')->name('progress');
 

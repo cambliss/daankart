@@ -11,12 +11,49 @@ use App\Models\Page;
 use App\Models\Product;
 use App\Models\CampaignProduct;
 use App\Models\DaanProject;
+use App\Models\DaanCampaign;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
 {
+    public function daanDetails(Request $request, $id)
+    {
+        $campaign = DaanCampaign::with('products')->find($id);
+        if(!empty($campaign)) {
+            $pageTitle = $campaign->campaign_title;
+        } else {
+            $pageTitle = 'Campaign Not Found';
+        }
+        //dd($campaign);
+        return view('Template::campaign.daan_details', compact('campaign', 'pageTitle'));
+    }
+
+    public function getAllCampaigns(Request $request)
+    {
+        $query = DaanCampaign::query();
+        if($request->search) {
+            $query->where('campaign_title', 'like', '%'.$request->search.'%')
+            ->orWhere('campaign_description', 'like', '%'.$request->search.'%')
+            ->orWhere('beneficiary_type', 'like', '%'.$request->search.'%');
+        }
+        if($request->category_id) {
+            $query->where('category_id', $request->category_id);
+        }
+        if($request->date) {
+            $query->whereDate('created_at', $request->date);
+        }
+        $campaigns  = $query->paginate(getPaginate());
+        $pageTitle = 'All Campaigns';
+        $categories = Category::active()->hasCampaigns()->orderBy('id', 'DESC')->get();
+        $sections  = Page::where('tempname', activeTemplate())->where('slug', 'campaign')->first();
+        $seoContents = $sections->seo_content;
+        $seoImage    = @$seoContents->image ? getImage(getFilePath('seo') . '/' . @$seoContents->image, getFileSize('seo')) : null;
+        return view('Template::campaign.all', compact('pageTitle', 'campaigns', 'categories', 'sections', 'seoContents', 'seoImage'));
+    }
+
     public function index()
     {
         $pageTitle = 'Campaigns';
