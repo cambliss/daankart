@@ -236,6 +236,14 @@
                     });
 
                     quillEditors[editorId] = editor;
+
+                    editor.on('text-change', function() {
+                        const sectionIndex = $(`#${uuid}`).data('index');
+                        if (typeof sectionIndex !== 'undefined') {
+                            sections[sectionIndex].content = editor.root.innerHTML;
+                            updateSectionData();
+                        }
+                    });
                 } else {
                     delete quillEditors[editorId];
                     initializeQuillEditors(uuid);
