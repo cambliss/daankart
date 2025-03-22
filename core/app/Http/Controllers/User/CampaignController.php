@@ -241,8 +241,9 @@ class CampaignController extends Controller
         $step = $request->step;
         $campaign->user_id = $user->id;
         if($step == 1 ){
+            
             $request->validate([
-                'category_id' => 'required|string',
+                'category_id' => 'required|integer|min:1',
                 'campaigner_name' => 'required|string',
                 'mobile_number' => 'required|string',
                 'email' => 'required|string'
@@ -272,7 +273,7 @@ class CampaignController extends Controller
             ]);
             $campaign->campaign_title = $request->campaign_title;
             $campaign->campaign_description = $request->campaign_description;
-            $campaign->image = fileUploader($request->campaign_image, getFilePath('campaign'), getFileSize('campaign'));
+            $campaign->image = fileUploader($request->campaign_image, getFilePath('campaign'));
             $campaign->save();
         } else if($step == 4) {
             $request->validate([

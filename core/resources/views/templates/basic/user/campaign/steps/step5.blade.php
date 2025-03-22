@@ -15,7 +15,6 @@
         width: 100px;
         object-fit: contain;
     }
-    
 </style>
 <form method="POST" action="{{ route('user.campaign.fundrise.save', ['step' => 5, 'id' => $id ?? 0]) }}"
     id="step-content-5" class="step-content {{ $step == 5 ? 'active' : '' }}">
@@ -97,7 +96,7 @@
 
                 // Initialize content based on type
                 if (section.type === 'paragraph' || section.type === 'heading' || section.type === 'subheading') {
-                    // Will be handled in initializeQuillEditors
+                    initializeQuillEditors(uuid);
                 } else if (section.type === 'faq' && Array.isArray(section.content)) {
                     renderFaqItems(uuid, section.content);
                 } else if ((section.type === 'image' || section.type === 'video') && section.content) {
@@ -110,8 +109,6 @@
                     renderImageSlider(uuid, section.content);
                 }
             });
-
-            initializeQuillEditors();
             updateSectionData(); // Set initial JSON data
         }
 
@@ -119,12 +116,10 @@
         function addSection() {
             const uuid = `section_${new Date().getTime()}`;
             sections.push({
-                type: "paragraph",
+                type: "image",
                 content: ""
             });
-
-            $('#page_json_container').append(getSectionTemplate("paragraph", "", sections.length - 1, uuid));
-            initializeQuillEditors();
+            $('#page_json_container').append(getSectionTemplate("image", "", sections.length - 1, uuid));
             updateSectionData();
         }
 
@@ -142,9 +137,13 @@
                 </h2>
                 <div class="accordion-collapse collapse" id="collapse-${uuid}">
                     <div class="accordion-body">
-                        <div class="d-flex justify-content-between mb-3">
+                        <div class="d-flex justify-content-between mb-3 gap-2">
                             ${sectionTypeSector}
-                            <button type="button" class="btn btn-danger" onclick="removeSection('${uuid}')">Remove</button>
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-danger" onclick="removeSection('${uuid}')">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="content-container" data-section-type="${type}" data-uuid="${uuid}">${contentInput}</div>
                     </div>
@@ -219,51 +218,71 @@
         }
 
         // Initialize Quill.js rich text editors
-        function initializeQuillEditors() {
-            $('.quill-editor').each(function() {
-                const editorId = $(this).attr('id');
-                const uuid = editorId.replace('editor-', '');
-
+        function initializeQuillEditors(uuid) {
+            if(uuid) {
+                const editorId = `editor-${uuid}`;
+                const editor = quillEditors[editorId]
                 // Destroy existing editor if it exists
-                if (quillEditors[editorId]) {
-                    quillEditors[editorId].destroy();
+                if (!editor) {
+                    // Initialize new editor
+                    const editor = new Quill(`#${editorId}`, {
+                        theme: 'snow',
+                        placeholder: 'Start writing here...',
+                        modules: {
+                            toolbar: [
+                                ['bold', 'italic', 'underline'],
+                            ]
+                        }
+                    });
+
+                    quillEditors[editorId] = editor;
+                } else {
                     delete quillEditors[editorId];
+                    initializeQuillEditors(uuid);
                 }
-
-                // Initialize new editor
-                const editor = new Quill(`#${editorId}`, {
-                    theme: 'snow',
-                    placeholder: 'Start writing here...',
-                    modules: {
-                        toolbar: [
-                            ['bold', 'italic', 'underline'],
-                            [{
-                                'list': 'ordered'
-                            }, {
-                                'list': 'bullet'
-                            }],
-                            [{
-                                'align': []
-                            }],
-                            ['link']
-                        ]
+            } else {
+                $('.quill-editor').each(function() {
+                    const editorId = $(this).attr('id');
+                    const uuid = editorId.replace('editor-', '');
+                    const editor = quillEditors[editorId]
+                    // Destroy existing editor if it exists
+                    if (!editor) {
+                        // Initialize new editor
+                        const editor = new Quill(`#${editorId}`, {
+                            theme: 'snow',
+                            placeholder: 'Start writing here...',
+                            modules: {
+                                toolbar: [
+                                    ['bold', 'italic', 'underline'],
+                                    [{
+                                        'list': 'ordered'
+                                    }, {
+                                        'list': 'bullet'
+                                    }],
+                                    [{
+                                        'align': []
+                                    }],
+                                    ['link']
+                                ]
+                            }
+                        });
+        
+                        // Set initial content
+                        editor.root.innerHTML = $(this).attr('data-content') || '';
+        
+                        // Update section data when editor content changes
+                        editor.on('text-change', function() {
+                            const sectionIndex = $(`#${uuid}`).data('index');
+                            if (typeof sectionIndex !== 'undefined') {
+                                sections[sectionIndex].content = editor.root.innerHTML;
+                                updateSectionData();
+                            }
+                        });
+        
+                        quillEditors[editorId] = editor;
                     }
                 });
-
-                // Set initial content
-                editor.root.innerHTML = $(this).attr('data-content') || '';
-
-                // Update section data when editor content changes
-                editor.on('text-change', function() {
-                    const sectionIndex = $(`#${uuid}`).data('index');
-                    if (typeof sectionIndex !== 'undefined') {
-                        sections[sectionIndex].content = editor.root.innerHTML;
-                        updateSectionData();
-                    }
-                });
-
-                quillEditors[editorId] = editor;
-            });
+            }
         }
 
         // Handle section type change
@@ -292,7 +311,7 @@
 
             if (selectedType === 'paragraph' || selectedType === 'heading' || selectedType === 'subheading') {
                 // Initialize Quill editors if not already initialized
-                initializeQuillEditors();
+                initializeQuillEditors(uuid);
             }
 
             updateSectionData();
@@ -345,7 +364,12 @@
                 uploadFile(file).then(path => {
                     const sectionIndex = $(`#${uuid}`).data('index');
                     sections[sectionIndex].content = path;
-                    container.html(`<img src="${path}" class="img-fluid" />`);
+                    container.append(`
+                        <div class="position-relative me-2 mb-2">
+                            <img src="${path}" class="img-thumbnail" style="height:100px"/>
+                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" onclick="removeUploadedImage('${uuid}', '${path}')">×</button>
+                        </div>
+                    `);
                     $(`#${uuid} .section-content`).val(path);
                     updateSectionData();
                 });
@@ -363,19 +387,21 @@
 
                 for (let i = 0; i < files.length; i++) {
                     const objectUrl = URL.createObjectURL(files[i]);
-                    imageUrls.push(objectUrl);
-
-                    container.append(`
-                        <div class="position-relative me-2 mb-2">
-                            <img src="${objectUrl}" class="img-thumbnail" style="height:100px"/>
-                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" onclick="removeSliderImage('${uuid}', '${objectUrl}')">×</button>
-                        </div>
-                    `);
+                    uploadFile(files[i]).then(path => {
+                        imageUrls.push(path);
+                        container.append(`
+                            <div class="position-relative me-2 mb-2">
+                                <img src="${path}" class="img-thumbnail" style="height:100px"/>
+                                <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" onclick="removeSliderImage('${uuid}', '${path}')">×</button>
+                            </div>
+                        `);
+                    }).catch(error => {
+                        console.error('Error uploading file:', error);
+                    }).finally(() => {
+                        sections[sectionIndex].content = imageUrls;
+                        updateSectionData();
+                    });
                 }
-
-                sections[sectionIndex].content = imageUrls;
-                
-                updateSectionData();
             }
         }
 
@@ -415,7 +441,11 @@
                             <label>Answer:</label>
                             <textarea class="form-control faq-answer" oninput="updateFaqItem('${uuid}')">${answer}</textarea>
                         </div>
-                        <button type="button" class="btn btn-sm btn-danger" onclick="removeFaqItem('${uuid}', ${index})">Remove</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-danger" onclick="removeFaqItem('${uuid}', ${index})">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -513,14 +543,14 @@
                 $(this).attr('data-index', idx);
                 $(this).find('.accordion-button').text(
                     `Section ${idx + 1}: ${sections[idx].type.charAt(0).toUpperCase() + sections[idx].type.slice(1)}`
-                    );
+                );
             });
 
             updateSectionData();
         }
 
         // Form submission handler
-        $('form').on('submit', function(e) {
+        $('form#step-content-5').on('submit', function(e) {
             e.preventDefault();
 
             // Ensure all Quill editors are updated in the sections data
@@ -543,7 +573,7 @@
             updateSectionData();
             const pageJson = $('#page_json_hidden').val();
             console.log(pageJson);
-            // this.submit();
+            this.submit();
         });
     </script>
 @endpush

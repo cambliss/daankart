@@ -5,7 +5,7 @@
     @csrf
 
     <label>Select Cause</label>
-    <select id="cause" class="form-control" name="category_id" required>
+    <select id="cause" class="form-control" name="category_id" required >
         <option value="">-- Select a Cause --</option> <!-- Default option -->
         @foreach ($categories as $category)
             <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
