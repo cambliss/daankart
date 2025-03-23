@@ -51,15 +51,56 @@ use Illuminate\Support\Str;
             top: 60px
         }
 
-        .daan-details .slider { position: relative; overflow: hidden; }
-        .daan-details .slide { display: none; transition: opacity 0.5s ease; }
-        .daan-details .slide.active { display: block; }
-        .daan-details .slider-controls { display: flex; justify-content: center; align-items: center; margin-top: 10px; }
-        .daan-details .prev-btn, .daan-details .next-btn { background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; margin: 0 10px; }
-        .daan-details .slider-dots { display: flex; justify-content: center; }
-        .daan-details .dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; margin: 0 5px; cursor: pointer; }
-        .daan-details .dot.active { background: #333; }
+        .daan-details .slider {
+            position: relative;
+            overflow: hidden;
+        }
 
+        .daan-details .slide {
+            display: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .daan-details .slide.active {
+            display: block;
+        }
+
+        .daan-details .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .daan-details .prev-btn,
+        .daan-details .next-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .daan-details .slider-dots {
+            display: flex;
+            justify-content: center;
+        }
+
+        .daan-details .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .daan-details .dot.active {
+            background: #333;
+        }
     </style>
 @endpush
 @extends($activeTemplate . 'layouts.frontend')
@@ -243,7 +284,7 @@ use Illuminate\Support\Str;
                                     function showSlide(index) {
                                         slides.forEach(slide => slide.classList.remove('active'));
                                         dots.forEach(dot => dot.classList.remove('active'));
-                                        
+
                                         slides[index].classList.add('active');
                                         dots[index].classList.add('active');
                                         currentIndex = index;
@@ -358,6 +399,9 @@ use Illuminate\Support\Str;
                             });
                         </script>
                     @endpush
+                    <div class="card my-3">
+
+                    </div>
 
                     @if ($campaign->sections)
                         <section class="video-text-image-section">
@@ -396,7 +440,8 @@ use Illuminate\Support\Str;
                                         <div class="slider">
                                             @foreach ($section->content as $key => $image)
                                                 <div class="slide {{ $key === 0 ? 'active' : '' }}">
-                                                    <img src="{{ $image }}" alt="Image Description" width="100%">
+                                                    <img src="{{ $image }}" alt="Image Description"
+                                                        width="100%">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -404,7 +449,8 @@ use Illuminate\Support\Str;
                                             <button class="prev-btn">&lt;</button>
                                             <div class="slider-dots">
                                                 @foreach ($section->content as $key => $image)
-                                                    <span class="dot {{ $key === 0 ? 'active' : '' }}" data-index="{{ $key }}"></span>
+                                                    <span class="dot {{ $key === 0 ? 'active' : '' }}"
+                                                        data-index="{{ $key }}"></span>
                                                 @endforeach
                                             </div>
                                             <button class="next-btn">&gt;</button>
@@ -472,40 +518,40 @@ use Illuminate\Support\Str;
                     </style>
                     <div class="event-details-area mt-50">
                         <div class="tab-content mt-4" id="myTabContent">
-                            <div class="mb-4">
-                                <h3 class="section-title">REVIEW</h3>
-                                <ul class="review-list mb-50">
-                                    <span class="empty-slip-message">
-                                        <span class="d-flex justify-content-center align-items-center">
-                                            <img src="https://daankart.com/assets/templates/basic//images/empty_list.png"
-                                                alt="image">
-                                        </span>
-                                        There are no reviews yet!
-                                    </span>
+                            <!--<div class="mb-4">-->
+                            <!--    <h3 class="section-title">REVIEW</h3>-->
+                            <!--    <ul class="review-list mb-50">-->
+                            <!--        <span class="empty-slip-message">-->
+                            <!--            <span class="d-flex justify-content-center align-items-center">-->
+                            <!--                <img src="https://daankart.com/assets/templates/basic//images/empty_list.png"-->
+                            <!--                    alt="image">-->
+                            <!--            </span>-->
+                            <!--            There are no reviews yet!-->
+                            <!--        </span>-->
 
-                                </ul>
-                                <form action="https://daankart.com/campaign/comment" method="POST">
-                                    <input type="hidden" name="_token" value="P4REKm8kmGAh2i7hyCBT5gIb0pZlt2TT7WgsLTLm"
-                                        autocomplete="off"> <input name="campaign" type="hidden" value="27">
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="review" placeholder="Enter Review" required></textarea>
-                                    </div>
-                                    <div class="text-end">
-                                        <button class="cmn-btn w-50" type="submit">SUBMIT REVIEW</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="mb-4">
-                                <h3 class="section-title">UPDATE</h3>
-                                <span class="empty-slip-message">
-                                    <span class="d-flex justify-content-center align-items-center">
-                                        <img src="https://daankart.com/assets/templates/basic//images/empty_list.png"
-                                            alt="image">
-                                    </span>
-                                    No update yet!
-                                </span>
+                            <!--    </ul>-->
+                            <!--    <form action="https://daankart.com/campaign/comment" method="POST">-->
+                            <!--        <input type="hidden" name="_token" value="P4REKm8kmGAh2i7hyCBT5gIb0pZlt2TT7WgsLTLm"-->
+                            <!--            autocomplete="off"> <input name="campaign" type="hidden" value="27">-->
+                            <!--        <div class="form-group">-->
+                            <!--            <textarea class="form-control" name="review" placeholder="Enter Review" required></textarea>-->
+                            <!--        </div>-->
+                            <!--        <div class="text-end">-->
+                            <!--            <button class="cmn-btn w-50" type="submit">SUBMIT REVIEW</button>-->
+                            <!--        </div>-->
+                            <!--    </form>-->
+                            <!--</div>-->
+                            <!--<div class="mb-4">-->
+                            <!--    <h3 class="section-title">UPDATE</h3>-->
+                            <!--    <span class="empty-slip-message">-->
+                            <!--        <span class="d-flex justify-content-center align-items-center">-->
+                            <!--            <img src="https://daankart.com/assets/templates/basic//images/empty_list.png"-->
+                            <!--                alt="image">-->
+                            <!--        </span>-->
+                            <!--        No update yet!-->
+                            <!--    </span>-->
 
-                            </div>
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -573,11 +619,11 @@ use Illuminate\Support\Str;
                                 </div>
                             </div><!-- donation-widget end -->
                             <div class="donation-widget-2">
-                                <form class="vent-details-form" method="POST"
-                                    action="https://daankart.com/campaign/donation/elders-initiative-empowering-supporting-and-celebrating-our-seniors/27">
-                                    <input type="hidden" name="_token" value="P4REKm8kmGAh2i7hyCBT5gIb0pZlt2TT7WgsLTLm"
-                                        autocomplete="off">
-                                    <h3 class="mb-3">Donation Amount</h3>
+                                <form class="vent-details-form" method="POST" action="{{ route('campaign.donation.process', $campaign->id) }}">
+                                    @csrf {{-- Include CSRF token for security --}}
+
+                                    <h3 class="mb-3">@lang('Donation Amount')</h3>
+
                                     <div class="form-row align-items-center">
                                         <div class="col-lg-12 form-group donate-amount">
                                             <div class="input-group mr-sm-2">
@@ -586,70 +632,62 @@ use Illuminate\Support\Str;
                                                     type="number" value="0" step="any" required>
                                             </div>
                                         </div>
+
+                                        {{-- Optional: Predefined donation amounts (commented out in your original code) --}}
                                         {{-- <div class="col-12 form-group donated-amount">
-                                        <div class="form--radio form-check-inline">
-                                            <input class="form-check-input donation-radio-check"
-                                                id="customRadioInline1" name="customRadioInline1" type="radio"
-                                                value="100">
-                                            <label class="form-check-label" for="customRadioInline1">
-                                                ₹100 </label>
-                                        </div>
-                                        <div class="form--radio form-check-inline">
-                                            <input class="form-check-input donation-radio-check"
-                                                id="customRadioInline2" name="customRadioInline1" type="radio"
-                                                value="200">
-                                            <label class="form-check-label" for="customRadioInline2">
-                                                ₹200 </label>
-                                        </div>
-                                        <div class="form--radio form-check-inline">
-                                            <input class="form-check-input donation-radio-check"
-                                                id="customRadioInline3" name="customRadioInline1" type="radio"
-                                                value="300">
-                                            <label class="form-check-label" for="customRadioInline3">
-                                                ₹300 </label>
-                                        </div>
-                                        <div class="form--radio form-check-inline">
-                                            <input class="form-check-input donation-radio-check custom-donation"
-                                                id="flexRadioDefault4" name="customRadioInline1" type="radio">
-                                            <label class="form-check-label" for="flexRadioDefault4">
-                                                Custom </label>
-                                        </div>
-                                    </div> --}}
+                <div class="form--radio form-check-inline">
+                    <input class="form-check-input donation-radio-check" id="customRadioInline1" name="customRadioInline1" type="radio" value="100">
+                    <label class="form-check-label" for="customRadioInline1">₹100</label>
+                </div>
+                <div class="form--radio form-check-inline">
+                    <input class="form-check-input donation-radio-check" id="customRadioInline2" name="customRadioInline1" type="radio" value="200">
+                    <label class="form-check-label" for="customRadioInline2">₹200</label>
+                </div>
+                <div class="form--radio form-check-inline">
+                    <input class="form-check-input donation-radio-check" id="customRadioInline3" name="customRadioInline1" type="radio" value="300">
+                    <label class="form-check-label" for="customRadioInline3">₹300</label>
+                </div>
+                <div class="form--radio form-check-inline">
+                    <input class="form-check-input donation-radio-check custom-donation" id="flexRadioDefault4" name="customRadioInline1" type="radio">
+                    <label class="form-check-label" for="flexRadioDefault4">@lang('Custom')</label>
+                </div>
+            </div> --}}
                                     </div>
 
-                                    <h3 class="mb-4 mt-30">Personal Information</h3>
-
+                                    <h3 class="mb-4 mt-30">@lang('Personal Information')</h3>
 
                                     <div class="form-row">
                                         <div class="form-group col-lg-12">
-                                            <label>Full Name</label>
+                                            <label>@lang('Full Name')</label>
                                             <input class="form-control checktoggle" name="name" type="text"
                                                 value="{{ $campaign->campaigner_name }}" required>
                                         </div>
 
                                         <div class="form-group col-lg-12">
-                                            <label>Email</label>
+                                            <label>@lang('Email')</label>
                                             <input class="form-control checktoggle" name="email" type="text"
                                                 value="{{ $campaign->email }}" required>
                                         </div>
 
                                         <div class="form-group col-lg-12">
-                                            <label>Mobile: </label>
+                                            <label>@lang('Mobile'): </label>
                                             <input class="form-control checktoggle" name="mobile" type="number"
                                                 value="{{ $campaign->mobile_number }}" required>
                                         </div>
 
                                         <div class="form-group col-lg-12">
-                                            <label>Location</label>
+                                            <label>@lang('Location')</label>
                                             <input class="form-control checktoggle" name="location" type="text"
                                                 value="{{ $campaign->beneficiary_location }}" required>
                                         </div>
+
                                         <div class="col-lg-12">
-                                            <input name="campaign_id" type="hidden" value="27">
-                                            <button class="cmn-btn w-100" type="submit">MAKE YOUR DONATION</button>
+                                            <input name="campaign_id" type="hidden" value="{{ $campaign->id }}">
+                                            <button class="cmn-btn w-100" type="submit"
+                                                @if (@auth()->user()->id == $campaign->user_id) disabled @endif>@lang('MAKE YOUR DONATION')</button>
                                         </div>
                                     </div>
-                                </form>
+                                </form> {{-- Closing the form tag here --}}
                             </div>
                             <div class="donation-widget-2 my-3">
                                 <h3>Share Campaign</h3>
@@ -728,8 +766,8 @@ use Illuminate\Support\Str;
                                 <ul class="donor-small-list">
                                     <span class="empty-slip-message">
                                         <span class="d-flex justify-content-center align-items-center">
-                                            <img src="https://daankart.com/assets/templates/basic//images/empty_list.png"
-                                                alt="image">
+                                            <!--<img src="https://daankart.com/assets/templates/basic//images/empty_list.png"-->
+                                            <!--    alt="image">-->
                                         </span>
                                         No donations raised yet
                                     </span>

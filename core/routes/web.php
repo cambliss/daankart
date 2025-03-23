@@ -97,4 +97,5 @@ Route::prefix('deposit')->name('deposit.')->controller('Gateway\PaymentControlle
 
 Route::controller('DonationController')->prefix('campaign/donation')->name('campaign.donation.')->group(function () {
     Route::post('/{slug?}/{id?}', 'donation')->name('process');
+    Route::post('/daan/{id?}', 'donation')->name('daan.process');
 });
