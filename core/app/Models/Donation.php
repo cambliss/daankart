@@ -7,12 +7,33 @@ use App\Constants\Status;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Campaign;
+use App\Models\DaanCampaign;
+
 class Donation extends Model
 {
     public function campaign()
     {
-        return $this->belongsTo(Campaign::class);
+        $campaignId = $this->campaign_id;
+        
+        if (Campaign::find($campaignId)) {
+            return $this->regularCampaign();
+        } elseif (DaanCampaign::find($campaignId)) {
+            return $this->daanCampaign();
+        }
+        return $this->regularCampaign();
     }
+    
+    public function regularCampaign()
+    {
+        return $this->belongsTo(Campaign::class, 'campaign_id');
+    }
+    
+    public function daanCampaign()
+    {
+        return $this->belongsTo(DaanCampaign::class, 'campaign_id');
+    }
+
     public function deposit()
     {
         return $this->hasOne(Deposit::class);
