@@ -4,7 +4,7 @@
         ->boundary()
         ->with(['user.organization', 'category', 'donations'])
         ->orderBy('id', 'DESC')
-        ->take(3)
+        ->take(7)
         ->get();
 @endphp
 <br/><br/>
@@ -27,11 +27,11 @@
 
             @include($activeTemplate . 'partials.campaign')
 
-            @if (count($campaigns) > 3)
-                <div class="col-md-12 my-5 text-center">
-                    <a class="cmn-btn" href="{{ route('campaign.index') }}">@lang('SHOW ALL CAMPAIGNS')</a>
-                </div>
-            @endif
+            <!--@if (count($campaigns) > 3)-->
+            <!--    <div class="col-md-12 my-5 text-center">-->
+            <!--        <a class="cmn-btn" href="{{ route('campaign.index') }}">@lang('SHOW ALL CAMPAIGNS')</a>-->
+            <!--    </div>-->
+            <!--@endif-->
         </div>
     </div>
 </section>

@@ -300,7 +300,7 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
 </div>
 <div class="container-fluid py-5 mt-5" style="background-color: hsl(var(--base)); color: white;">
     <div class="container text-center">
-        <h2 class="fw-bold" style="color:#FFF !important"> Join Daankart's Monthly Mission To Break The Cycle Of Hunger</h2>
+        <h2 class="fw-bold" style="color:#FFF !important"> Join Daankart's Monthly Mission {{$campaign->joinmonthlytag}}</h2>
         <h4 class="mb-2" style="color:#FFF !important">Your monthly contribution ensures thousands of underprivileged families, children and communities.
 </h4>
         <div class="row g-4">
@@ -463,8 +463,8 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                     <div class="mb-3">
                         <i class="fas fa-utensils fa-3x text-white"></i>
                     </div>
-                    <h5 class="fw-bold text-white">₹1000</h5>
-                    <p class="text-white-75">Feeds 30 people every month</p>
+                    <h5 class="fw-bold text-white">{{$campaign->makingadifference1}}</h5>
+                    <p class="text-white-75">{{$campaign->makingadifference1text1}}</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -472,8 +472,8 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                     <div class="mb-3">
                         <i class="fas fa-hand-holding-heart fa-3x text-white"></i>
                     </div>
-                    <h5 class="fw-bold text-white">₹3000</h5>
-                    <p class="text-white-75">Feeds 90 people every month</p>
+                    <h5 class="fw-bold text-white">{{$campaign->makingadifference2}}</h5>
+                    <p class="text-white-75">{{$campaign->makingadifference1text2}}</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -481,8 +481,8 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                     <div class="mb-3">
                         <i class="fas fa-globe fa-3x text-white"></i>
                     </div>
-                    <h5 class="fw-bold text-white">₹6000</h5>
-                    <p class="text-white-75">Feeds 150 people every month</p>
+                    <h5 class="fw-bold text-white">{{$campaign->makingadifference3}}</h5>
+                    <p class="text-white-75">{{$campaign->makingadifference1text3}}</p>
                 </div>
             </div>
         </div>
