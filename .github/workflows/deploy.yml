@@ -1,0 +1,37 @@
+name: Deploy to Digital Ocean
+
+on:
+  push:
+    branches:
+      - main
+      - development
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set Environment Variables
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/production" ]; then
+          echo "DEPLOY_PATH=/home/u243320263/domains/daankart.com/public_html" >> $GITHUB_ENV
+        elif [ "${{ github.ref }}" == "refs/heads/production" ]; then
+          echo "DEPLOY_PATH=/home/u243320263/domains/daankart.com/public_html" >> $GITHUB_ENV
+        fi
+
+    - name: Deploy to DigitalOcean
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_HOST: ${{ secrets.DIGITAL_OCEAN_IP }}
+        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+        DEPLOY_PATH: ${{ env.DEPLOY_PATH }}
+      run: |
+        echo "$SSH_PRIVATE_KEY" > private_key
+        chmod 600 private_key
+        ssh -o StrictHostKeyChecking=no -i private_key $SSH_USERNAME@$SSH_HOST "
+          cd $DEPLOY_PATH && 
+          sh deploy.sh > ./public/deployed.html
+        "
