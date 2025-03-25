@@ -24,7 +24,14 @@ jobs:
 
     - name: Deploy to DigitalOcean
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY: |
+          -----BEGIN OPENSSH PRIVATE KEY-----
+          b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+          QyNTUxOQAAACCvDlsMj3oNoEPthlrUxNLIgj1fhi0Xt2COp/2c49wXjAAAAKDOZZdXzmWX
+          VwAAAAtzc2gtZWQyNTUxOQAAACCvDlsMj3oNoEPthlrUxNLIgj1fhi0Xt2COp/2c49wXjA
+          AAAECMcZ4p1kumxqw4CCt4WOdzQHOAi+VH9ypCrpzJssU//68OWwyPeg2gQ+2GWtTE0siC
+          PV+GLRe3YI6n/Zzj3BeMAAAAHWFuaWxrdW1hcmtyaXNobmEwMjdAZ21haWwuY29t
+          -----END OPENSSH PRIVATE KEY-----
         DEPLOY_PATH: ${{ env.DEPLOY_PATH }}
       run: |
         echo "$SSH_PRIVATE_KEY" > private_key
