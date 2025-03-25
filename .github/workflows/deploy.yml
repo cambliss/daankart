@@ -25,13 +25,11 @@ jobs:
     - name: Deploy to DigitalOcean
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SSH_HOST: ${{ secrets.DIGITAL_OCEAN_IP }}
-        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
         DEPLOY_PATH: ${{ env.DEPLOY_PATH }}
       run: |
         echo "$SSH_PRIVATE_KEY" > private_key
         chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key $SSH_USERNAME@$SSH_HOST "
+        ssh -o StrictHostKeyChecking=no -i private_key -p 65002 u243320263@147.93.109.63 "
           cd $DEPLOY_PATH && 
           sh deploy.sh > ./public/deployed.html
         "
