@@ -20,10 +20,11 @@
         <!--    @include($activeTemplate . 'partials.empty', ['message' => ucfirst(strtolower($pageTitle)) . ' not found!'])-->
         <!--</div>-->
     @endforelse
-    <div class="text-center py-3 d-flex justify-content-center align-items-center m-3">
-        <video controls="" width="100%" height="100%" muted autoplay playsinline class="rounded" controls="false" >
+    <div class="text-center py-3 d-flex justify-content-center align-items-center m-3 position-relative">
+        <video width="100%" height="100%" muted autoplay playsinline class="rounded" loop >
             <source src="/assets/videos/volunteer_bannar_for_daankart.mp4"  type="video/mp4">
         </video>
+        <a class="position-absolute top-0 bottom-0 start-0 end-0" href="/volunteer/join-as/volunteer " ></a>
     </div>
 </div>
 

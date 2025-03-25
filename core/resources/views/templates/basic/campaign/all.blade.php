@@ -54,7 +54,7 @@
                                     <span class="feature">
                                         {{ $campaign->category->name }}
                                     </span>
-                                    <a class="item-link" href="{{ route('campaign.daan_details', ['id' => $campaign->id]) }}"></a>
+                                    <a class="item-link" href="{{ $campaign->slug ? route('campaign.daan_details_slug', ['slug' => $campaign->slug]) : '#' }}"></a>
                                     <div class="event-card__thumb">
                                         <span class="camp_deadline">
                                             <i class="las la-certificate"></i> Tax Verified

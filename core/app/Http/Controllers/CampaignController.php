@@ -30,6 +30,17 @@ class CampaignController extends Controller
         //dd($campaign);
         return view('Template::campaign.daan_details', compact('campaign', 'pageTitle'));
     }
+    
+    public function daanDetailsOnSlug(Request $request, $slug)
+    {
+        $campaign = DaanCampaign::where('slug', $slug)->first();
+        if(!empty($campaign)) {
+            $pageTitle = $campaign->campaign_title;
+        } else {
+            $pageTitle = 'Campaign Not Found';
+        }
+        return view('Template::campaign.daan_details', compact('campaign', 'pageTitle'));
+    }
 
     public function getAllCampaigns(Request $request)
     {
@@ -45,6 +56,8 @@ class CampaignController extends Controller
         if($request->date) {
             $query->whereDate('created_at', $request->date);
         }
+        $query->where('is_kyc_varified', 1);
+        $query->where('status', 'Completed');
         $campaigns  = $query->paginate(getPaginate());
         $pageTitle = 'All Campaigns';
         $categories = Category::active()->hasCampaigns()->orderBy('id', 'DESC')->get();
