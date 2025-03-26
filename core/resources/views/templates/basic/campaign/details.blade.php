@@ -728,7 +728,7 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                             @endphp
                             <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
                                 <div class="row gy-4">
-                                    @foreach ($campaign->proof_images as $images)
+                                    @foreach (($campaign->proof_images??[])  as $images)
                                         @if (explode('.', $images)[1] != 'pdf')
                                             @php
                                                 $foundImg = true;
@@ -756,7 +756,7 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                                 </div>
                             </div><!-- tab-pane end -->
                             <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
-                                @foreach ($campaign->proof_images as $pdfFiles)
+                                @foreach (($campaign->proof_images??[]) as $pdfFiles)
                                     @if (explode('.', @$pdfFiles)[1] == 'pdf')
                                         @php
                                             $foundPdf = true;
@@ -892,7 +892,7 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                             @endphp
                             <div class="tab-pane fade" id="gallery" role="tabpanel" aria-labelledby="gallery-tab">
                                 <div class="row gy-4">
-                                    @foreach ($campaign->proof_images as $images)
+                                    @foreach (($campaign->proof_images??[]) as $images)
                                         @if (explode('.', $images)[1] != 'pdf')
                                             @php
                                                 $foundImg = true;
@@ -920,7 +920,7 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                                 </div>
                             </div><!-- tab-pane end -->
                             <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
-                                @foreach ($campaign->proof_images as $pdfFiles)
+                                @foreach (($campaign->proof_images??[]) as $pdfFiles)
                                     @if (explode('.', @$pdfFiles)[1] == 'pdf')
                                         @php
                                             $foundPdf = true;
