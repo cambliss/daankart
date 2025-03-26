@@ -181,11 +181,13 @@
                                                     href="{{ route('admin.fundrise.details', $campaign->id) . '?tab=daan' }}">
                                                     <i class="las la-desktop"></i>@lang('Details')
                                                 </a>
+                                                @if ($campaign->status === 'Completed')
                                                 <button class="btn btn-sm btn-outline--success ms-1 mb-2 confirmationBtn"
                                                     data-action="{{ route('admin.daan.campaign.update', ['id' => $campaign->id, 'status' => 'Approved']) }}"
                                                     data-question="Are you sure to approve this campaign?" type="button">
                                                     Approve
                                                 </button>
+                                                @endif
                                                 @if (request()->routeIs('admin.fundrise.rejected'))
                                                     <button class="btn btn-sm btn-outline--danger ms-1 mb-2 confirmationBtn"
                                                         data-action="{{ route('admin.fundrise.delete', $campaign->id) }}"
