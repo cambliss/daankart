@@ -5,8 +5,12 @@
            <img src="{{ asset('assets/images/frontend/exploreBanner/explore_compaign.jpg.jpg') }}" alt="explore_campaign" class="banner-image">
        </div>
        
-        @include($activeTemplate . 'sections.search-filters');
-        <div class="container-fluid custom-container explore-container">
+       <div class="container-fluid custom-container explore-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    @include($activeTemplate . 'sections.search-filters');
+                </div>
+            </div>
             <div class="row">
                 <!-- Left Sidebar - Filters -->
                 <div class="col-lg-3">
