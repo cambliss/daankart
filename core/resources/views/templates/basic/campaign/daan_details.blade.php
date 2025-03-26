@@ -162,6 +162,7 @@ use Illuminate\Support\Str;
                                     </div>
                                     <?php
                                         $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
+                                        $total_amount = $total_amount > $campaign->goal ? $campaign->goal : $total_amount;
                                     ?>
                                     <!-- Donation Section -->
                                     <div class="p-4 text-center" style="background-color: #f0f0f5; border-radius: 10px;">
@@ -556,7 +557,7 @@ use Illuminate\Support\Str;
                                         <span class="text">Also To Go</span>
                                     </div>
                                     <p class="number">
-                                        {{ number_format($total_amount, 2) }} INR
+                                        {{ number_format($total_amount - $campaign->raised_amount, 2) }} INR
                                     </p>
                                 </div>
                                 @if($campaign->campaign_type == 'time_bound')
