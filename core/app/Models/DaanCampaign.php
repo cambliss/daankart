@@ -57,7 +57,7 @@ class DaanCampaign extends Model {
                 if (false === $this->status) {
                     $html = '<span class="badge badge--dark">' . trans("Expired") . '</span>';
                 } elseif ($this->status == "Approved") {
-                    $html = '<span class="badge badge--primary">' . trans("Approved") . '</span>';
+                    $html = '<span class="badge badge--success">' . trans("Approved") . '</span>';
                 } elseif ($this->status == "Completed") {
                     $html = '<span class="badge badge--primary">' . trans("Completed") . '</span>';
                 } elseif ($this->status == "Inactive") {
