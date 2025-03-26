@@ -30,7 +30,7 @@
 </style>
 @endpush
 
-<form method="GET" action="{{ route('campaigns.all') }}" id="search-filter-form">
+<form method="GET" action="{{ route('campaign.all') }}" id="search-filter-form">
   <div class="row g-2 align-items-center">
     <!-- Search Input with Icon Inside -->
     <div class="col-md-6">
