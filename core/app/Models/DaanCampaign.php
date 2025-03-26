@@ -52,6 +52,16 @@ class DaanCampaign extends Model {
         return $this->hasMany(Comment::class, 'campaign_id', 'id');
     }
 
+    public function scopeBoundary($query)
+    {
+        return $query;
+    }
+
+    public function scopeRunning($query)
+    {
+        return $query;
+    }
+
 
     public function statusBadge(): Attribute
     {

@@ -129,6 +129,11 @@ class CampaignController extends Controller
         $user      = auth()->user();
         $isAdmin   = auth()->guard('admin')->check();
         $query     = Campaign::where('slug', $slug)->boundary();
+        if(Campaign::where('slug', $slug)->exists()) {
+            $query = Campaign::where('slug', $slug)->boundary();
+        } else {
+            $query = DaanCampaign::where('slug', $slug)->boundary();
+        }
         if (!$isAdmin) {
             if ($user) {
                 $query->where(function ($query) use ($user) {
