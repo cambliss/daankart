@@ -106,9 +106,9 @@ use Illuminate\Support\Str;
                     <div class="event-details-area mt-50">
                         <ul class="nav nav-tabs custom--tab" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="description-tab" data-bs-toggle="tab"
-                                    data-bs-target="#description" href="#description" role="tab"
-                                    aria-controls="description" aria-selected="true"><span
+                                <a class="nav-link active" id="project-tab" data-bs-toggle="tab"
+                                    data-bs-target="#project" href="#project" role="tab"
+                                    aria-controls="project" aria-selected="true"><span
                                         class="las la-desktop d-block text-center mb-1"></span>PROJECT</a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -123,9 +123,9 @@ use Illuminate\Support\Str;
                             </li>
                         </ul>
                         <div class="tab-content mt-4" id="myTabContent">
-                            <div class="tab-pane fade show active" id="description" role="tabpanel"
-                                aria-labelledby="description-tab">
-                                <p class="text-justify">{{ $campaign->campaign_description }}</p>
+                            <div class="tab-pane fade show active" id="project" role="tabpanel"
+                                aria-labelledby="project-tab">
+                                {{-- <p class="text-justify">{{ $campaign->campaign_description }}</p> --}}
                             </div><!-- tab-pane end -->
                             <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
                                 <div class="container mt-5 mb-5">
