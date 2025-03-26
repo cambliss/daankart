@@ -47,5 +47,25 @@ class DaanCampaign extends Model {
     {
         return $this->hasMany(Comment::class, 'campaign_id', 'id');
     }
+
+
+    public function statusBadge(): Attribute
+    {
+        return new Attribute(
+            function () {
+                $html = '';
+                if (false === $this->status) {
+                    $html = '<span class="badge badge--dark">' . trans("Expired") . '</span>';
+                } elseif ($this->status == "Approved") {
+                    $html = '<span class="badge badge--primary">' . trans("Approved") . '</span>';
+                } elseif ($this->status == "Inactive") {
+                    $html = '<span class="badge badge--danger">' . trans("Rejected") . '</span>';
+                } elseif ($this->status == "Pending") {
+                    $html = '<span class="badge badge--warning">' . trans("Pending") . '</span>';
+                }
+                return $html;
+            }
+        );
+    }
 }
 
