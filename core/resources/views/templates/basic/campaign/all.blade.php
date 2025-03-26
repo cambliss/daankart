@@ -106,11 +106,11 @@
 
                                         <div class="amount-status">
                                             <div class="left">
-                                                <b>1,800 INR</b>
+                                                <b>{{number_format($campaign->raised_amount)}} INR</b>
                                                 Raised
                                             </div>
                                             <div class="right">
-                                                Goal <b>2,500,000 INR</b>
+                                                Goal <b>{{number_format($campaign->goal)}} INR</b>
                                             </div>
                                         </div>
                                     </div>
