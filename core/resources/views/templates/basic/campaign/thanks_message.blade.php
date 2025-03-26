@@ -6,18 +6,26 @@
                 <div class="modal-body text-center">
                     <div class="modal-body__img">
                         @if ($user->enable_org)
-                            <img src="{{ avatar(@$user->organization->image ? getFilePath('orgProfile') . '/' . @$user->organization->image : null, false) }}" alt="user-avatar">
+                            <img src="{{ avatar(@$user->organization->image ? getFilePath('orgProfile') . '/' . @$user->organization->image : null, false) }}"
+                                alt="user-avatar">
                         @else
-                            <img src="{{ avatar(@$user->image ? getFilePath('userProfile') . '/' . @$user->image : null, false) }}" alt="user-avatar">
+                            <img src="{{ avatar(@$user->image ? getFilePath('userProfile') . '/' . @$user->image : null, false) }}"
+                                alt="user-avatar">
                         @endif
                     </div>
                     <div class="modal-body__content">
-                        <h5 class="modal-body__title">@lang("Thank's for your supporting") @if ($user->enable_org) {{ __($user->organization->name) }} @else {{ __($user->fullname) }} @endif 🎉</h5>
+                        <h5 class="modal-body__title">@lang("Thank's for your supporting") @if ($user->enable_org)
+                                {{ __($user->organization->name) }}
+                            @else
+                                {{ __($user->fullname) }}
+                            @endif 🎉</h5>
                         <div class="modal-body__share">
                             <p>{{ __(@$campaign->title) }}</p>
                             <div class="modal-body__content share-action">
                                 <div class="form-group copy-link">
-                                    <input class="copyURL" class="form-control form--control" id="profile" name="profile" type="text" value="{{ route('campaign.details', $campaign->slug) }}" readonly="">
+                                    <input class="copyURL" class="form-control form--control" id="profile" name="profile"
+                                        type="text" value="{{ route('campaign.details', $campaign->slug) }}"
+                                        readonly="">
                                     <span class="copy" data-id="profile">
                                         <i class="las la-copy"></i> <strong class="copyText">@lang('Copy')</strong>
                                     </span>
@@ -40,10 +48,10 @@
                 </div>
             </div>
             <div class="success-message-footer">
-                <a class="btn btn--sm" href="{{ route('campaign.details', $campaign->slug) }}">@lang('Back To Campaign') <span
-                          class="icon"> <i class="las la-arrow-right"></i> </span></a>
+                {{-- <a class="btn btn--sm" href="{{ route('campaign.details', $campaign->slug) }}">@lang('Back To Campaign') <span
+                        class="icon"> <i class="las la-arrow-right"></i> </span></a> --}}
                 <a class="btn btn--sm" href="{{ route('home') }}">@lang('Back To Home')<span class="icon"><i
-                           class="las la-arrow-right"></i></span></a>
+                            class="las la-arrow-right"></i></span></a>
             </div>
         </div>
     </div>
