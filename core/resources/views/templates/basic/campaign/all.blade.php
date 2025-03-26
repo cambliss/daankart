@@ -17,7 +17,7 @@
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <!-- Campaign Title Filter -->
-                            <div class="mb-4">
+                            {{-- <div class="mb-4">
                                 <h5 class="text-orange">Search Campaign</h5>
                                 <div class="input-group">
                                     <input type="text" name="search" class="form-control" id="campaignSearch"
@@ -26,7 +26,7 @@
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="mb-4">
                                 <h5 class="text-orange">Filter By Category</h5>

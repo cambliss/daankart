@@ -34,6 +34,7 @@
   <div class="row g-2 align-items-center">
     <!-- Search Input with Icon Inside -->
     <div class="col-md-6">
+      <h5 class="text-orange">Search Campaign</h5>
       <div class="input-group">
         <span class="input-group-text"><i class="fas fa-search"></i></span>
         <input type="text" name="search" class="form-control custom-input" placeholder="Search by Campaign/NGO" value="{{ request('search') }}">
@@ -51,7 +52,7 @@
 
     <!-- Type Dropdown -->
     <div class="col-md-3">
-      <select class="form-select custom-select" name="type" onchange="document.getElementById('search-filter-form').submit();">
+      <select class="form-select custom-select" name="category_id" onchange="document.getElementById('search-filter-form').submit();">
         <option value="">All Types</option>
         @foreach ($categories as $category)
         <option value="{{ $category->id }}" {{ request('type') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
@@ -73,7 +74,7 @@
   document.querySelector('select[name="location"]').addEventListener('change', function () {
     document.getElementById('search-filter-form').submit();
   });
-  document.querySelector('select[name="type"]').addEventListener('change', function () {
+  document.querySelector('select[name="category_id"]').addEventListener('change', function () {
     document.getElementById('search-filter-form').submit();
   });
 </script>
