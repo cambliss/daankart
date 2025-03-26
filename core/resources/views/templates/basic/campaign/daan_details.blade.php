@@ -530,7 +530,7 @@ use Illuminate\Support\Str;
 
                                 <div class="progressbar" data-perc="0%">
                                     <div class="bar"></div>
-                                    <span class="label">0.00%</span>
+                                    <span class="label">{{ percent($campaign->raised_amount, $campaign) }}%</span>
                                 </div>
                             </div>
 
