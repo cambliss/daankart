@@ -43,6 +43,7 @@
 
     <!-- Location Dropdown -->
     <div class="col-md-3">
+      <h5 class="text-orange">Location</h5>
       <select class="form-select custom-select" name="location" onchange="document.getElementById('search-filter-form').submit();">
         <option value="">📍 Location (1)</option>
         <option value="hyderabad" {{ request('location') == 'hyderabad' ? 'selected' : '' }}>Hyderabad</option>
@@ -52,6 +53,7 @@
 
     <!-- Type Dropdown -->
     <div class="col-md-3">
+      <h5 class="text-orange">Filter By Category</h5>
       <select class="form-select custom-select" name="category_id" onchange="document.getElementById('search-filter-form').submit();">
         <option value="">All Types</option>
         @foreach ($categories as $category)
