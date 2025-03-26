@@ -516,7 +516,11 @@ use Illuminate\Support\Str;
                 <div class="col-lg-4 mt-lg-0 mt-5">
                     <div class="donation-sidebar">
                         <div class="donation-widget">
+                            @if($campaign->campaign_type == 'continuous')
                             <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
+                            @else
+                            <span class="cam_deadline"> <i class="las la-calendar-alt"></i> One Time</span>
+                            @endif
                             <h4 class="title py-2"><i class="las la-thumbtack"></i>
                                 {{ $campaign->category ? $campaign->category->name : 'Campaign' }} Initiative:
                             </h4>
@@ -555,14 +559,15 @@ use Illuminate\Support\Str;
                                         {{ number_format($total_amount, 2) }} INR
                                     </p>
                                 </div>
+                                @if($campaign->campaign_type == 'time_bound')
                                 <div class="donation-content">
                                     <div>
                                         <span class="icon"><i class="las la-clock"></i></span>
                                         <span class="text">Not Yet Completed</span>
                                     </div>
-
-                                    <p class="number">13 days to go</p>
+                                    <p class="number">{{ $campaign->end_date->diffForHumans() }}</p>
                                 </div>
+                                @endif
                             </div>
                             <div class="donation-wrapper">
                                 <div class="event-cart__top">

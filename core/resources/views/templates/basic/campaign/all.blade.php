@@ -124,8 +124,6 @@
                             </div>
                         @endforelse
                     </div>
-
-                     Pagination 
                     @if ($campaigns->hasPages())
                         <div class="mt-4">
                             {{ $campaigns->links() }}
