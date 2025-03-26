@@ -57,7 +57,7 @@ class CampaignController extends Controller
             $query->whereDate('created_at', $request->date);
         }
         $query->where('is_kyc_varified', 1);
-        $query->where('status', 'Completed');
+        $query->where('status', 'Approved');
         $campaigns  = $query->paginate(getPaginate());
         $pageTitle = 'All Campaigns';
         $categories = Category::active()->hasCampaigns()->orderBy('id', 'DESC')->get();
