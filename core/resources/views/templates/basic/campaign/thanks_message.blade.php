@@ -24,7 +24,7 @@
                             <div class="modal-body__content share-action">
                                 <div class="form-group copy-link">
                                     <input class="copyURL" class="form-control form--control" id="profile" name="profile"
-                                        type="text" value="{{ route('campaign.details', $campaign->slug) }}"
+                                        type="text" value="{{ route('campaign.daan_details_slug', $campaign->slug) }}"
                                         readonly="">
                                     <span class="copy" data-id="profile">
                                         <i class="las la-copy"></i> <strong class="copyText">@lang('Copy')</strong>
@@ -48,8 +48,8 @@
                 </div>
             </div>
             <div class="success-message-footer">
-                {{-- <a class="btn btn--sm" href="{{ route('campaign.details', $campaign->slug) }}">@lang('Back To Campaign') <span
-                        class="icon"> <i class="las la-arrow-right"></i> </span></a> --}}
+                <a class="btn btn--sm" href="{{ route('campaign.daan_details_slug', $campaign->slug) }}">@lang('Back To Campaign') <span
+                        class="icon"> <i class="las la-arrow-right"></i> </span></a>
                 <a class="btn btn--sm" href="{{ route('home') }}">@lang('Back To Home')<span class="icon"><i
                             class="las la-arrow-right"></i></span></a>
             </div>
