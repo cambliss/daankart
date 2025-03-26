@@ -35,7 +35,7 @@
     <!-- Search Input with Icon Inside -->
     <div class="col-md-6">
       <div class="input-group">
-        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
         <input type="text" name="search" class="form-control custom-input" placeholder="Search by Campaign/NGO" value="{{ request('search') }}">
       </div>
     </div>
@@ -44,8 +44,8 @@
     <div class="col-md-3">
       <select class="form-select custom-select" name="location" onchange="document.getElementById('search-filter-form').submit();">
         <option value="">📍 Location (1)</option>
-        <option value="bangalore" {{ request('location') == 'bangalore' ? 'selected' : '' }}>Bangalore</option>
-        <option value="delhi" {{ request('location') == 'delhi' ? 'selected' : '' }}>Delhi</option>
+        <option value="hyderabad" {{ request('location') == 'hyderabad' ? 'selected' : '' }}>Hyderabad</option>
+        <option value="karnataka" {{ request('location') == 'karnataka' ? 'selected' : '' }}>Karnataka</option>
       </select>
     </div>
 
@@ -53,8 +53,9 @@
     <div class="col-md-3">
       <select class="form-select custom-select" name="type" onchange="document.getElementById('search-filter-form').submit();">
         <option value="">All Types</option>
-        <option value="education" {{ request('type') == 'education' ? 'selected' : '' }}>Education</option>
-        <option value="health" {{ request('type') == 'health' ? 'selected' : '' }}>Health</option>
+        @foreach ($categories as $category)
+        <option value="{{ $category->id }}" {{ request('type') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
+        @endforeach
       </select>
     </div>
   </div>
