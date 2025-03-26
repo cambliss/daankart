@@ -57,11 +57,7 @@ class ManageCampaignController extends Controller
         }
 
         $donate    = $campaign->donations->where('status', Status::DONATION_PAID)->sum('donation');
-        if($donate > 0){
-            $percent   = percent($donate, $campaign);
-        }else{
-            $percent = 0;
-        }
+        $percent   = percent($donate, $campaign);
 
         if ($campaign->is_extend == Status::YES) {
             $pageTitle = "Campaign Extend Request Details";

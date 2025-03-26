@@ -291,8 +291,13 @@ public function store(Request $request)
                 $queryDonation->where("id",$donation_id);
             }
             $donation = $queryDonation->first();
-            $campaign->raised_amount += $donation->donation;
-            $campaign->save();
+            if(!empty($donation)) {
+                $campaign->raised_amount = $campaign->raised_amount + $donation->donation;
+                $campaign->save();
+                tap($donation)->update([
+                    'status' => 1,
+                ]);
+            }
         }
         $user      = $campaign->user;
         return view('Template::campaign.thanks_message', compact('pageTitle', 'campaign', 'user'));

@@ -37,6 +37,10 @@ class DaanCampaign extends Model {
         return json_decode($this->attributes['page_json']);
     }
 
+    public function documents()
+    {
+        return $this->morphMany(Document::class, 'targetable');
+    }
     
     public function donations()
     {

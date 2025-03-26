@@ -500,7 +500,8 @@ function frontendImage($sectionName, $image, $size = null, $seo = false)
 
 function percent($donate, $campaign)
 {
-    return ($donate * 100) / $campaign->goal;
+    $total = $campaign->goal ?? 0;
+    return $total > 0 ? ($donate * 100) / $total : 0;
 }
 
 function progressPercent($percent)

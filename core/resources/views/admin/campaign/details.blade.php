@@ -42,6 +42,7 @@
                                 <div class="my-4">
                                     <ul class="list-group list-group-flush">
 
+                                        @if($campaign->user)
                                         <li class="list-group-item">
                                             <span class="fw-bold">@lang('Donation Reason')</span>
                                             <h6 class="text--primary">
@@ -55,6 +56,7 @@
                                                 </a>
                                             </h6>
                                         </li>
+                                        @endif
                                         <li class="list-group-item">
                                             <span class="fw-bold">@lang('Campaign Owner')</span>
                                             <h6 class="text--primary">
@@ -233,8 +235,22 @@
                                                 allowfullscreen></iframe>
                                         @endif
                                     @endforeach
+                                    @foreach($campaign->documents as $document)
+                                        @php
+                                            $foundPdf = true;
+                                        @endphp
+                                        <div class="gallery-card">
+                                            <a class="view-btn" data-rel="lightcase:myCollection"
+                                                href="{{ asset(getFilePath('proof') . '/' . $images) }}"><i
+                                                    class="las la-plus"></i></a>
+                                            <div class="gallery-card__thumb">
+                                                <img class="w-100 h-100"
+                                                    src="{{ asset(getFilePath('proof') . '/' . $images) }}">
+                                            </div>
+                                        </div>
+                                    @endforeach
                                     @if (!$foundPdf)
-                                        <p class="text-center">@lang('Documents not found!')</p>
+1                                        <p class="text-center">@lang('Documents not found!')</p>
                                     @endif
                                 </div>
                             </div>
