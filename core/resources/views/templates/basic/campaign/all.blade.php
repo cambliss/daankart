@@ -92,12 +92,14 @@
                                         </div>
 
                                         <h4 class="title pt-2">{{ $campaign->campaign_title }}</h4>
-
+                                        @php
+                                            $percentage = percent($campaign->raised_amount, $campaign);
+                                        @endphp
                                         <div class="event-bar-item">
                                             <div class="skill-bar">
-                                                <div class="progressbar" data-perc="0.072%">
-                                                    <div class="bar" style="width: 0.072%;"></div>
-                                                    <span class="label" style="left: 0.072%;">0.07%</span>
+                                                <div class="progressbar" data-perc="{{ $percentage }}%">
+                                                    <div class="bar" style="width: {{ $percentage }}%;"></div>
+                                                    <span class="label" style="left: {{ $percentage }}%;">{{ $percentage }}%</span>
                                                 </div>
                                             </div>
                                         </div><!-- event-bar-item end -->

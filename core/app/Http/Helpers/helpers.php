@@ -498,10 +498,10 @@ function frontendImage($sectionName, $image, $size = null, $seo = false)
     return getImage('assets/images/frontend/' . $sectionName . '/' . $image, $size);
 }
 
-function percent($donate, $campaign)
+function percent($donate, $campaign, $decimal = 2)
 {
     $total = $campaign->goal ?? 0;
-    return $total > 0 ? ($donate * 100) / $total : 0;
+    return $total > 0 ? round(($donate * 100) / $total, $decimal) : 0;
 }
 
 function progressPercent($percent)
