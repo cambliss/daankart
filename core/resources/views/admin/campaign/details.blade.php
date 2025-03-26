@@ -241,11 +241,11 @@
                                         @endphp
                                         <div class="gallery-card">
                                             <a class="view-btn" data-rel="lightcase:myCollection"
-                                                href="{{ asset(getFilePath('proof') . '/' . $images) }}"><i
+                                                href="{{ asset(getFilePath('campaign') . '/' . $document->file_path) }}"><i
                                                     class="las la-plus"></i></a>
                                             <div class="gallery-card__thumb">
                                                 <img class="w-100 h-100"
-                                                    src="{{ asset(getFilePath('proof') . '/' . $images) }}">
+                                                    src="{{ asset(getFilePath('campaign') . '/' . $document->file_path) }}">
                                             </div>
                                         </div>
                                     @endforeach
