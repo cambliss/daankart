@@ -60,6 +60,10 @@ use Illuminate\Support\Str;
         .daan-details .dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; margin: 0 5px; cursor: pointer; }
         .daan-details .dot.active { background: #333; }
 
+        .daan-details .product-heading {
+            height: 55px;
+        }
+
     </style>
 @endpush
 @extends($activeTemplate . 'layouts.frontend')
@@ -205,7 +209,7 @@ use Illuminate\Support\Str;
                             @foreach ($campaign->products as $product)
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card p-3 shadow-sm">
-                                        <h5 class="fw-bold">{{ $product->product_name }}</h5>
+                                        <h5 class="fw-bold product-heading">{{ $product->product_name }}</h5>
                                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
                                             class="img-fluid mb-2" alt="Groceries Kit">
                                         <p>{{ $product->sold_quantity }} of {{ $product->required_quantity }} Quantity
