@@ -4,6 +4,8 @@
         <div class="banner-container">
            <img src="{{ asset('assets/images/frontend/exploreBanner/explore_compaign.jpg.jpg') }}" alt="explore_campaign" class="banner-image">
        </div>
+       
+        @include($activeTemplate . 'sections.search-filters');
         <div class="container-fluid custom-container explore-container">
             <div class="row">
                 <!-- Left Sidebar - Filters -->
