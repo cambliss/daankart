@@ -513,10 +513,10 @@ use Illuminate\Support\Str;
                     <div class="donation-sidebar">
                         <div class="donation-widget">
                             <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
-                            <h4 class="title py-3"><i class="las la-thumbtack"></i>
+                            <h4 class="title py-2"><i class="las la-thumbtack"></i>
                                 {{ $campaign->category ? $campaign->category->name : 'Campaign' }} Initiative:
                             </h4>
-                            <p class="text-justify">{{ $campaign->campaign_description }}</p>
+                            <p class="text-justify py-3">{{ $campaign->campaign_description }}</p>
                             <div class="skill-bar mt-2">
 
                                 <div class="progressbar" data-perc="0%">
