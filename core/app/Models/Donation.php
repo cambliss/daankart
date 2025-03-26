@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Donation extends Model
 {
+    protected $guarded = ['id', 'created_at', 'updated_at'];
     public function campaign()
     {
         $campaignId = $this->campaign_id;

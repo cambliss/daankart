@@ -533,13 +533,15 @@ use Illuminate\Support\Str;
                                     </div>
                                     <p class="number">{{ number_format($total_amount, 2) }} INR</p>
                                 </div>
+                                @if($campaign->raised_amount > 0)
                                 <div class="donation-content">
                                     <div>
                                         <span class="icon"><i class="las la-balance-scale-right"></i></span>
                                         <span class="text">Raised</span>
                                     </div>
-                                    <p class="number">0.00 INR</p>
+                                    <p class="number">{{ number_format($campaign->raised_amount, 2) }} INR</p>
                                 </div>
+                                @endif
                                 <div class="donation-content">
                                     <div>
                                         <span class="icon"><i class="las la-bullseye"></i></span>
