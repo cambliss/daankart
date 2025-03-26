@@ -104,6 +104,8 @@ Route::middleware('admin')->group(function () {
         Route::post('status/{id}', 'commentStatus')->name('comment.status');
     });
 
+    
+
     //Campaign Fundrise
     Route::controller('ManageCampaignController')->prefix('fundrise')->name('fundrise.')->group(function () {
         Route::get('index', 'index')->name('index');
@@ -126,6 +128,11 @@ Route::middleware('admin')->group(function () {
         Route::post('extend/{status}/{id}', 'extendApproveOrReject')->name('extend.approve.reject');
 
         Route::post('delete/{id}', 'delete')->name('delete');
+    });
+
+    //Daan Campaign
+    Route::controller('ManageCampaignController')->prefix('daan/campaign')->name('daan.campaign.')->group(function () {
+        Route::post('update/{id}', 'updateDaanCampaign')->name('update');
     });
 
     //Statistic

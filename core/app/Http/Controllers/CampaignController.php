@@ -281,6 +281,19 @@ public function store(Request $request)
             $pageTitle = 'Thank You ' . @$user->fullname;
         }
         $campaign  = Campaign::where('slug', $slug)->first();
+        if(empty($campaign)) {
+            $campaign = DaanCampaign::where('slug', $slug)->first();
+        }
+        if(!empty($campaign)) {
+            $donation_id = request()->donation_id;
+            $queryDonation = Donation::where("campaign_id",$campaign->id);
+            if(!empty($donation_id)) {
+                $queryDonation->where("id",$donation_id);
+            }
+            $donation = $queryDonation->first();
+            $campaign->raised_amount += $donation->donation;
+            $campaign->save();
+        }
         $user      = $campaign->user;
         return view('Template::campaign.thanks_message', compact('pageTitle', 'campaign', 'user'));
     }

@@ -74,7 +74,7 @@
 
                                         <li class="list-group-item">
                                             <span class="fw-bold">@lang('Category')</span>
-                                            <h6>{{ __($campaign->category->name) }}</h6>
+                                            <h6>{{ __($campaign->category?->name) }}</h6>
                                         </li>
                                         <li class="list-group-item">
                                             <span class="fw-bold">@lang('Deadline')</span>
@@ -193,7 +193,7 @@
                         <div class="tab-pane fade" id="gallery">
                             <div class="mt-4">
                                 <div class="row gy-4 ">
-                                    @foreach (@$campaign->proof_images as $images)
+                                    @foreach ((@$campaign->proof_images ?? []) as $images)
                                         @if (explode('.', $images)[1] != 'pdf')
                                             @php
                                                 $foundImg = true;
@@ -221,7 +221,7 @@
                         <div class="tab-pane fade" id="document">
                             <div class="mt-4">
                                 <div class="row h-100">
-                                    @foreach ($campaign->proof_images as $pdfFiles)
+                                    @foreach ((@$campaign->proof_images ?? []) as $pdfFiles)
                                         @if (explode('.', $pdfFiles)[1] == 'pdf')
                                             @php
                                                 $foundPdf = true;

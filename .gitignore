@@ -5,3 +5,5 @@ assets/images/withdraw/*
 assets/images/withdraw/*
 assets/images/withdraw/*
 assets/video/*
+access.log
+error.log

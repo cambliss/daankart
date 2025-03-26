@@ -299,6 +299,10 @@ public function details($slug)
             $product->comments = $prod->comments ?? '';
             $product->save();
         }
+        $totalAmount = collect($product_list)->map(function ($item) {
+            return $item->price * $item->quantity;
+        })->sum();
+        $campaign->goal = $totalAmount;
     } else if ($step == DAAN_CAMPAIGN_FINAL_STEP) {
         $request->validate([
             'page_json' => 'required|string',

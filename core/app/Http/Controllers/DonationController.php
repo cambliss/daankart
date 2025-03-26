@@ -21,10 +21,12 @@ class DonationController extends Controller
         ], [
             'amount' => 'Please choose or enter your donate amount.'
         ]);
-         $campaign = Campaign::running()->boundary()->find($request->campaign_id);
-
+        $donation              = new Donation();
+        $campaign = Campaign::running()->boundary()->find($request->campaign_id);
+        $donation->campaign_type = "App\Models\Campaign";
         if (empty($campaign)) {
             $campaign = DaanCampaign::find($request->campaign_id);
+            $donation->campaign_type = "App\Models\DaanCampaign";
         }
 
         if (empty($campaign)) {
@@ -38,7 +40,7 @@ class DonationController extends Controller
             $notify[] = ['error', 'You can\'t donate your own campaign!'];
             return back()->withNotify($notify);
         }
-        $donation              = new Donation();
+        
         $donation->user_id     = auth()->check() ? $authUser->id : 0;
         $donation->campaign_id = $campaign->id;
         $donation->anonymous   = $request->anonymous ? Status::YES : Status::NO;

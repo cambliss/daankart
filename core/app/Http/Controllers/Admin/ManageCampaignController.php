@@ -2,23 +2,34 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Constants\Status;
+use Illuminate\Http\Request;
+
 use App\Models\Campaign;
-use App\Http\Controllers\Controller;
+use App\Models\DaanCampaign;
 use App\Models\Comment;
 use App\Models\User;
+
+use App\Constants\Status;
 use Exception;
+
+use App\Http\Controllers\Controller;
 
 
 class ManageCampaignController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $pageTitle = 'All Campaigns';
         $campaigns = Campaign::searchable(['title', 'category:name', 'user:username'])->with('user', 'category', 'donations')->withCount(['donations' => function ($query) {
             $query->paid();
         }])->orderBy('id', 'DESC')->paginate(getPaginate());
-        return view('admin.campaign.index', compact('campaigns', 'pageTitle'));
+
+
+        $daanCampaigns = DaanCampaign::searchable(['title', 'category:name', 'user:username'])->with('user', 'category', 'donations')->withCount(['donations' => function ($query) {
+            $query->paid();
+        }])->orderBy('id', 'DESC')->paginate(getPaginate());
+
+        return view('admin.campaign.index', compact('campaigns', 'pageTitle', 'daanCampaigns'));
     }
 
     public function details($id)
@@ -31,10 +42,26 @@ class ManageCampaignController extends Controller
             }
         ])->withCount(['donations' => function ($query) {
             $query->paid();
-        }])->findOrFail($id);
+        }])->find($id);
+
+        if(empty($campaign)){
+            $campaign  = DaanCampaign::with([
+                'comments' => function ($q) {
+                    $q->take(5)->orderBy('id', 'DESC');
+                }, 'donations' => function ($donation) {
+                    $donation->orderBy('id', 'DESC');
+                }
+            ])->withCount(['donations' => function ($query) {
+                $query->paid();
+            }])->findOrFail($id);
+        }
 
         $donate    = $campaign->donations->where('status', Status::DONATION_PAID)->sum('donation');
-        $percent   = percent($donate, $campaign);
+        if($donate > 0){
+            $percent   = percent($donate, $campaign);
+        }else{
+            $percent = 0;
+        }
 
         if ($campaign->is_extend == Status::YES) {
             $pageTitle = "Campaign Extend Request Details";
@@ -42,6 +69,7 @@ class ManageCampaignController extends Controller
             $pageTitle = "Campaign Details";
         }
 
+        // dd($campaign);
         return view('admin.campaign.details', compact('pageTitle', 'campaign', 'donate', 'percent'));
     }
 
@@ -50,6 +78,13 @@ class ManageCampaignController extends Controller
         return Campaign::changeStatus($id, 'featured');
     }
 
+    public function updateDaanCampaign(Request $request, $id)
+    {
+        $campaign = DaanCampaign::findOrFail($id);
+        $campaign->status = $request->status;
+        $campaign->save();
+        return back()->withNotify(['success', 'Campaign approved successfully']);
+    }
 
     public function approveOrReject($status, $id)
     {

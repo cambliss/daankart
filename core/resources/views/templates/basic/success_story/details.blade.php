@@ -8,7 +8,7 @@
                 <div class="col-lg-8 col-md-8">
                     <div class="blog-details-wrapper">
                         <div class="blog-details__thumb">
-                            <img src="{{ getImage(getFilePath('success') . '/' . $story->image), getFileSize('success') }}"
+                            <img src="{{ getImage(getFilePath('success') . '/' . $story->image, getFileSize('success')) }}"
                                 alt="image">
                             <div class="post__date">
                                 <span class="date">{{ showDateTime($story->created_at, 'd') }}</span>

@@ -29,12 +29,23 @@ class DaanCampaign extends Model {
     
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     public function getSectionsAttribute()
     {
         return json_decode($this->attributes['page_json']);
+    }
+
+    
+    public function donations()
+    {
+        return $this->hasMany(Donation::class, 'campaign_id', 'id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'campaign_id', 'id');
     }
 }
 

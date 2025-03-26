@@ -80,7 +80,7 @@ class PaymentController extends Controller
         $data->btc_amount = 0;
         $data->btc_wallet = "";
         $data->trx = getTrx();
-        $data->success_url = urlPath('campaign.thanks', $donation->campaign->slug);
+        $data->success_url = urlPath('campaign.thanks', $donation->campaign->slug)."?donation_id=".$donation->id;
         $data->failed_url = urlPath('campaign.index');
         $data->save();
         session()->put('Track', $data->trx);
