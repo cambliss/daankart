@@ -143,7 +143,7 @@
                                                     <a 
                                                         href="/donate-monthly" 
                                                         class="menu-item btn p-3 mt-1 text-white" 
-                                                        style="margin-left: -20px; background: linear-gradient(90deg, orange, red);">
+                                                        style="margin-left: -20px; background: linear-gradient(90deg, orange, red);color: white !important;">
                                                         DONATE MONTHLY
                                                     </a>
                                                 </li>
@@ -262,7 +262,7 @@
                                 <a 
                                     href="/donate-monthly" 
                                     class="menu-item btn p-3 mt-1 text-white" 
-                                    style="margin-left: -20px; background: linear-gradient(90deg, orange, red);">
+                                    style="margin-left: -20px; background: linear-gradient(90deg, orange, red);color: white !important;">
                                     DONATE MONTHLY
                                 </a>
                             </li>
