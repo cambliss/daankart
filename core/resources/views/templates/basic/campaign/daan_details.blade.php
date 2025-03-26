@@ -515,8 +515,8 @@ use Illuminate\Support\Str;
                             <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
                             <h4 class="title py-3"><i class="las la-thumbtack"></i>
                                 {{ $campaign->category ? $campaign->category->name : 'Campaign' }} Initiative:
-                                {{ $campaign->campaign_title }}
                             </h4>
+                            <p class="text-justify">{{ $campaign->campaign_description }}</p>
                             <div class="skill-bar mt-2">
 
                                 <div class="progressbar" data-perc="0%">
