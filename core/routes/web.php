@@ -6,6 +6,10 @@ use App\Http\Controllers\FileController;
 
 Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    $loggedUser = auth('admin')->user();
+    if($loggedUser){
+        Cache::forget('permissions_'.$loggedUser->id);
+    }
 });
 /*
 Route::middleware('auth')->name('user.')->group(function () {
