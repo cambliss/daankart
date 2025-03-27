@@ -150,7 +150,10 @@
                             {{-- Common Menu Items for Authenticated Users --}}
                             @foreach($pages as $page)
                                 <li>
-                                    <a href="{{ route('pages', [$page->slug]) }}" class="menu-item">
+                                    <a 
+                                        href="{{ route('pages', [$page->slug]) }}" 
+                                        class="menu-item {{ $page->slug == 'donate-monthly' ? 'donate-monthly' : '' }}"
+                                        >
                                         {{ __($page->name) }}
                                     </a>
                                 </li>
@@ -176,7 +179,7 @@
                                     DONATE MONTHLY
                                 </a>
                             </li>
-                            <li><a href="https://daankart.com/user/login" class="menu-item">START A CAMPAIGN</a></li>
+                            <li><a href="/user/login" class="menu-item">START A CAMPAIGN</a></li>
                         @else
                             {{-- Common Menu Items for Guests --}}
                             @foreach($pages as $page)
