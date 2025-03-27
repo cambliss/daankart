@@ -51,24 +51,30 @@ class Admin extends Authenticatable
         //if name permission has can_access_admin.fundrise* then $name = "admin.fundrise.all should be true"
         $hasPermission = $this->permissions()->contains("can_access_all");
         $butCantAccess = false;
-        $checkPermission = function($name){
-            $flag = $this->permissions()->contains("can_access_all");
+        $checkPermission = function($name,$prefix = "can_access_"){
+            $flag = $this->permissions()->contains($prefix.$name);
             if(!$flag) {
-                $flag = $this->permissions()->contains(function($permission) use ($name){
-                    $permissionName = Str::replaceFirst("can_access_", "", $permission);
-                    return Str::is($permissionName, $name);
-                });
+                $flag = $this->permissions()
+                ->filter(function ($permission) use ($name, $prefix) {
+                    if (!Str::contains($permission, $prefix)) {
+                        return false;
+                    }
+
+                    $permissionName = Str::replaceFirst($prefix, '', $permission);
+                    return Str::is($name, $permissionName);
+                })
+                ->isNotEmpty();
             }
             return $flag;
         };
         if(is_array($name)){
             foreach($name as $item){
-                $hasPermission = $hasPermission || $checkPermission("can_access_".$item);
-                $butCantAccess = $butCantAccess || $checkPermission("cannot_access_".$item);
+                $hasPermission = $hasPermission || $checkPermission($item,"can_access_");
+                $butCantAccess = $butCantAccess || $checkPermission($item,"cannot_access_");
             }
         } else {
-            $hasPermission = $hasPermission || $checkPermission("can_access_".$name);
-            $butCantAccess = $butCantAccess || $checkPermission("cannot_access_".$name);
+            $hasPermission = $hasPermission || $checkPermission($name,"can_access_");
+            $butCantAccess = $butCantAccess || $checkPermission($name,"cannot_access_");
         }
         return $hasPermission && !$butCantAccess;
     }
