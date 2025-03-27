@@ -10,23 +10,6 @@
     $isTicketIndex = request()->routeIs('ticket.index');
 @endphp
 
-
-@push('style')
-    <style>
-        .main-menu li a.menu-item.btn.donate-monthly {
-            margin-left: -20px; 
-            background: linear-gradient(90deg, orange, red); 
-            border-radius: 10px; 
-            padding: 10px 20px;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
-    </style>
-@endpush
-
 <header class="header__bottom @if($isProfileRoute) header-for-profile @endif">
     <div class="container">
         <nav class="navbar navbar-expand-xl p-0 align-items-center">
