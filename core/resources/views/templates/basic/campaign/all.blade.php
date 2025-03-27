@@ -153,7 +153,7 @@
         }
         
         .explore-container{
-            padding-top: 100px;
+            padding-top: 50px;
         }
         .text-orange {
             color: #FF7c1f;
