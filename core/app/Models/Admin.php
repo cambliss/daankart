@@ -55,7 +55,7 @@ class Admin extends Authenticatable
             $flag = $this->permissions()->contains("can_access_all");
             if(!$flag) {
                 $flag = $this->permissions()->contains(function($permission) use ($name){
-                    $permissionName = Str::replaceFirst("can_access_", "", $permission->name);
+                    $permissionName = Str::replaceFirst("can_access_", "", $permission);
                     return Str::is($permissionName, $name);
                 });
             }
