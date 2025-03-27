@@ -152,7 +152,7 @@
                                 <li>
                                     <a 
                                         href="{{ route('pages', [$page->slug]) }}" 
-                                        class="menu-item {{ $page->slug == 'donate-monthly' ? 'donate-monthly' : '' }}"
+                                        class="menu-item {{ $page->slug == 'donate-monthly' ? 'btn donate-monthly' : '' }}"
                                         >
                                         {{ __($page->name) }}
                                     </a>
@@ -184,7 +184,9 @@
                             {{-- Common Menu Items for Guests --}}
                             @foreach($pages as $page)
                                 <li>
-                                    <a href="{{ route('pages', [$page->slug]) }}" class="menu-item">
+                                    <a 
+                                        href="{{ route('pages', [$page->slug]) }}" 
+                                        class="menu-item {{ $page->slug == 'donate-monthly' ? 'btn donate-monthly' : '' }}">
                                         {{ __($page->name) }}
                                     </a>
                                 </li>
