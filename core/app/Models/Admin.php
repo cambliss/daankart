@@ -31,7 +31,7 @@ class Admin extends Authenticatable
     {
         //cache permissions with admin id and expire time 1 hour return cache if exist
         $cache = Cache::get('permissions_'.$this->id);
-        if(!empty($cache) && false){
+        if(!empty($cache) && count($cache) > 0){
             return $cache;
         }
         $permissions = $this->roles()->with('role.permissions')->get()
