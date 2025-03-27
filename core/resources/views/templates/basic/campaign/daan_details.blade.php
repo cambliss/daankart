@@ -517,15 +517,15 @@ use Illuminate\Support\Str;
                 <div class="col-lg-4 mt-lg-0 mt-5">
                     <div class="donation-sidebar">
                         <div class="donation-widget">
-                            @if($campaign->campaign_type == 'continuous')
-                            <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
+                            {{-- @if($campaign->campaign_type == 'continuous')
+                                <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
                             @else
-                            <span class="cam_deadline"> <i class="las la-calendar-alt"></i> One Time</span>
-                            @endif
+                                <span class="cam_deadline"> <i class="las la-calendar-alt"></i> One Time</span>
+                            @endif --}}
                             <h4 class="title py-2"><i class="las la-thumbtack"></i>
                                 {{ $campaign->category ? $campaign->category->name : 'Campaign' }} Initiative:
                             </h4>
-                            <p class="text-justify py-3">{{ $campaign->campaign_description }}</p>
+                            <p class="text-justify pb-3">{{ $campaign->campaign_description }}</p>
                             <div class="skill-bar mt-2">
 
                                 <div class="progressbar" data-perc="0%">
