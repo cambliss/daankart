@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 
 class Admin extends Authenticatable
 {
@@ -30,8 +31,8 @@ class Admin extends Authenticatable
     public function permissions()
     {
         //cache permissions with admin id and expire time 1 hour return cache if exist
-        $cache = Cache::get('permissions_'.$this->id);
-        if(!empty($cache) && count($cache) > 0){
+        $cache = Cache::get('permissions_'.$this->id); // returns collection
+        if(!empty($cache) && count($cache) > 0 && $cache->count() > 0){
             return $cache;
         }
         $permissions = $this->roles()->with('role.permissions')->get()
@@ -47,16 +48,27 @@ class Admin extends Authenticatable
 
     public function hasPermission($name): bool
     {
+        //if name permission has can_access_admin.fundrise* then $name = "admin.fundrise.all should be true"
         $hasPermission = $this->permissions()->contains("can_access_all");
         $butCantAccess = false;
+        $checkPermission = function($name){
+            $flag = $this->permissions()->contains("can_access_all");
+            if(!$flag) {
+                $flag = $this->permissions()->contains(function($permission) use ($name){
+                    $permissionName = Str::replaceFirst("can_access_", "", $permission->name);
+                    return Str::is($permissionName, $name);
+                });
+            }
+            return $flag;
+        };
         if(is_array($name)){
             foreach($name as $item){
-                $hasPermission = $hasPermission || $this->permissions()->contains("can_access_".$item);
-                $butCantAccess = $butCantAccess || $this->permissions()->contains("cannot_access_".$item);
+                $hasPermission = $hasPermission || $checkPermission("can_access_".$item);
+                $butCantAccess = $butCantAccess || $checkPermission("cannot_access_".$item);
             }
         } else {
-            $hasPermission = $hasPermission || $this->permissions()->contains("can_access_".$name);
-            $butCantAccess = $butCantAccess || $this->permissions()->contains("cannot_access_".$name);
+            $hasPermission = $hasPermission || $checkPermission("can_access_".$name);
+            $butCantAccess = $butCantAccess || $checkPermission("cannot_access_".$name);
         }
         return $hasPermission && !$butCantAccess;
     }
