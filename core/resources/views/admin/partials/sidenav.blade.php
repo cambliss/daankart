@@ -11,7 +11,7 @@
         <div class="sidebar__menu-wrapper">
             <ul class="sidebar__menu">
                 @foreach($sideBarLinks as $key => $data)
-                    @if(@$data->submenu)
+                    @if(@$data->submenu && auth('admin')->user()->hasPermission($data->menu_active))
                         <li class="sidebar-menu-item sidebar-dropdown">
                             <a href="javascript:void(0)" class="{{ menuActive(@$data->menu_active, 3) }}">
                                 <i class="menu-icon {{ @$data->icon }}"></i>
@@ -36,16 +36,18 @@
                                             }
                                         }
                                     @endphp
-                                        <li class="sidebar-menu-item {{ menuActive(@$menu->menu_active) }} ">
-                                            <a href="{{ route(@$menu->route_name,$submenuParams) }}" class="nav-link">
-                                                <i class="menu-icon las la-dot-circle"></i>
-                                                <span class="menu-title">{{ __($menu->title) }}</span>
-                                                @php $counter = @$menu->counter; @endphp
-                                                @if(@$$counter)
-                                                    <span class="menu-badge bg--info ms-auto">{{ @$$counter }}</span>
-                                                @endif
-                                            </a>
-                                        </li>
+                                        @if(auth('admin')->user()->hasPermission($menu->menu_active))
+                                            <li class="sidebar-menu-item {{ menuActive(@$menu->menu_active) }} ">
+                                                <a href="{{ route(@$menu->route_name,$submenuParams) }}" class="nav-link">
+                                                    <i class="menu-icon las la-dot-circle"></i>
+                                                    <span class="menu-title">{{ __($menu->title) }}</span>
+                                                    @php $counter = @$menu->counter; @endphp
+                                                    @if(@$$counter)
+                                                        <span class="menu-badge bg--info ms-auto">{{ @$$counter }}</span>
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
@@ -59,16 +61,18 @@
                                 }
                             }
                         @endphp
-                        <li class="sidebar-menu-item {{ menuActive(@$data->menu_active) }}">
-                            <a href="{{ route(@$data->route_name,$mainParams) }}" class="nav-link ">
+                        @if(auth('admin')->user()->hasPermission($data->menu_active))
+                            <li class="sidebar-menu-item {{ menuActive(@$data->menu_active) }}">
+                                <a href="{{ route(@$data->route_name,$mainParams) }}" class="nav-link {{ menuActive(@$data->menu_active) }}">
                                 <i class="menu-icon {{ $data->icon }}"></i>
                                 <span class="menu-title">{{ __(@$data->title) }}</span>
                                 @php $counter = @$data->counter; @endphp
                                 @if (@$$counter)
                                     <span class="menu-badge bg--info ms-auto">{{ @$$counter }}</span>
                                 @endif
-                            </a>
-                        </li>
+                                </a>
+                            </li>
+                        @endif
                     @endif
                 @endforeach
             </ul>

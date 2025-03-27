@@ -21,13 +21,13 @@ class User extends BaseModel {
 
     protected $allowMethods = array('get', 'update');
 
-    public function get() {
+    public function get($id) {
         $this->checkPermissions('get');
 
         return $this->client->retrieveData($this->resourceName);
     }
 
-    public function update($params = array()) {
+    public function update($id, $params = array()) {
         $this->checkPermissions('update');
 
         return $this->client->updateData($this->resourceName, $params);

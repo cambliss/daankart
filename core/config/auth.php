@@ -44,11 +44,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
             'hash' => true,
+            'with' => ['roles'],
         ],
 
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+            'with' => ['roles'],
         ],
     ],
 

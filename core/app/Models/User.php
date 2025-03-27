@@ -138,4 +138,8 @@ class User extends Authenticatable
         return $this->hasMany(DeviceToken::class);
     }
 
+    public function roles()
+    {
+        return $this->morphMany(RoleUser::class, 'target');
+    }
 }
