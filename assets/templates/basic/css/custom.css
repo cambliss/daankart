@@ -611,11 +611,10 @@ background-color : #fff !important;
 .main-menu li a.menu-item.btn.donate-monthly {
   margin-left: -20px; 
   background: linear-gradient(90deg, orange, red); 
-  border-radius: 10px; 
+  border-radius: 15px !important; 
   padding: 10px 20px;
-  color: white;
+  color: white !important;
   font-weight: bold;
-  font-size: 16px;
   text-transform: uppercase;
-  margin-top: 10px;
+  margin-top: 5px;
 }
