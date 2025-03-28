@@ -36,7 +36,7 @@
                                             }
                                         }
                                     @endphp
-                                        @if(auth('admin')->user()->hasPermission($menu->menu_active))
+                                        @if(auth('admin')->user()->hasPermission($menu->route_name))
                                             <li class="sidebar-menu-item {{ menuActive(@$menu->menu_active) }} ">
                                                 <a href="{{ route(@$menu->route_name,$submenuParams) }}" class="nav-link">
                                                     <i class="menu-icon las la-dot-circle"></i>
@@ -60,16 +60,17 @@
                                     $mainParams[] = array_values((array)$paramVal)[0];
                                 }
                             }
+                            $routeName = $data->route_name ?? $data->menu_active;
                         @endphp
-                        @if(auth('admin')->user()->hasPermission($data->menu_active))
-                            <li class="sidebar-menu-item {{ menuActive(@$data->menu_active) }}">
-                                <a href="{{ route(@$data->route_name,$mainParams) }}" class="nav-link {{ menuActive(@$data->menu_active) }}">
-                                <i class="menu-icon {{ $data->icon }}"></i>
-                                <span class="menu-title">{{ __(@$data->title) }}</span>
-                                @php $counter = @$data->counter; @endphp
-                                @if (@$$counter)
-                                    <span class="menu-badge bg--info ms-auto">{{ @$$counter }}</span>
-                                @endif
+                        @if(auth('admin')->user()->hasPermission($routeName))
+                            <li class="sidebar-menu-item {{ menuActive($routeName) }}">
+                                <a href="{{ route($routeName,$mainParams) }}" class="nav-link {{ menuActive($routeName) }}">
+                                    <i class="menu-icon {{ $data->icon }}"></i>
+                                    <span class="menu-title">{{ __(@$data->title) }}</span>
+                                    @php $counter = @$data->counter; @endphp
+                                    @if (@$$counter)
+                                        <span class="menu-badge bg--info ms-auto">{{ @$$counter }}</span>
+                                    @endif
                                 </a>
                             </li>
                         @endif
