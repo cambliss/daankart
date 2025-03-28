@@ -51,23 +51,65 @@ use Illuminate\Support\Str;
             top: 60px
         }
 
-        .daan-details .slider { position: relative; overflow: hidden; }
-        .daan-details .slide { display: none; transition: opacity 0.5s ease; }
-        .daan-details .slide.active { display: block; }
-        .daan-details .slider-controls { display: flex; justify-content: center; align-items: center; margin-top: 10px; }
-        .daan-details .prev-btn, .daan-details .next-btn { background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; margin: 0 10px; }
-        .daan-details .slider-dots { display: flex; justify-content: center; }
-        .daan-details .dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; margin: 0 5px; cursor: pointer; }
-        .daan-details .dot.active { background: #333; }
+        .daan-details .slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .daan-details .slide {
+            display: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .daan-details .slide.active {
+            display: block;
+        }
+
+        .daan-details .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .daan-details .prev-btn,
+        .daan-details .next-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .daan-details .slider-dots {
+            display: flex;
+            justify-content: center;
+        }
+
+        .daan-details .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .daan-details .dot.active {
+            background: #333;
+        }
 
         .daan-details .product-heading {
             height: 55px;
         }
-
     </style>
 @endpush
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
+    @include($activeTemplate . 'campaign.donatepopup')
     <section class="pt-90 pb-120 daan-details">
         <div class="container">
             <div class="row">
@@ -110,9 +152,8 @@ use Illuminate\Support\Str;
                     <div class="event-details-area mt-50">
                         <ul class="nav nav-tabs custom--tab" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="project-tab" data-bs-toggle="tab"
-                                    data-bs-target="#project" href="#project" role="tab"
-                                    aria-controls="project" aria-selected="true"><span
+                                <a class="nav-link active" id="project-tab" data-bs-toggle="tab" data-bs-target="#project"
+                                    href="#project" role="tab" aria-controls="project" aria-selected="true"><span
                                         class="las la-desktop d-block text-center mb-1"></span>PROJECT</a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -161,8 +202,8 @@ use Illuminate\Support\Str;
                                         </table>
                                     </div>
                                     <?php
-                                        $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
-                                        $total_amount = $total_amount > $campaign->goal ? $campaign->goal : $total_amount;
+                                    $total_amount = $campaign->products->sum('price_per_unit') * $campaign->products->sum('required_quantity');
+                                    $total_amount = $total_amount > $campaign->goal ? $campaign->goal : $total_amount;
                                     ?>
                                     <!-- Donation Section -->
                                     <div class="p-4 text-center" style="background-color: #f0f0f5; border-radius: 10px;">
@@ -248,7 +289,7 @@ use Illuminate\Support\Str;
                                     function showSlide(index) {
                                         slides.forEach(slide => slide.classList.remove('active'));
                                         dots.forEach(dot => dot.classList.remove('active'));
-                                        
+
                                         slides[index].classList.add('active');
                                         dots[index].classList.add('active');
                                         currentIndex = index;
@@ -356,7 +397,7 @@ use Illuminate\Support\Str;
                                     cart.forEach(item => {
                                         totalAmount += item.quantity * item.price;
                                     });
-                                    $('#donateAmount').val(totalAmount);
+                                    $('#donate-form #donateAmount').val(totalAmount);
                                 }
 
                                 initializeSlider();
@@ -401,7 +442,8 @@ use Illuminate\Support\Str;
                                         <div class="slider">
                                             @foreach ($section->content as $key => $image)
                                                 <div class="slide {{ $key === 0 ? 'active' : '' }}">
-                                                    <img src="{{ $image }}" alt="Image Description" width="100%">
+                                                    <img src="{{ $image }}" alt="Image Description"
+                                                        width="100%">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -409,7 +451,8 @@ use Illuminate\Support\Str;
                                             <button class="prev-btn">&lt;</button>
                                             <div class="slider-dots">
                                                 @foreach ($section->content as $key => $image)
-                                                    <span class="dot {{ $key === 0 ? 'active' : '' }}" data-index="{{ $key }}"></span>
+                                                    <span class="dot {{ $key === 0 ? 'active' : '' }}"
+                                                        data-index="{{ $key }}"></span>
                                                 @endforeach
                                             </div>
                                             <button class="next-btn">&gt;</button>
@@ -517,7 +560,7 @@ use Illuminate\Support\Str;
                 <div class="col-lg-4 mt-lg-0 mt-5">
                     <div class="donation-sidebar">
                         <div class="donation-widget">
-                            {{-- @if($campaign->campaign_type == 'continuous')
+                            {{-- @if ($campaign->campaign_type == 'continuous')
                                 <span class="cam_deadline"> <i class="las la-spinner"></i> Continuous</span>
                             @else
                                 <span class="cam_deadline"> <i class="las la-calendar-alt"></i> One Time</span>
@@ -542,14 +585,14 @@ use Illuminate\Support\Str;
                                     </div>
                                     <p class="number">{{ number_format($total_amount, 2) }} INR</p>
                                 </div>
-                                @if($campaign->raised_amount > 0)
-                                <div class="donation-content">
-                                    <div>
-                                        <span class="icon"><i class="las la-balance-scale-right"></i></span>
-                                        <span class="text">Raised</span>
+                                @if ($campaign->raised_amount > 0)
+                                    <div class="donation-content">
+                                        <div>
+                                            <span class="icon"><i class="las la-balance-scale-right"></i></span>
+                                            <span class="text">Raised</span>
+                                        </div>
+                                        <p class="number">{{ number_format($campaign->raised_amount, 2) }} INR</p>
                                     </div>
-                                    <p class="number">{{ number_format($campaign->raised_amount, 2) }} INR</p>
-                                </div>
                                 @endif
                                 <div class="donation-content">
                                     <div>
@@ -560,14 +603,14 @@ use Illuminate\Support\Str;
                                         {{ number_format($total_amount - $campaign->raised_amount, 2) }} INR
                                     </p>
                                 </div>
-                                @if($campaign->campaign_type == 'time_bound')
-                                <div class="donation-content">
-                                    <div>
-                                        <span class="icon"><i class="las la-clock"></i></span>
-                                        <span class="text">Not Yet Completed</span>
+                                @if ($campaign->campaign_type == 'time_bound')
+                                    <div class="donation-content">
+                                        <div>
+                                            <span class="icon"><i class="las la-clock"></i></span>
+                                            <span class="text">Not Yet Completed</span>
+                                        </div>
+                                        <p class="number">{{ $campaign->end_date->diffForHumans() }}</p>
                                     </div>
-                                    <p class="number">{{ $campaign->end_date->diffForHumans() }}</p>
-                                </div>
                                 @endif
                             </div>
                             <div class="donation-wrapper">
@@ -586,19 +629,31 @@ use Illuminate\Support\Str;
                             </div><!-- donation-widget end -->
                             <div class="donation-widget-2">
                                 {{-- Handel below form action via ajax --}}
-                                <form class="vent-details-form" method="POST" id="donate-form">
-                                    <input type="hidden" name="_token" value="P4REKm8kmGAh2i7hyCBT5gIb0pZlt2TT7WgsLTLm"
-                                        autocomplete="off">
-                                    <h3 class="mb-3">Donation Amount</h3>
-                                    <div class="form-row align-items-center">
-                                        <div class="col-lg-12 form-group donate-amount">
-                                            <div class="input-group mr-sm-2">
-                                                <div class="input-group-text">₹</div>
-                                                <input class="form-control" id="donateAmount" name="amount"
-                                                    type="number" value="0" step="any" required>
-                                            </div>
+                                @if (auth()->check() && $campaign->user_id == auth()->user()->id)
+                                    @if (auth()->check())
+                                        <div class="alert alert-danger">
+                                            You can't donate your own campaign.
                                         </div>
-                                        {{-- <div class="col-12 form-group donated-amount">
+                                    @else
+                                        <div class="alert alert-danger">
+                                            Please login to make a donation.
+                                            <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                                        </div>
+                                    @endif
+                                @else
+                                    <form class="vent-details-form" method="POST" id="donate-form">
+                                        <input type="hidden" name="_token"
+                                            value="P4REKm8kmGAh2i7hyCBT5gIb0pZlt2TT7WgsLTLm" autocomplete="off">
+                                        <h3 class="mb-3">Donation Amount</h3>
+                                        <div class="form-row align-items-center">
+                                            <div class="col-lg-12 form-group donate-amount">
+                                                <div class="input-group mr-sm-2">
+                                                    <div class="input-group-text">₹</div>
+                                                    <input class="form-control mb-0" id="donateAmount" name="amount"
+                                                        type="number" value="0" step="any" required>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="col-12 form-group donated-amount">
                                         <div class="form--radio form-check-inline">
                                             <input class="form-check-input donation-radio-check"
                                                 id="customRadioInline1" name="customRadioInline1" type="radio"
@@ -627,51 +682,74 @@ use Illuminate\Support\Str;
                                                 Custom </label>
                                         </div>
                                     </div> --}}
-                                    </div>
-
-                                    <h3 class="mb-4 mt-30">Personal Information</h3>
-
-
-                                    <div class="form-row">
-                                        <div class="form-group col-lg-12">
-                                            <label>Full Name</label>
-                                            <input class="form-control checktoggle" name="name" type="text"
-                                                value="{{ $campaign->campaigner_name }}" required>
                                         </div>
 
-                                        <div class="form-group col-lg-12">
-                                            <label>Email</label>
-                                            <input class="form-control checktoggle" name="email" type="text"
-                                                value="{{ $campaign->email }}" required>
-                                        </div>
+                                        <h3 class="mb-4 mt-30">Personal Information</h3>
 
-                                        <div class="form-group col-lg-12">
-                                            <label>Mobile: </label>
-                                            <input class="form-control checktoggle" name="mobile" type="number"
-                                                value="{{ $campaign->mobile_number }}" required>
-                                        </div>
+                                        <?php
+                                        $donarName = auth()->user()->fullname ?? '';
+                                        $donarEmail = auth()->user()->email ?? '';
+                                        $donarMobile = auth()->user()->mobile ?? '';
+                                        ?>
+                                        <div class="form-row">
+                                            <div class="form-group col-lg-12">
+                                                <label>Full Name</label>
+                                                <input class="form-control checktoggle" name="name" type="text"
+                                                    value="{{ $donarName }}" required>
+                                            </div>
 
-                                        <div class="form-group col-lg-12">
-                                            <label>Location</label>
-                                            <input class="form-control checktoggle" name="location" type="text"
-                                                value="{{ $campaign->beneficiary_location }}" required>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <input name="campaign_id" type="hidden" value="27">
-                                            <button class="cmn-btn w-100" type="submit">MAKE YOUR DONATION</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                            <div class="form-group col-lg-12">
+                                                <label>Email</label>
+                                                <input class="form-control checktoggle" name="email" type="text"
+                                                    value="{{ $donarEmail }}" required>
+                                            </div>
 
+                                            <div class="form-group col-lg-12">
+                                                <label>Mobile: </label>
+                                                <input class="form-control checktoggle" name="mobile" type="number"
+                                                    value="{{ $donarMobile }}" required>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="country" type="radio"
+                                                    id="indianNational" value="indian" checked>
+                                                <label class="form-check-label" for="indianNational">I'm An Indian
+                                                    National</label>
+                                            </div>
+
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" name="country" type="radio"
+                                                    id="notIndianNational" value="non-indian">
+                                                <label class="form-check-label" for="notIndianNational">I'm Not An Indian
+                                                    National</label>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <input name="campaign_id" type="hidden" value="27">
+                                                <button class="cmn-btn w-100" type="submit">MAKE YOUR DONATION</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                @endif
                                 @push('script')
                                     <script>
                                         $(document).ready(function() {
                                             $('#donate-form').submit(function(e) {
                                                 e.preventDefault();
-                                                var formData = [...(new FormData(this)).entries()].reduce((old,[key,val])=>({...old,[key]:val}),{});
+                                                var formData = [...(new FormData(this)).entries()].reduce((old, [key, val]) => ({
+                                                    ...old,
+                                                    [key]: val
+                                                }), {});
                                                 console.log(formData);
-                                                $("#donatepopup-modal #donateAmount").val(formData.amount);
                                                 $("#donatepopup-modal").css('display', 'block');
+                                                if (formData.amount > 0) {
+                                                    $("#donatepopup-modal #one-time-form  #donateAmount").val(formData.amount);
+                                                    $("#donatepopup-modal #one-time-form  #donation-amounts").hide();
+                                                    $("#donatepopup-modal #one-time-form  #donateAmount")[0].dispatchEvent(new Event(
+                                                        'change'));
+                                                } else {
+                                                    $("#donatepopup-modal #one-time-form  #donation-amounts").show();
+                                                }
                                             });
                                         });
                                     </script>
@@ -705,7 +783,7 @@ use Illuminate\Support\Str;
                                 <ul class="social-links mt-2 d-flex justify-content-center">
                                     @php
                                         $shareUrl = urlencode("https://daankart.com/campaign/details/{$campaign->id}");
-                                        $title = urlencode($campaign->title);
+                                        $title = urlencode($campaign->campaign_title);
                                         $image = urlencode(asset("assets/images/campaign/{$campaign->image}"));
                                     @endphp
 
@@ -769,5 +847,5 @@ use Illuminate\Support\Str;
                 </div>
             </div>
     </section>
-    @include($activeTemplate . 'campaign.donatepopup')
+
 @endsection
