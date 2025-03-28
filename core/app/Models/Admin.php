@@ -51,6 +51,7 @@ class Admin extends Authenticatable
         //if name permission has can_access_admin.fundrise* then $name = "admin.fundrise.all should be true"
         $hasPermission = $this->permissions()->contains("can_access_all");
         $butCantAccess = false;
+        // dump($hasPermission,$name);
         $checkPermission = function($name,$prefix = "can_access_"){
             $flag = $this->permissions()->contains($prefix.$name);
             if(!$flag) {
@@ -61,9 +62,15 @@ class Admin extends Authenticatable
                     }
 
                     $permissionName = Str::replaceFirst($prefix, '', $permission);
-                    return Str::is($name, $permissionName);
+                    if(Str::contains($permissionName, "*")) {
+                        // dump($permissionName);
+                        $permissionName = Str::replaceLast("*", "", $permissionName);
+                        return Str::contains($name, $permissionName);
+                    }
+                    return Str::is($permissionName, $name);
                 })
                 ->isNotEmpty();
+                // dd($flag,$name);
             }
             return $flag;
         };
