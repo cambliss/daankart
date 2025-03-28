@@ -67,7 +67,7 @@ class Admin extends Authenticatable
                         $permissionName = Str::replaceLast("*", "", $permissionName);
                         return Str::contains($name, $permissionName);
                     }
-                    return Str::is($permissionName, $name);
+                    return $permissionName == $name;
                 })
                 ->isNotEmpty();
                 // dd($flag,$name);
