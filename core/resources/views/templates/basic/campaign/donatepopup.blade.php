@@ -91,7 +91,7 @@
                 <div class="mb-3">
                     <label class="form-label">Monthly Donation:</label>
                     <div class="input-group">
-                        <span class="input-group-text">$</span>
+                        <span class="input-group-text">₹</span>
                         <input type="text" name="monthlyAmount" class="form-control mb-0" placeholder="Amount" value="00">
                         <span class="input-group-text">/ month</span>
                     </div>
@@ -161,7 +161,7 @@
         max-height: 100%;
         overflow: auto;
     }
-    .donation-popup-container { max-width: 500px; margin: 0 auto; position: relative; }
+    .donation-popup-container { max-width: 500px; margin: 0 auto; position: relative; background: transparent; border: none;}
     .donation-toggle-container { display: inline-flex; border: 2px solid #FF6B35; border-radius: 8px; overflow: hidden; margin: 0 auto 25px; }
     .donation-toggle-btn { padding: 12px 30px; border: none; background: transparent; color: #FF6B35; font-weight: 600; cursor: pointer; transition: all 0.3s ease; outline: none; font-size: 16px; margin: -1px; }
     .donation-toggle-btn.active { background-color: #FF6B35; color: white; }
