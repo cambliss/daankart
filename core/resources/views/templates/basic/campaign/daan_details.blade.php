@@ -518,7 +518,7 @@ use Illuminate\Support\Str;
                             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                         }
                     </style>
-                    <div class="event-details-area mt-50">
+                    {{-- <div class="event-details-area mt-50">
                         <div class="tab-content mt-4" id="myTabContent">
                             <div class="mb-4">
                                 <h3 class="section-title">REVIEW</h3>
@@ -555,7 +555,7 @@ use Illuminate\Support\Str;
 
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-4 mt-lg-0 mt-5">
                     <div class="donation-sidebar">
