@@ -122,9 +122,6 @@ use Illuminate\Support\Str;
                         <span class="feature">
                             {{ $campaign->category ? $campaign->category->name : 'Campaign' }}
                         </span>
-                        <span class="taxstrip">
-                            Tax Benefit
-                        </span>
                         <div class="event-details-thumb">
                             <img class="border--radius"
                                 src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}"
@@ -136,6 +133,9 @@ use Illuminate\Support\Str;
                                 <i class="fas fa-heart"></i>
                             </span>
                         </div>
+                        <span class="taxstrip">
+                            Tax Benefit
+                        </span>
                     </div>
                     {{-- <div class="scrollable-images mt-4">
                         <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3"
