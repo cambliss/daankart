@@ -33,11 +33,11 @@
             @if(version_compare(gs('available_version'),systemDetails()['version'],'>'))
             <li><button type="button" class="primary--layer" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@lang('Update Available')"><a href="{{ route('admin.system.update') }}" class="primary--layer"><i class="las la-download text--warning"></i></a> </button></li>
             @endif
-            <li>
+            {{-- <li>
                 <button type="button" class="primary--layer" data-bs-toggle="tooltip" data-bs-placement="bottom" title="@lang('Visit Website')">
                     <a href="{{ route('home') }}" target="_blank"><i class="las la-globe"></i></a>
                 </button>
-            </li>
+            </li> --}}
             <li class="dropdown">
                 <button type="button" class="primary--layer notification-bell" data-bs-toggle="dropdown" data-display="static"
                     aria-haspopup="true" aria-expanded="false">

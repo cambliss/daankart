@@ -5109,13 +5109,13 @@ th.w-85 {
 }
 
 .sidebar__logo {
-  padding: 20px 10px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   align-items: center;
   text-align: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
