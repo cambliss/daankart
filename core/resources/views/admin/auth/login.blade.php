@@ -8,6 +8,7 @@
                 <div class="login-area">
                     <div class="login-wrapper">
                         <div class="login-wrapper__top">
+                            <img class="login-logo" src="{{ asset('/assets/images/logo_icon/logo.png') }}" alt="Daankart Logo">
                             <h3 class="title text-white">@lang('Welcome to') <strong>{{ __(gs('site_name')) }}</strong></h3>
                             <p class="text-white">{{ __($pageTitle) }} @lang('to') {{ __(gs('site_name')) }}
                                 @lang('Dashboard')</p>
