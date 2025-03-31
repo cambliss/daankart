@@ -824,7 +824,7 @@ use Illuminate\Support\Str;
                                     </li>
                                 </ul>
                             </div>
-                            <div class="my-3">
+                            {{-- <div class="my-3">
                                 <div class="mb-4 d-flex d-inline"><span class="milestone-icon"><i
                                             class="lab la-gratipay"></i></span>
                                     <h4>Donation milestone reached: For successful contributions.</h4>
@@ -840,7 +840,7 @@ use Illuminate\Support\Str;
 
 
                                 </ul>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
