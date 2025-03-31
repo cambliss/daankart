@@ -13,9 +13,7 @@
     <label>Description</label>
     <textarea class="form-control" rows="10" placeholder="Enter campaign description" name="campaign_description" id="campaign_description">
     Hello everyone,
-    {{ $campaign->campaigner_name }} is dedicated to making a positive impact in the lives of the elderly. We believe that every senior deserves access to care, companionship, and respect, and we’re tirelessly striving to provide them with the love and support they need for their well-being.
-    Thank you.
-    Warm regards,
+    {{ $campaign->campaigner_name }}  is dedicated to supporting the elderly with care, companionship & respect. We strive to ensure their well-being with love & support. Thank you! Warm regards,
     {{ $campaign->campaigner_name }}
     </textarea>
     <span id="charCount">0/200</span>
