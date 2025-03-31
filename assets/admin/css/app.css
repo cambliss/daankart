@@ -6432,7 +6432,7 @@ th.w-85 {
   }
 }
 
-.login-main::before {
+/* .login-main::before {
   position: absolute;
   content: '';
   top: 0;
@@ -6442,13 +6442,13 @@ th.w-85 {
   background-color: #1e157d;
   opacity: 0.57;
   z-index: -1;
-}
+} */
 
 .login-area {
   position: relative;
 }
 
-.login-area::after {
+/* .login-area::after {
   position: absolute;
   content: '';
   width: 247px;
@@ -6463,7 +6463,7 @@ th.w-85 {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
-}
+} */
 
 .login-wrapper {
   background-color: #1e157d;
