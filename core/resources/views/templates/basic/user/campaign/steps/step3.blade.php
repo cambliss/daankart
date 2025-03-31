@@ -11,7 +11,9 @@
         value="Support {{ $campaign->campaigner_name }} To Empower Underprivileged People In India">
 
     <label>Description</label>
-    <textarea class="form-control" rows="10" placeholder="Enter campaign description" name="campaign_description" id="campaign_description">Hello,everyone.\n{{ $campaign->campaigner_name }} is dedicated to supporting the elderly with care, companionship & respect. We strive to ensure their well-being with love & support. Thank you! Warm regards,\n{{ $campaign->campaigner_name }}</textarea>
+    <textarea class="form-control" rows="10" placeholder="Enter campaign description" name="campaign_description" id="campaign_description">Hello,everyone.
+{{ $campaign->campaigner_name }} is dedicated to supporting the elderly with care, companionship & respect. We strive to ensure their well-being with love & support. Thank you! Warm regards,
+{{ $campaign->campaigner_name }}</textarea>
     <span id="charCount">0/200</span>
     <button class="btn btn-primary w-100 mt-3" onclick="nextStep(3)">Continue</button>
 </form>
