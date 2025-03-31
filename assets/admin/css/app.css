@@ -8645,4 +8645,12 @@ label.required:after {
   font-size: 22px;
 }
 
+
 /*ONLY RISELAB PROJECT CSS END */
+
+
+img.login-logo {
+  height: 80px;
+  border-radius: 10px;
+  margin: 10px;
+}
