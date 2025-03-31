@@ -133,8 +133,9 @@ use Illuminate\Support\Str;
                                 <i class="fas fa-heart"></i>
                             </span>
                         </div>
-                        <span class="taxstrip">
+                        <span class="taxstrip" title="80G Tax Benefits available for INR donations">
                             Tax Benefit
+                            <i class="fas fa-info-circle"></i>
                         </span>
                     </div>
                     {{-- <div class="scrollable-images mt-4">

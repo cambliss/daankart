@@ -5255,8 +5255,10 @@ input[type=file]::file-selector-button {
     right: 0;
     background: hsl(var(--base));
     color: white;
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 0px 5px 0px 5px;
+    font-size: small;
+    cursor: pointer;
 }
 
 .event-details-wrapper .icon.heart-icon {
