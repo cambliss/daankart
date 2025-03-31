@@ -18,14 +18,13 @@
     Warm regards,
     {{ $campaign->campaigner_name }}
     </textarea>
-    <span id="charCount">200/200</span>
+    <span id="charCount">0/200</span>
     <button class="btn btn-primary w-100 mt-3" onclick="nextStep(3)">Continue</button>
 </form>
-@push('scripts')
 <script>
     $(document).ready(function() {
         const charCountDisplay = document.querySelector('span#charCount');
-        $('#campaign_description').addEventListener('input', function() {
+        document.getElementById('campaign_description').addEventListener('input', function() {
             const currentLength = this.value.length;
             charCountDisplay.textContent = currentLength + '/200';
             if (currentLength > 200) {
@@ -35,4 +34,3 @@
         });
     });
 </script>
-@endpush
