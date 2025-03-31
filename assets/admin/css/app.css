@@ -5291,7 +5291,7 @@ th.w-85 {
 }
 
 .sidebar__menu .sidebar-submenu .sidebar-menu-item.active>a {
-  background-color: #4634ff59 !important;
+  background-color: #33392759 !important;
 }
 
 .sidebar__menu .sidebar-submenu .sidebar-menu-item.active a .menu-icon {
@@ -5340,7 +5340,7 @@ th.w-85 {
 }
 
 .sidebar[class*='bg--'] .sidebar__menu .sidebar-menu-item>a:hover {
-  background-color: #4634ff59;
+  background-color: #33392759;
 }
 
 .sidebar[class*='bg--'] .sidebar__menu .sidebar-menu-item .menu-icon,
