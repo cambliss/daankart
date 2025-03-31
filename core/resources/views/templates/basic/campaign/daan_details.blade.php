@@ -691,7 +691,7 @@ use Illuminate\Support\Str;
                                         $donarEmail = auth()->user()->email ?? '';
                                         $donarMobile = auth()->user()->mobile ?? '';
                                         ?>
-                                        <div class="form-row">
+                                        {{-- <div class="form-row">
                                             <div class="form-group col-lg-12">
                                                 <label>Full Name</label>
                                                 <input class="form-control checktoggle" name="name" type="text"
@@ -724,10 +724,10 @@ use Illuminate\Support\Str;
                                                     National</label>
                                             </div>
 
-                                            <div class="col-lg-12">
-                                                <input name="campaign_id" type="hidden" value="27">
-                                                <button class="cmn-btn w-100" type="submit">MAKE YOUR DONATION</button>
-                                            </div>
+                                        </div> --}}
+                                        <div class="col-lg-12">
+                                            <input name="campaign_id" type="hidden" value="27">
+                                            <button class="cmn-btn w-100" type="submit">MAKE YOUR DONATION</button>
                                         </div>
                                     </form>
                                 @endif
