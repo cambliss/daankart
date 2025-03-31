@@ -74,8 +74,8 @@
         .cmn-btn.disabled,
         .cmn-btn:disabled {
             color: #fff;
-            background-color: #3d2bfb;
-            border-color: #3d2bfb;
+            background-color: #de7c00;
+            border-color: #de7c00;
             opacity: 0.7;
         }
     </style>
