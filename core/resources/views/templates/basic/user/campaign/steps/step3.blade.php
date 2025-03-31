@@ -21,16 +21,16 @@
     <span id="charCount">0/200</span>
     <button class="btn btn-primary w-100 mt-3" onclick="nextStep(3)">Continue</button>
 </form>
-<script>
-    $(document).ready(function() {
-        const charCountDisplay = document.querySelector('span#charCount');
-        document.getElementById('campaign_description').addEventListener('input', function() {
-            const currentLength = this.value.length;
-            charCountDisplay.textContent = currentLength + '/200';
-            if (currentLength > 200) {
-                this.value = this.value.substring(0, 200);
-                charCountDisplay.textContent = '200/200';
-            }
-        });
+<script type="text/javascript" >
+    const charCountDisplay = document.querySelector('span#charCount');
+    const campaignDescription = document.getElementById('campaign_description');
+    campaignDescription.addEventListener('input', function() {
+        const currentLength = this.value.length;
+        charCountDisplay.textContent = currentLength + '/200';
+        if (currentLength > 200) {
+            this.value = this.value.substring(0, 200);
+            charCountDisplay.textContent = '200/200';
+        }
     });
+    charCountDisplay.textContent = `${campaignDescription.value.length}/200`;
 </script>
