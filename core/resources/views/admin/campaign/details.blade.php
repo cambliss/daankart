@@ -533,7 +533,7 @@
         }
 
         .nav-tabs .nav-link.active {
-            color: #4634ff;
+            color: #333927;
         }
     </style>
 @endpush

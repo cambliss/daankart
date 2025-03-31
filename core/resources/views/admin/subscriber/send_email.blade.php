@@ -220,7 +220,7 @@
             stroke-dashoffset: 0px;
             stroke-linecap: round;
             stroke-width: 6px;
-            stroke: #4634ff;
+            stroke: #333927;
             fill: transparent;
         }
 
@@ -245,7 +245,7 @@
         }
 
         .coaling-time-count {
-            color: #4634ff;
+            color: #333927;
         }
 
         @keyframes countdown {
