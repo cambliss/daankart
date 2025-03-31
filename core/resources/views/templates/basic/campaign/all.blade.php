@@ -12,12 +12,11 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Left Sidebar - Filters -->
+                <!-- Left Sidebar - Filters 
                 <div class="col-lg-3">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <!-- Campaign Title Filter -->
-                            {{-- <div class="mb-4">
+                            <div class="mb-4">
                                 <h5 class="text-orange">Search Campaign</h5>
                                 <div class="input-group">
                                     <input type="text" name="search" class="form-control" id="campaignSearch"
@@ -26,7 +25,7 @@
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="mb-4">
                                 <h5 class="text-orange">Filter By Category</h5>
@@ -41,8 +40,6 @@
                                 </div>
                                 @endforeach
                             </div>
-
-                            <!-- Date Filter -->
                             <div class="mb-4">
                                 <h5 class="text-orange">Filter By Date</h5>
                                 <input type="text" class="form-control datepicker" placeholder="From Created Date..">
@@ -50,9 +47,9 @@
                         </div>
                     </div>
                 </div>
-
+                -->
                 <!-- Right Content - Campaign Cards -->
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="row g-4">
                         @forelse($campaigns as $campaign)
                             <div class="col-md-6 col-lg-4">
