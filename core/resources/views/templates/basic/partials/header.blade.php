@@ -173,7 +173,7 @@
                         
                         @if($isHomepage)
                             {{-- Homepage Specific Menu --}}
-                            <li><a href="/about" class="menu-item">ABOUT</a></li>
+                            <li><a href="/about" class="menu-item">ABOUT US</a></li>
                             <li>
                                 <a href="/donate-monthly" class="menu-item btn donate-monthly" >
                                     DONATE MONTHLY
@@ -191,6 +191,7 @@
                                     </a>
                                 </li>
                             @endforeach
+                            <li><a href="/user/login" class="menu-item">START A CAMPAIGN</a></li>
                         @endif
                     </ul>
 

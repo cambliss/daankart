@@ -179,7 +179,9 @@
                                             <div class="button--group">
                                                 <a class="btn btn-sm btn-outline--primary ms-1 mb-2"
                                                     href="{{ route('admin.fundrise.details', $campaign->id) . '?tab=daan' }}">
-                                                    <i class="las la-desktop"></i>@lang('Details')
+                                                    <i class="las la-desktop"></i>
+                                                    KYC
+                                                    @lang('Details')
                                                 </a>
                                                 @if ($campaign->status === 'Completed')
                                                 <button class="btn btn-sm btn-outline--success ms-1 mb-2 confirmationBtn"
