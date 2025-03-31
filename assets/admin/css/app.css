@@ -463,7 +463,7 @@ a {
 }
 
 .bg--dark {
-  --color: #071251;
+  --color: #4e5b31;
   background-color: var(--color) !important;
 }
 
@@ -5448,7 +5448,7 @@ th.w-85 {
 .sidebar .version-info {
   width: 249px;
   padding-block: 10px;
-  background-color: #071251;
+  background-color: #4e5b31;
   transition: 0.27s;
   flex-shrink: 0;
 }
@@ -7676,7 +7676,7 @@ label.required:after {
 }
 
 .sidebar__menu-wrapper::-webkit-scrollbar-track {
-  background: #071251;
+  background: #4e5b31;
 }
 
 .sidebar__menu-wrapper::-webkit-scrollbar-thumb {
