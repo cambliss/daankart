@@ -119,6 +119,12 @@ use Illuminate\Support\Str;
                 <div class="col-lg-8">
 
                     <div class="event-details-wrapper border--radius campaign-hero-image">
+                        <span class="feature">
+                            {{ $campaign->category ? $campaign->category->name : 'Campaign' }}
+                        </span>
+                        <span class="taxstrip">
+                            Tax Benefit
+                        </span>
                         <div class="event-details-thumb">
                             <img class="border--radius"
                                 src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}"

@@ -5246,9 +5246,18 @@ input[type=file]::file-selector-button {
 /* ----favorite-=user icon----- */
 .event-details-wrapper {
     position: relative;
+    overflow: hidden;
 }
 
-
+.taxstrip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: hsl(var(--base));
+    color: white;
+    padding: 5px;
+    border-radius: 0px 5px 0px 5px;
+}
 
 .event-details-wrapper .icon.heart-icon {
     position: absolute;
