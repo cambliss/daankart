@@ -759,7 +759,7 @@ use Illuminate\Support\Str;
                                 <h3>Share Campaign</h3>
                                 <div class="form-group copy-link">
                                     <input class="copyURL" id="profile" name="profile" type="text"
-                                        value="https://daankart.com/campaign/details/{{ $campaign->id }}" readonly>
+                                        value="https://daankart.com/campaign/details/{{ $campaign->slug }}" readonly>
                                     <span class="copy" data-id="profile">
                                         <i class="las la-copy"></i> <strong class="copyText">Copy</strong>
                                     </span>
@@ -767,15 +767,15 @@ use Illuminate\Support\Str;
 
                                 <div class="form-group">
                                     <button class="btn cmn-outline-btn w-100" id="copyButton"
-                                        data-profile="https://daankart.com/campaign/details/{{ $campaign->id }}"
-                                        data-url="https://daankart.com/campaign/widget/{{ $campaign->id }}"
+                                        data-profile="https://daankart.com/campaign/details/{{ $campaign->slug }}"
+                                        data-url="https://daankart.com/campaign/widget/{{ $campaign->slug }}"
                                         type="button">
                                         Copy Widget for WebPage <i class="far fa-copy"></i>
                                     </button>
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control form--control mt-3 mb-2" id="embedCode" readonly><iframe src="https://daankart.com/campaign/details/{{ $campaign->id }}" width="768" height="415"></iframe></textarea>
+                                    <textarea class="form-control form--control mt-3 mb-2" id="embedCode" readonly><iframe src="https://daankart.com/campaign/details/{{ $campaign->slug }}" width="768" height="415"></iframe></textarea>
                                     <button class="btn cmn-outline-btn w-100 copyEmbed">
                                         Copy Embed Code
                                     </button>
