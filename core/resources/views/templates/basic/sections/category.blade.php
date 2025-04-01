@@ -134,10 +134,12 @@
                         $iconClass = $icons[$category->name] ?? 'fa-star';
                     @endphp
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4 text-center">
-                        <div class="category-card">
-                            <i class="fas {{ $iconClass }} category-icon"></i>
-                            <div class="category-text">{{ __($category->name) }}</div>
-                        </div>
+                        <a href="{{ route('campaign.all', ['category_id' => $category->id]) }}">
+                            <div class="category-card">
+                                <i class="fas {{ $iconClass }} category-icon"></i>
+                                <div class="category-text">{{ __($category->name) }}</div>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>

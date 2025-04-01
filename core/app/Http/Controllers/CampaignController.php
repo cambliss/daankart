@@ -60,7 +60,7 @@ class CampaignController extends Controller
         $query->where('status', 'Approved');
         $campaigns  = $query->paginate(getPaginate());
         $pageTitle = 'All Campaigns';
-        $categories = Category::active()->hasCampaigns()->orderBy('id', 'DESC')->get();
+        $categories = Category::active()->orderBy('id', 'DESC')->get();
         $sections  = Page::where('tempname', activeTemplate())->where('slug', 'campaign')->first();
         $seoContents = $sections->seo_content;
         $seoImage    = @$seoContents->image ? getImage(getFilePath('seo') . '/' . @$seoContents->image, getFileSize('seo')) : null;
