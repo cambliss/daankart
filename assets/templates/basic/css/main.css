@@ -2161,7 +2161,7 @@ span.menu-toggle:hover {
 
 @media (min-width: 375px) {
     .hero {
-        top: 72px;
+        top: 50px;
     }
     .hero__slider {
         height: calc(100vh);
