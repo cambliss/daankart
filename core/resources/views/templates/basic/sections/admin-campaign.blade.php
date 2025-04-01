@@ -14,8 +14,7 @@
         ->boundary()
         ->with(['user.organization', 'category', 'donations'])
         ->orderBy('id', 'DESC')
-        ->take(7)
-        ->get();
+        ->paginate(getPaginate());
     @endphp
     <!-- Urgent Fundrised -->
     <br/><br/>
