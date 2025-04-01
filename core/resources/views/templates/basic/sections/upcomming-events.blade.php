@@ -35,7 +35,7 @@
         ],
     ];
 @endphp
-<div class="container py-4">
+<div class="container py-4 upcomming-events">
     <div class="row">
 
         <!-- Upcoming Events -->
@@ -62,9 +62,11 @@
             <h4 class="mb-4">Featured Causes</h4>
             @foreach ($featuredCauses as $cause)
             <div class="card border-0 shadow-sm">
-                <img src="{{ $cause->image }}" class="card-img-top rounded-top"
+                <div class="position-relative image-container" >
+                    <img src="{{ $cause->image }}" class="card-img-top rounded-top"
                     alt="Child Image">
-                <div class="donation-bar">{{ $cause->raised }} donated of {{ $cause->goal }} goal</div>
+                    <div class="donation-bar">{{ $cause->raised }} donated of {{ $cause->goal }} goal</div>
+                </div>
                 <div class="card-body">
                     <h5 class="card-title text-danger">{{ $cause->title }}</h5>
                     <p class="card-text text-muted small">
@@ -111,6 +113,10 @@
       padding: 10px;
       border-bottom-left-radius: 0.5rem;
       border-bottom-right-radius: 0.5rem;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
     }
     .social-icons i {
       font-size: 1.2rem;
@@ -118,6 +124,9 @@
       color: #ff4a00;
       cursor: pointer;
     }
-
+    .upcomming-events .image-container {
+        height: 250px;
+        overflow: hidden;
+    }
 </style>
 @endpush
