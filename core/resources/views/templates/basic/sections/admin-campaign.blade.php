@@ -1,7 +1,6 @@
 @extends($activeTemplate . 'layouts.frontend')
 @section('content')
     @php
-        $data = getContent('campaign.content', true);
         session()->forget('DONATION');
         $categories = App\Models\Category::active()
         ->orderByDesc('id')
@@ -10,6 +9,12 @@
                 $query->active()->running()->boundary();
             },
         ])
+        ->get();
+        $campaigns = App\Models\Campaign::running()
+        ->boundary()
+        ->with(['user.organization', 'category', 'donations'])
+        ->orderBy('id', 'DESC')
+        ->take(7)
         ->get();
     @endphp
     <!-- Urgent Fundrised -->
