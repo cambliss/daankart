@@ -38,7 +38,7 @@
 
             <!-- Donors Section -->
             <div id="donors-content" class="steps row" style="display: flex;">
-                <div class="step-card col-md-3">
+                <div class="step-card col-12 col-md-3">
                     <div class="step-number">1</div>
                     <div class="image-box">
                         <img src="assets/images/search.png" alt="Choose a Cause">
@@ -46,7 +46,7 @@
                     <h3>CHOOSE A CAUSE</h3>
                     <p>Browse different campaigns and select a cause.</p>
                 </div>
-                <div class="step-card col-md-3">
+                <div class="step-card col-12 col-md-3">
                     <div class="step-number">2</div>
                     <div class="image-box">
                         <img src="assets/images/step.png" alt="Select Products">
@@ -54,7 +54,7 @@
                     <h3>SELECT PRODUCTS</h3>
                     <p>Select products and quantity you wish to donate.</p>
                 </div>
-                <div class="step-card col-md-3">
+                <div class="step-card col-12 col-md-3">
                     <div class="step-number">3</div>
                     <div class="image-box">
                         <img src="assets/images/step2.avif" alt="Order Processing">
@@ -62,7 +62,7 @@
                     <h3>ORDER PROCESSING</h3>
                     <p>Checkout and pay for your contributions.</p>
                 </div>
-                <div class="step-card col-md-3">
+                <div class="step-card col-12 col-md-3">
                     <div class="step-number">4</div>
                     <div class="image-box">
                         <img src="assets/images/step5.jpg" alt="Delivery Report">
@@ -172,7 +172,6 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 15px;
             text-align: center;
-            width: 22%;
             transition: transform 0.3s ease;
             border: 1px solid transparent;
             margin: 10px;
