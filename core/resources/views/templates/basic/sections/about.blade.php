@@ -10,8 +10,11 @@
 @endphp
 <!-- about section start -->
 <section class="pb-120 about-section">
+    <div class="banner-container">
+           <img src="{{ asset('assets/images/frontend/about_banner/about_banner.jpg') }}" alt="explore_campaign" class="banner-image">
+       </div>
     <div class="container">
-        <div class="row">
+        <div class="row about-details">
             <div class="col-lg-6">
                 <div class="about-thumb pe-lg-2">
                     <div class="thumb-one wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.3s">
@@ -36,3 +39,21 @@
     </div>
 </section>
 
+@push('style')
+    <style>
+    .banner-container {
+        padding-bottom: 120px;
+        padding-top: 120px;
+        width: 100%; /* Full width */
+          height: 380px; /* Adjust height as needed */
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+    }
+    
+    .about-details{
+        padding-top:50px;
+    }
+    </style>
+@endpush    
