@@ -86,3 +86,38 @@
         </div>
     </div>
 </div>
+
+@push('style')
+<style>
+    .event-date {
+      background-color: #ff4a00;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      width: 60px;
+      border-radius: 5px;
+    }
+    .event-date .day {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+    .event-date .month {
+      text-transform: uppercase;
+    }
+    .donation-bar {
+      background: rgba(255, 74, 0, 0.85);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+    .social-icons i {
+      font-size: 1.2rem;
+      margin-right: 10px;
+      color: #ff4a00;
+      cursor: pointer;
+    }
+
+</style>
+@endpush
