@@ -2165,13 +2165,19 @@ span.menu-toggle:hover {
         top: 72px;
     }
     .hero__slider {
-        height: calc(50vh);
+        height: calc(100vh);
     }
 
     .hero__slider .slick-list,
     .hero__slider .slick-track {
         height: 100%;
     }
+}
+
+@media screen and (max-width: 768px) {
+    .hero_slider {
+        height: calc(50vh);
+    }   
 }
 
 .hero .single__slide {
