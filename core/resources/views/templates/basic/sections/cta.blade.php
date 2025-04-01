@@ -17,8 +17,8 @@
     </div>
 </section> --}}
 
-<section class="pt-120 pb-120">
-    <div class="container text-center d-flex justify-content-center align-items-center m-3 position-relative">
+<section class="pt-120 pb-120 container">
+    <div class="text-center d-flex justify-content-center align-items-center m-3 position-relative">
         <video width="100%" height="100%" muted autoplay playsinline class="rounded" loop >
             <source src="/assets/videos/volunteer_bannar_for_daankart.mp4"  type="video/mp4">
         </video>
