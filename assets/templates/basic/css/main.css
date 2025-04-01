@@ -2023,7 +2023,6 @@ span.menu-toggle:hover {
 /* hero-section css start */
 .hero {
     position: relative;
-    top:50px;
 }
 
 .hero__content {
