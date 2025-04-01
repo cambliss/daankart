@@ -3,6 +3,14 @@
     @php
         $data = getContent('campaign.content', true);
         session()->forget('DONATION');
+        $categories = App\Models\Category::active()
+        ->orderByDesc('id')
+        ->withCount([
+            'campaigns' => function ($query) {
+                $query->active()->running()->boundary();
+            },
+        ])
+        ->get();
     @endphp
     <!-- Urgent Fundrised -->
     <br/><br/>
