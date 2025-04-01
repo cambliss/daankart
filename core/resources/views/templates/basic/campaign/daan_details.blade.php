@@ -691,7 +691,7 @@ use Illuminate\Support\Str;
                                     </div> --}}
                                         </div>
 
-                                        <h3 class="mb-4 mt-30">Personal Information</h3>
+                                        {{-- <h3 class="mb-4 mt-30">Personal Information</h3> --}}
 
                                         <?php
                                         $donarName = auth()->user()->fullname ?? '';
