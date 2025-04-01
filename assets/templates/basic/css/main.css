@@ -1704,8 +1704,12 @@ textarea {
 }
 
 @media (max-width: 383px) {
-    .header__bottom {
-        top: 70px;
+    .page-wrapper {
+        padding-top: 72px;
+    }
+    .hero {
+        top: 0px;
+        padding-bottom: 10px;
     }
 }
 
@@ -2022,13 +2026,6 @@ span.menu-toggle:hover {
     top:50px;
 }
 
-@media (max-width: 480px) {
-    .hero {
-        position: static;
-        padding-bottom: 20px;
-    }
-}
-
 .hero__content {
     position: relative;
     z-index: 9;
@@ -2163,9 +2160,12 @@ span.menu-toggle:hover {
     background-color: rgba(255, 255, 255, 0.35);
 }
 
-@media (min-width: 480px) {
+@media (min-width: 375px) {
+    .hero {
+        top: 72px;
+    }
     .hero__slider {
-        height: calc(100vh);
+        height: calc(50vh);
     }
 
     .hero__slider .slick-list,
