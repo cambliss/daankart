@@ -31,10 +31,11 @@ class SiteController extends Controller
     {
         $page = Page::where('tempname', activeTemplate())->where('slug', $slug)->firstOrFail();
         $pageTitle = $page->name;
+        $pageSlug = $page->slug;
         $sections = $page->secs;
         $seoContents = $page->seo_content;
         $seoImage = @$seoContents->image ? getImage(getFilePath('seo') . '/' . @$seoContents->image, getFileSize('seo')) : null;
-        return view('Template::pages', compact('pageTitle', 'sections', 'seoContents', 'seoImage'));
+        return view('Template::pages', compact('pageTitle', 'sections', 'seoContents', 'seoImage', 'pageSlug'));
     }
 
 

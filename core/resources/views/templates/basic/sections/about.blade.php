@@ -1,4 +1,3 @@
-
 @php
     $storyContent = getContent('story.content', true);
     $stories = getContent('story.element', null, false, true);
@@ -10,9 +9,6 @@
 @endphp
 <!-- about section start -->
 <section class="pb-120 about-section">
-    <div class="banner-container">
-           <img src="{{ asset('assets/images/frontend/about_banner/about_banner.jpg') }}" alt="explore_campaign" class="banner-image">
-       </div>
     <div class="container">
         <div class="row about-details">
             <div class="col-lg-6">
@@ -38,22 +34,3 @@
 
     </div>
 </section>
-
-@push('style')
-    <style>
-    .banner-container {
-        padding-bottom: 120px;
-        padding-top: 120px;
-        width: 100%; /* Full width */
-          height: 380px; /* Adjust height as needed */
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-    }
-    
-    .about-details{
-        padding-top:50px;
-    }
-    </style>
-@endpush    
