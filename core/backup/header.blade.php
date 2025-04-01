@@ -24,7 +24,7 @@
                 @auth
                     @if ($routePrefix != 'user' && !request()->routeIs('ticket.index'))
                         <ul class="navbar-nav main-menu ms-auto">
-                            <li><a href="/campaign/all" class="menu-item px-4">DISCOVER CAMPAIGNS</a></li>
+                            <li><a href="/campaign/all" class="menu-item px-2">DISCOVER CAMPAIGNS</a></li>
                             @include($activeTemplate . 'partials.common_menus')
                         </ul>
                     @else

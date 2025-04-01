@@ -609,7 +609,6 @@ background-color : #fff !important;
 
 
 .main-menu li a.menu-item.btn.donate-monthly {
-  margin-left: -20px; 
   background: linear-gradient(90deg, orange, red); 
   border-radius: 10px !important; 
   padding: 10px 20px;
