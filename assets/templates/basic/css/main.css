@@ -2158,7 +2158,7 @@ span.menu-toggle:hover {
 
 @media (min-width: 375px) {
     .hero__slider {
-        height: calc(100vh);
+        height: calc(50vh);
     }
 
     .hero__slider .slick-list,
