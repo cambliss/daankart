@@ -46,9 +46,9 @@ class CampaignController extends Controller
     {
         $query = DaanCampaign::query();
         if($request->search) {
-            $query->where('campaign_title', 'like', '%'.$request->search.'%')
-            ->orWhere('campaign_description', 'like', '%'.$request->search.'%')
-            ->orWhere('beneficiary_type', 'like', '%'.$request->search.'%');
+            $query->where('campaign_title', 'like', '%'.$request->search.'%');
+            // ->orWhere('campaign_description', 'like', '%'.$request->search.'%')
+            // ->orWhere('beneficiary_type', 'like', '%'.$request->search.'%');
         }
         if($request->category_id) {
             $query->where('category_id', $request->category_id);
