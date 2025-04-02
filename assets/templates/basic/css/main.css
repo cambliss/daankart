@@ -276,7 +276,7 @@ a:hover {
 }
 
 .pt-120 {
-    padding-top: 120px;
+    padding-top: 1rem;
 }
 
 @media (max-width: 991px) {
@@ -292,7 +292,7 @@ a:hover {
 }
 
 .pb-120 {
-    padding-bottom: 120px;
+    padding-bottom: 1rem;
 }
 
 @media (max-width: 991px) {
