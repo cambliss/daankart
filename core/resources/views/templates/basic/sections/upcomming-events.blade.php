@@ -73,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-md-6 position-relative">
                                         <img src="{{ getImage(getFilePath('campaign') . '/' . $daanCampaign->image, getFileSize('campaign')) }}"
-                                            alt="Event Image" class="w-100 h-100">
+                                            alt="Event Image" class="w-100 h-100" style="object-fit: cover;">
                                         {{-- add progress bar --}}
                                         <?php
                                         $raised_amount = $daanCampaign->raised_amount ?? 100;
