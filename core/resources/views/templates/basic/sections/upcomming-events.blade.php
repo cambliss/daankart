@@ -68,48 +68,50 @@
                 <!-- 3 seconds interval -->
                 <div class="carousel-inner">
                     @foreach ($daanCampaigns as $index => $daanCampaign)
-                        <div class="event-card border-0 shadow-sm mb-2">
-                            <div class="row">
-                                <div class="col-md-6 position-relative">
-                                    <img src="{{ getImage(getFilePath('campaign') . '/' . $daanCampaign->image, getFileSize('campaign')) }}"
-                                        alt="Event Image" class="w-100 h-100">
-                                    {{-- add progress bar --}}
-                                    <?php
-                                    $raised_amount = $daanCampaign->raised_amount ?? 100;
-                                    $goal = $daanCampaign->goal ?? 1000;
-                                    
-                                    $raised_amount = 100;
-                                    $goal = 1000;
-                                    
-                                    $percentage = ($raised_amount / $goal) * 100;
-                                    ?>
-                                    <div class="progress mt-2 position-absolute"
-                                        style="bottom: 0; left: 0; right: 0;margin: 10px 20px;">
-                                        <div class="progress-bar bg-primary" role="progressbar"
-                                            style="width: {{ $percentage }}%" aria-valuenow="{{ $raised_amount }}"
-                                            aria-valuemin="0" aria-valuemax="{{ $goal }}"></div>
-                                        <span
-                                            class="text-white position-relative translate-left-minus-full">{{ $percentage }}%</span>
+                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                            <div class="event-card border-0 shadow-sm mb-2">
+                                <div class="row">
+                                    <div class="col-md-6 position-relative">
+                                        <img src="{{ getImage(getFilePath('campaign') . '/' . $daanCampaign->image, getFileSize('campaign')) }}"
+                                            alt="Event Image" class="w-100 h-100">
+                                        {{-- add progress bar --}}
+                                        <?php
+                                        $raised_amount = $daanCampaign->raised_amount ?? 100;
+                                        $goal = $daanCampaign->goal ?? 1000;
+                                        
+                                        $raised_amount = 100;
+                                        $goal = 1000;
+                                        
+                                        $percentage = ($raised_amount / $goal) * 100;
+                                        ?>
+                                        <div class="progress mt-2 position-absolute"
+                                            style="bottom: 0; left: 0; right: 0;margin: 10px 20px;">
+                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                style="width: {{ $percentage }}%" aria-valuenow="{{ $raised_amount }}"
+                                                aria-valuemin="0" aria-valuemax="{{ $goal }}"></div>
+                                            <span
+                                                class="text-white position-relative translate-left-minus-full">{{ $percentage }}%</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5 class="text-primary mt-2 mb-2">{{ $daanCampaign->campaign_title }}</h5>
-                                    <p class="text-muted small">{!! $daanCampaign->campaign_description !!}</p>
-                                    <div class="mb-2">
-                                        <a
-                                            href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
-                                            <button class="btn btn-sm btn-primary me-2">Donate Now</button>
-                                        </a>
-                                        <a
-                                            href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
-                                            <button class="btn btn-sm btn-outline-primary">Read More</button>
-                                        </a>
-                                    </div>
-                                    <div class="social-icons mt-2">
-                                        <i class="bi bi-facebook"></i>
-                                        <i class="bi bi-twitter"></i>
-                                        <i class="bi bi-instagram"></i>
-                                        <i class="bi bi-share-fill"></i>
+                                    <div class="col-md-6">
+                                        <h5 class="text-primary mt-2 mb-2">{{ $daanCampaign->campaign_title }}</h5>
+                                        <p class="text-muted small">{!! $daanCampaign->campaign_description !!}</p>
+                                        <div class="mb-2">
+                                            <a
+                                                href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
+                                                <button class="btn btn-sm btn-primary me-2">Donate Now</button>
+                                            </a>
+                                            <a
+                                                href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
+                                                <button class="btn btn-sm btn-outline-primary">Read More</button>
+                                            </a>
+                                        </div>
+                                        <div class="social-icons mt-2">
+                                            <i class="bi bi-facebook"></i>
+                                            <i class="bi bi-twitter"></i>
+                                            <i class="bi bi-instagram"></i>
+                                            <i class="bi bi-share-fill"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
