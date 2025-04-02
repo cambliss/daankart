@@ -142,7 +142,7 @@
           padding-bottom: 120px;
           text-align: center;
           width: 100%; /* Full width */
-          height: 380px; /* Adjust height as needed */
+          height: fit-content; /* Adjust height as needed */
           display: flex;
           flex-direction: column;
           justify-content: center;
