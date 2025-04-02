@@ -75,7 +75,7 @@
                         ?>
                         <div class="progress mt-2 position-absolute" style="bottom: 0; left: 0; right: 0;margin: 10px 20px;">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $percentage }}%" aria-valuenow="{{ $raised_amount }}" aria-valuemin="0" aria-valuemax="{{ $goal }}"></div>
-                            <span class="text-white ">{{ $percentage }}%</span>
+                            <span class="text-white position-relative translate-left-minus-full">{{ $percentage }}%</span>
                         </div>
                     </div>
                     <div class="col-md-12">

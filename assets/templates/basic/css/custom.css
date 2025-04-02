@@ -617,4 +617,12 @@ background-color : #fff !important;
   text-transform: uppercase;
   margin-top: 5px;
 }
- 
+
+.translate-left-full {
+  transform: translateX(100%);
+}
+
+.translate-left-minus-full {
+  transform: translateX(-100%);
+}
+
