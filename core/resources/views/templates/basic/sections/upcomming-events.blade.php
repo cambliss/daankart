@@ -195,6 +195,10 @@
             padding: 5px 0px;
             border-radius: 5px;
         }
+        .upcomming-events .carousel-navigation .carousel-control>span {
+            height: 1.5rem;
+            width: 1.5rem;
+        }
         .upcomming-events .featured-cause-description {
             height: 250px;
             overflow: hidden;
