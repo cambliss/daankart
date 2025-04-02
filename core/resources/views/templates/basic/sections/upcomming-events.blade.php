@@ -82,8 +82,12 @@
                         <h5 class="text-danger mt-2 mb-2">{{ $daanCampaign->campaign_title }}</h5>
                         <p class="text-muted small">{!! $daanCampaign->campaign_description !!}</p>
                         <div class="mb-2">
-                            <button class="btn btn-sm btn-danger me-2">Donate Now</button>
-                            <button class="btn btn-sm btn-outline-danger">Read More</button>
+                            <a href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
+                                <button class="btn btn-sm btn-danger me-2">Donate Now</button>
+                            </a>
+                            <a href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
+                                <button class="btn btn-sm btn-outline-danger">Read More</button>
+                            </a>
                         </div>
                         <div class="social-icons mt-2">
                             <i class="bi bi-facebook"></i>
