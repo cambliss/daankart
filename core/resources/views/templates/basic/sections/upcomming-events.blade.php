@@ -41,20 +41,38 @@
         <!-- Upcoming Events -->
         <div class="col-md-6">
             <h4 class="mb-4">Upcoming Event</h4>
-            <!-- Event Item -->
-            @foreach ($events as $event)
-            <div class="d-flex mb-3">
-                <div class="event-date me-3">
-                    <div class="day">{{ $event->day }}</div>
-                    <div class="month">{{ $event->month }}</div>
+            <!-- Event Slider -->
+            <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach ($events as $key => $event)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        <div class="card border-0 shadow-sm">
+                            <div class="position-relative image-container">
+                                <img src="{{ $cause->image ?? 'https://via.placeholder.com/500x300.png?text=Event+Image' }}" class="card-img-top rounded-top"
+                                alt="Event Image">
+                                <div class="event-date position-absolute top-0 start-0 m-3">
+                                    <div class="day">{{ $event->day }}</div>
+                                    <div class="month">{{ $event->month }}</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="text-danger mb-2">{{ $event->title }}</h5>
+                                <p class="mb-1"><small><i class="bi bi-clock"></i> {{ $event->start_date }} - {{ $event->end_date }}</small></p>
+                                <p class="text-muted small">{{ $event->donation }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
-                <div>
-                    <h6 class="text-danger mb-1">{{ $event->title }}</h6>
-                    <p class="mb-0"><small>{{ $event->start_date }} - {{ $event->end_date }}</small></p>
-                    <p class="text-muted small">Donation: {{ $event->donation }}</p>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            @endforeach
         </div>
 
         <!-- Featured Causes -->
