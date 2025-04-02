@@ -1,6 +1,6 @@
 <?php
 $mappedBanner = [
-    'about' => 'assets/images/frontend/about_banner/about_banner.jpg',
+    'about' => 'assets/images/frontend/about_banner/aboutUs_banner.png',
     'contact' => 'assets/images/frontend/contact_banner/contact_banner.jpg',
 ];
 ?>
