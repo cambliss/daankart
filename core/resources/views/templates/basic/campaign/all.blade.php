@@ -54,9 +54,11 @@
                         @forelse($campaigns as $campaign)
                             <div class="col-md-6 col-lg-4">
                                 <div class="event-card has-link">
-                                    <span class="feature">
-                                        {{ $campaign->category->name }}
-                                    </span>
+                                    @if ($campaign->category)
+                                        <span class="feature">
+                                            {{ $campaign->category->name }}
+                                        </span>
+                                    @endif
                                     <a class="item-link" href="{{ $campaign->slug ? route('campaign.daan_details_slug', ['slug' => $campaign->slug]) : '#' }}"></a>
                                     <div class="event-card__thumb">
                                         <span class="camp_deadline">
