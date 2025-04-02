@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h5 class="text-primary mt-2 mb-2">{{ $daanCampaign->campaign_title }}</h5>
-                                        <p class="text-muted small">{!! $daanCampaign->campaign_description !!}</p>
+                                        <p class="text-muted small featured-cause-description">{!! $daanCampaign->campaign_description !!}</p>
                                         <div class="mb-2">
                                             <a
                                                 href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
@@ -194,6 +194,10 @@
             align-items: center;
             padding: 5px 0px;
             border-radius: 5px;
+        }
+        .upcomming-events .featured-cause-description {
+            height: 250px;
+            overflow: hidden;
         }
     </style>
 @endpush
