@@ -58,10 +58,12 @@
         <!-- Featured Causes -->
         <div class="col-md-6">
             <h4 class="mb-2">Featured Causes</h4>
-            @foreach ($daanCampaigns as $daanCampaign)
+          <div id="campaignCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"> <!-- 3 seconds interval -->
+           <div class="carousel-inner">
+             @foreach($daanCampaigns as $index => $daanCampaign)
             <div class="event-card border-0 shadow-sm mb-2">
                 <div class="row">
-                    <div class="col-md-12 position-relative">
+                    <div class="col-md-6 position-relative">
                         <img src="{{ getImage(getFilePath('campaign') . '/' . $daanCampaign->image, getFileSize('campaign')) }}" alt="Event Image" class="w-100 h-100">
                         {{-- add progress bar --}}
                         <?php
@@ -78,7 +80,7 @@
                             <span class="text-white position-relative translate-left-minus-full">{{ $percentage }}%</span>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <h5 class="text-primary mt-2 mb-2">{{ $daanCampaign->campaign_title }}</h5>
                         <p class="text-muted small">{!! $daanCampaign->campaign_description !!}</p>
                         <div class="mb-2">
@@ -98,7 +100,10 @@
                     </div>
                 </div>
             </div>
+             
+        </div>
             @endforeach
+         </div>         
         </div>
     </div>
 </div>
@@ -155,7 +160,7 @@
     }
     .upcomming-events .carousel-navigation {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
     }
     .upcomming-events .carousel-navigation .carousel-control  {
