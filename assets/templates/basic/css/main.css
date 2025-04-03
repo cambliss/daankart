@@ -2163,7 +2163,7 @@ span.menu-toggle:hover {
     .hero {
         top: 70px;
     }
-    .hero_slider {
+    .hero__slider {
         height: calc(50vh);
         padding-bottom: 8rem;
     }   
