@@ -9,6 +9,11 @@
     $isProfileRoute = request()->routeIs('profile.*');
     $isTicketIndex = request()->routeIs('ticket.index');
 @endphp
+<style>
+    .navbar-nav.main-menu>li:first-child>a {
+        padding-left: 0px !important;
+    }
+</style>
 
 <header class="header__bottom @if($isProfileRoute) header-for-profile @endif">
     <div class="container">
@@ -22,7 +27,7 @@
                 data-bs-target="#navbarSupportedContent" type="button" 
                 aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <i class="las la-bars"></i>
+                <i class="las la-bars" style="color: #292f19;" ></i>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
