@@ -2160,9 +2160,12 @@ span.menu-toggle:hover {
 }
 /*   */
 @media (min-width: 375px) { 
+    .hero {
+        top: 70px;
+    }
     .hero_slider {
         height: calc(50vh);
-        padding-bottom: 25px;
+        padding-bottom: 8rem;
     }   
 }
 
