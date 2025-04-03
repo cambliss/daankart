@@ -8,7 +8,7 @@
     $aboutElement = getContent('about.element', false);
 @endphp
 <!-- about section start -->
-<section class="pb-120 about-section">
+<section class="pb-120 about-section banner-section-image">
     <div class="container">
         <div class="row about-details">
             <div class="col-lg-6">
@@ -34,3 +34,13 @@
 
     </div>
 </section>
+
+@push('style')
+    <style>
+        @media(max-width:420px){
+        .banner-section-image {
+            padding-bottom: 10px;
+            }
+        }
+    </style>
+@endpush  

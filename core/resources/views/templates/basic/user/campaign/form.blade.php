@@ -7,7 +7,13 @@
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         background: white;
     }
-
+    
+     @media (max-width:420px) {
+        .card {
+            margin-bottom: 25px;
+        } 
+    }
+    
     .step-indicator {
         display: flex;
         justify-content: space-between;

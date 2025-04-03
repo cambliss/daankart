@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col">
-                    <h4 class="mb-4">Upcoming Event</h4>
+                    <h4 class="mb-4">Donate Monthly</h4>
                 </div>
                 <div class="col-md-4">
                     <div class="carousel-navigation">
@@ -41,7 +41,7 @@
                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                             @foreach ($campaigns as $campaign)
                                 <div class="event-card border-0 shadow-sm mb-2">
-                                    <div class="row">
+                                    <div class="row" >
                                         <div class="col-md-4">
                                             <img src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}"
                                                 alt="Event Image" class="w-100 h-100">
@@ -63,7 +63,7 @@
 
         <!-- Featured Causes -->
         <div class="col-md-6">
-            <h4 class="mb-2">Featured Causes</h4>
+            <h4 class="mb-2">Discover Campaigns</h4>
             <div id="campaignCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <!-- 3 seconds interval -->
                 <div class="carousel-inner">

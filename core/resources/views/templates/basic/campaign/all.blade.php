@@ -151,6 +151,13 @@
           align-items: center;
         }
         
+         @media (max-width:420px){
+            .banner-container {
+                  padding-bottom: 20px;
+                  height: 80px;
+            }
+        }
+        
         .explore-container{
             padding-top: 50px;
         }

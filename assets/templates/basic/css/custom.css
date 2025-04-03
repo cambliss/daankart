@@ -618,6 +618,13 @@ background-color : #fff !important;
   margin-top: 5px;
 }
 
+@media (max-width:420px){
+  .main-menu li a.menu-item.btn.donate-monthly {
+    padding: 10px 0px 10px 0px;
+    width: 150px;
+  }
+}
+
 .translate-left-full {
   transform: translateX(100%);
 }
