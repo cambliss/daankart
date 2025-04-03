@@ -218,7 +218,6 @@ class CampaignController extends Controller
                 'comments' => $request->input('comments')[$index],
             ];
         }
-        dd($request->all(),$products);
         // Now you can insert the products into the database
         foreach ($products as $product) {
             Product::create($product);
