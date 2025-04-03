@@ -1161,14 +1161,14 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
                                         </div>
                                         <div class="form--radio form-check-inline">
                                             <input class="form-check-input donation-radio-check" id="customRadioInline2"
-                                                name="customRadioInline1" type="radio" value="2000">
+                                                name="customRadioInline1" type="radio" value="1500">
                                             <label class="form-check-label" for="customRadioInline2">
                                                 {{ gs('cur_sym') }}@lang('1500')
                                             </label>
                                         </div>
                                         <div class="form--radio form-check-inline">
                                             <input class="form-check-input donation-radio-check" id="customRadioInline3"
-                                                name="customRadioInline1" type="radio" value="3000">
+                                                name="customRadioInline1" type="radio" value="2000">
                                             <label class="form-check-label" for="customRadioInline3">
                                                 {{ gs('cur_sym') }}@lang('2000')
                                             </label>

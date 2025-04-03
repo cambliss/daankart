@@ -2159,7 +2159,7 @@ span.menu-toggle:hover {
     background-color: rgba(255, 255, 255, 0.35);
 }
 
-@media (min-width: 375px) {
+@media (min-width: 768px) {
     .hero {
         top: 50px;
     }
@@ -2172,8 +2172,9 @@ span.menu-toggle:hover {
         height: 100%;
     }
 }
-
-@media screen and (max-width: 768px) {
+/*   */
+@media screen and (max-width: 767px) { 
+/* This media query targets screens with a maximum width of 767px (mobile devices) */
     .hero_slider {
         height: calc(50vh);
     }   
