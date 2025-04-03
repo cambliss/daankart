@@ -17,7 +17,7 @@
             <button class="navbar-toggler ml-auto" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <i class="las la-bars"></i>
+                <i class="las la-bars" style="color: #292f19;"></i>
             </button>
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
