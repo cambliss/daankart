@@ -98,7 +98,7 @@
         .fundraiser-container .step-indicator>div>.step, .step-indicator>div>.step+div {
             display: none;
         }
-        .step-indicator>div>.active-step, .step-indicator>div>.active-step+div {
+        .fundraiser-container .step-indicator>div>.active-step, .step-indicator>div>.active-step+div {
             display: flex;
         }
     }
