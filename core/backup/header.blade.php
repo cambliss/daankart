@@ -5,7 +5,11 @@
     $routePrefix = explode('.', $routeName)[0] ?? '';
     $isHomepage = request()->is('/');
 @endphp
-
+<style>
+    .navbar-nav.main-menu>li:first-child>a {
+        padding-left: 0px !important;
+    }
+</style>
 <header class="header__bottom @if (request()->routeIs('profile.*')) header-for-profile @endif">
     <div class="container">
         <nav class="navbar navbar-expand-xl p-0 align-items-center">
