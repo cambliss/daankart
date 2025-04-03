@@ -2173,7 +2173,7 @@ span.menu-toggle:hover {
     }
 }
 /*   */
-@media screen and (max-width: 767px) { 
+@media (max-width: 767px) { 
 /* This media query targets screens with a maximum width of 767px (mobile devices) */
     .hero_slider {
         height: calc(50vh);
