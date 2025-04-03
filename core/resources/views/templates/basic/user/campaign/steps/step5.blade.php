@@ -159,7 +159,7 @@
                 case 'image_url':
                 case 'video_url':
                 case 'document_url':
-                    return `<input type="url" class="form-control section-content" data-type="${type}" placeholder="Enter a valid URL" value="${content || ''}" oninput="updateContentValue('${uuid}', this.value)" />`;
+                    return `<input type="url" class="form-control section-content" data-type="${type}" placeholder="Enter a valid URL" value="${content || ''}" oninput="updateContentValue('${uuid}',this.value,'${type}')" />`;
 
                 case 'image':
                 case 'video':
@@ -430,9 +430,15 @@
         }
 
         // Update content value for text inputs and URLs
-        function updateContentValue(uuid, value) {
+        function updateContentValue(uuid, value, type) {
             const sectionIndex = $(`#${uuid}`).data('index');
-            sections[sectionIndex].content = value;
+            if(type == 'youtube') {
+                const url = new URL(value);
+                const videoId = url.searchParams.get('v');
+                sections[sectionIndex].content = `https://www.youtube.com/embed/${videoId}`;
+            } else {
+                sections[sectionIndex].content = value;
+            }
             updateSectionData();
         }
 
