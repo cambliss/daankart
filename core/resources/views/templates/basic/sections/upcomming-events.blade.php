@@ -40,6 +40,7 @@
                     @foreach ($campaignsChunks as $key => $campaigns)
                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                             @foreach ($campaigns as $campaign)
+                            <a href="{{ route('campaign.details', ['slug' => $campaign->slug]) }}">
                                 <div class="event-card border-0 shadow-sm mb-2">
                                     <div class="row" >
                                         <div class="col-md-4">
@@ -52,6 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </a>
                             @endforeach
 
                         </div>
