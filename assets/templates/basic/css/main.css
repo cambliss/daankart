@@ -2158,6 +2158,13 @@ span.menu-toggle:hover {
     -o-border-radius: 0;
     background-color: rgba(255, 255, 255, 0.35);
 }
+/*   */
+@media (min-width: 375px) { 
+    .hero_slider {
+        height: calc(50vh);
+        padding-bottom: 25px;
+    }   
+}
 
 @media (min-width: 768px) {
     .hero {
@@ -2171,13 +2178,6 @@ span.menu-toggle:hover {
     .hero__slider .slick-track {
         height: 100%;
     }
-}
-/*   */
-@media (max-width: 767px) { 
-/* This media query targets screens with a maximum width of 767px (mobile devices) */
-    .hero_slider {
-        height: calc(50vh);
-    }   
 }
 
 .hero .single__slide {
