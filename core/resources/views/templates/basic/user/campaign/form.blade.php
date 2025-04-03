@@ -94,6 +94,14 @@
     .fundraiser-container {
         padding-top: 50px;
     }
+    @media (max-width: 768px) {
+        .fundraiser-container .step-indicator>div>.step, .step-indicator>div>.step+div {
+            display: none;
+        }
+        .step-indicator>div>.active-step, .step-indicator>div>.active-step+div {
+            display: flex;
+        }
+    }
 </style>
 
 <div class="container p-5">
