@@ -2175,7 +2175,7 @@ span.menu-toggle:hover {
     }
     .hero__slider {
         height: calc(100vh);
-        padding-bottom: 10rem;
+        padding-bottom: 0rem;
     }
 
     .hero__slider .slick-list,
