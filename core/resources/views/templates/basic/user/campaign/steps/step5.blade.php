@@ -433,9 +433,13 @@
         function updateContentValue(uuid, value, type) {
             const sectionIndex = $(`#${uuid}`).data('index');
             if(type == 'youtube') {
-                const url = new URL(value);
-                const videoId = url.searchParams.get('v');
-                sections[sectionIndex].content = `https://www.youtube.com/embed/${videoId}`;
+                if(!value.includes('embed')) {
+                    const url = new URL(value);
+                    const videoId = url.searchParams.get('v');
+                    sections[sectionIndex].content = `https://www.youtube.com/embed/${videoId}`;
+                } else {
+                    sections[sectionIndex].content = value;
+                }
             } else {
                 sections[sectionIndex].content = value;
             }
