@@ -120,7 +120,7 @@
         <div class="col-md-6 col-lg-4">
             <div class="card p-3 shadow-sm">
                 <h5 class="fw-bold">Fruit Kit</h5>
-                <img src="https://dkprodimages.gumlet.io/catalogue/1065250136grocery%20kit%202024%20dec%2018-01.jpg?format=webp&w=160&dpr=1.3" class="img-fluid mb-2" alt="Fruit Kit">
+                <img src="{{ asset('assets/images/campaignProducts/FruitsKit.png') }}" class="img-fluid mb-2" alt="Fruit Kit">
                 <p>314 of 2000 Quantity Obtained</p>
                 <h5 class="text-primary">₹540/unit</h5>
                 <button class="btn btn-outline-primary w-100">ADD +</button>

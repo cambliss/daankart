@@ -47,7 +47,7 @@
                                             <img src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}"
                                                 alt="Event Image" class="w-100 h-100">
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-8 upcoming-title">
                                             <h5 class="text-primary mb-2">{{ $campaign->title }}</h5>
                                             <p class="text-muted small">{!! $campaign->description !!}</p>
                                         </div>
@@ -99,9 +99,9 @@
                                         <h5 class="text-primary mt-2 mb-2">{{ $daanCampaign->campaign_title }}</h5>
                                         <p class="text-muted small featured-cause-description">{!! $daanCampaign->campaign_description !!}</p>
                                         <div class="mb-2">
-                                            <a
+                                            <a class="donate-amt"
                                                 href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
-                                                <button class="btn btn-sm btn-primary me-2">Donate Now</button>
+                                                <button class="btn btn-sm btn-primary me-2 ">Donate Now</button>
                                             </a>
                                             <a
                                                 href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
@@ -204,6 +204,18 @@
         .upcomming-events .featured-cause-description {
             height: 250px;
             overflow: hidden;
+        }
+        
+        @media (max-width: 768px){
+            .upcoming-title{
+                padding-top:15px;
+            }
+        }
+        
+        @media (min-width: 775px) and (max-width:995px){
+            .donate-amt{
+                padding-bottom: 15px;
+            }
         }
     </style>
 @endpush

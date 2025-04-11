@@ -1,5 +1,10 @@
 @extends($activeTemplate . 'layouts.master')
 @section('content')
+    <style>
+        .nice-edit+div,.nice-edit+div+div {
+            width: 100% !important;
+        }
+    </style>
     <div class="pt-90 pb-120">
         <div class="container">
             <div class="row justify-content-center">
@@ -105,7 +110,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">@lang('Description')</label>
+                                        <label class="form-label nice-edit">@lang('Description')</label>
                                         <textarea class="form-control form--control nicEdit" name="description">{{ old('description', @$org->description) }}</textarea>
                                     </div>
 

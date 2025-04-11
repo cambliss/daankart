@@ -6,7 +6,7 @@
        </div>
        
        <div class="container-fluid custom-container explore-container">
-            <div class="row">
+            <div class="row campaign-search">
                 <div class="col-lg-12">
                     @include($activeTemplate . 'sections.search-filters');
                 </div>
@@ -151,16 +151,42 @@
           align-items: center;
         }
         
-         @media (max-width:420px){
+         @media (min-width:720px) and (max-width:1200px){
             .banner-container {
-                  padding-bottom: 20px;
-                  height: 80px;
+                          padding-bottom: 180px;
+                          height: 80px;
+                          padding-top: 80px;
             }
         }
-        
-        .explore-container{
-            padding-top: 50px;
+         @media (min-width:375px) and (max-width:720px){
+            .banner-container {
+                          
+                          height: 80px;
+                          padding-top: 40px;
+            }
         }
+        @media (min-width:1200px){
+            .banner-container {
+                  padding-bottom: 180px;
+        }
+        
+        @media (min-width: 720px) and (max-width: 1200px) {
+        .explore-container {
+        padding-top: 50px;
+         }
+        }
+        /* @media (max-width:720px){*/
+        /*.explore-container{*/
+        /*    padding-top: 50px;*/
+        /*  }    */
+        /*}*/
+        
+        /* @media (min-width:420px){*/
+        /*    .campaign-search {*/
+        /*          padding-top: 70px;*/
+        /*}*/
+         
+        
         .text-orange {
             color: #FF7c1f;
         }

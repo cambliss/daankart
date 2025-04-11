@@ -9,7 +9,7 @@
                         <input name="currency" type="hidden">
                         <div class="card custom--card">
                             <div class="card-body">
-                                <div class="row justify-content-center gy-sm-4 gy-3">
+                                <div class="row justify-content-center gy-sm-4 gy-3 razorpay-image">
 
                                     <div class="col-lg-6">
                                         <div class="payment-system-list is-scrollable gateway-option-list">
@@ -140,6 +140,18 @@
         </div>
     </div>
 @endsection
+
+@push('style')
+    <style>
+    
+     @media (max-width:1200px){
+    .razorpay-image{
+        padding-top: 55px;
+      }
+    }
+
+    </style>
+@endpush    
 
 @push('script')
     <script>

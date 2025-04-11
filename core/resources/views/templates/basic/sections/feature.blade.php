@@ -68,7 +68,7 @@
                         <img src="assets/images/step5.jpg" alt="Delivery Report">
                     </div>
                     <h3>DELIVERY REPORT</h3>
-                    <p>Donatekart delivers the products and the organisation updates about product utilization.</p>
+                    <p>Daankart delivers the products and the organisation updates about product utilization.</p>
                 </div>
             </div>
 
