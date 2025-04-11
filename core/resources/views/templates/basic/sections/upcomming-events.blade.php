@@ -4,121 +4,97 @@
         'status' => 'Approved',
         'is_kyc_varified' => 1,
     ])
-        ->limit(5)
-        ->latest()
-        ->get();
-    // dd($daanCampaigns);
+    ->limit(5)
+    ->latest()
+    ->get();
 @endphp
-<div class="container py-4 upcomming-events">
-    <div class="row">
 
-        <!-- Upcoming Events -->
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col">
-                    <h4 class="mb-4">Donate Monthly</h4>
-                </div>
-                <div class="col-md-4">
+<div class="container py-5 upcomming-events">
+    <div class="row g-4 align-items-stretch">
+        <!-- Donate Monthly -->
+        <div class="col-md-6 d-flex flex-column">
+            <div class="bg-light rounded-4 p-4 h-100 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold text-orange">Donate Monthly</h4>
                     <div class="carousel-navigation">
-                        <button class="carousel-control control-prev" type="button" data-bs-target="#eventCarousel"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                        <button class="carousel-control control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
                         </button>
-                        <button class="carousel-control control-next" type="button" data-bs-target="#eventCarousel"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
+                        <button class="carousel-control control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
                         </button>
                     </div>
                 </div>
-            </div>
-            <!-- Event Slider -->
-            <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
-
-                <div class="carousel-inner">
-                    @foreach ($campaignsChunks as $key => $campaigns)
-                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                            @foreach ($campaigns as $campaign)
-                            <a href="{{ route('campaign.details', ['slug' => $campaign->slug]) }}">
-                                <div class="event-card border-0 shadow-sm mb-2">
-                                    <div class="row" >
-                                        <div class="col-md-4">
+                <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($campaignsChunks as $key => $campaigns)
+                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                @foreach ($campaigns as $campaign)
+                                    <a href="{{ route('campaign.details', ['slug' => $campaign->slug]) }}" class="text-decoration-none">
+                                        <div class="event-card d-flex border-0 bg-white rounded-3 shadow-sm mb-3 overflow-hidden">
                                             <img src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image, getFileSize('campaign')) }}"
-                                                alt="Event Image" class="w-100 h-100">
+                                                alt="Event Image" class="img-fluid" style="width: 120px; object-fit: cover;">
+                                            <div class="ps-3 py-2">
+                                                <h6 class="text-green fw-bold">{{ $campaign->title }}</h6>
+                                                <p class="text-muted small mb-0">{!! Str::limit(strip_tags($campaign->description), 100) !!}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-8 upcoming-title">
-                                            <h5 class="text-primary mb-2">{{ $campaign->title }}</h5>
-                                            <p class="text-muted small">{!! $campaign->description !!}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            @endforeach
-
-                        </div>
-                    @endforeach
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- Featured Causes -->
-        <div class="col-md-6">
-            <h4 class="mb-2">Discover Campaigns</h4>
-            <div id="campaignCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                <!-- 3 seconds interval -->
-                <div class="carousel-inner">
-                    @foreach ($daanCampaigns as $index => $daanCampaign)
-                        <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                            <div class="event-card border-0 shadow-sm mb-2">
-                                <div class="row">
-                                    <div class="col-md-6 position-relative">
-                                        <img src="{{ getImage(getFilePath('campaign') . '/' . $daanCampaign->image, getFileSize('campaign')) }}"
-                                            alt="Event Image" class="w-100 h-100" style="object-fit: cover;">
-                                        {{-- add progress bar --}}
-                                        <?php
-                                        $raised_amount = $daanCampaign->raised_amount ?? 100;
-                                        $goal = $daanCampaign->goal ?? 1000;
-                                        
-                                        $raised_amount = 100;
-                                        $goal = 1000;
-                                        
-                                        $percentage = ($raised_amount / $goal) * 100;
-                                        ?>
-                                        <div class="progress mt-2 position-absolute"
-                                            style="bottom: 0; left: 0; right: 0;margin: 10px 20px;">
-                                            <div class="progress-bar bg-primary" role="progressbar"
-                                                style="width: {{ $percentage }}%" aria-valuenow="{{ $raised_amount }}"
-                                                aria-valuemin="0" aria-valuemax="{{ $goal }}"></div>
-                                            <span
-                                                class="text-white position-relative translate-left-minus-full">{{ $percentage }}%</span>
+        <!-- Discover Campaigns -->
+        <div class="col-md-6 d-flex flex-column">
+            <div class="bg-light rounded-4 p-4 h-100 shadow-sm">
+                <h4 class="fw-bold text-orange mb-3">Discover Campaigns</h4>
+                <div id="campaignCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                    <div class="carousel-inner">
+                        @foreach ($daanCampaigns as $index => $daanCampaign)
+                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                <div class="event-card border-0 bg-white rounded-3 shadow-sm overflow-hidden">
+                                    <div class="row g-0">
+                                        <div class="col-md-6 position-relative">
+                                            <img src="{{ getImage(getFilePath('campaign') . '/' . $daanCampaign->image, getFileSize('campaign')) }}"
+                                                alt="Campaign Image" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                            @php
+                                                $raised_amount = $daanCampaign->raised_amount ?? 100;
+                                                $goal = $daanCampaign->goal ?? 1000;
+                                                $percentage = min(100, ($raised_amount / $goal) * 100);
+                                            @endphp
+                                            <div class="progress position-absolute w-100 bottom-0 start-0" style="height: 8px;">
+                                                <div class="progress-bar bg-orange" style="width: {{ $percentage }}%"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h5 class="text-primary mt-2 mb-2">{{ $daanCampaign->campaign_title }}</h5>
-                                        <p class="text-muted small featured-cause-description">{!! $daanCampaign->campaign_description !!}</p>
-                                        <div class="mb-2">
-                                            <a class="donate-amt"
-                                                href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
-                                                <button class="btn btn-sm btn-primary me-2 ">Donate Now</button>
-                                            </a>
-                                            <a
-                                                href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
-                                                <button class="btn btn-sm btn-outline-primary">Read More</button>
-                                            </a>
-                                        </div>
-                                        <div class="social-icons mt-2">
-                                            <i class="bi bi-facebook"></i>
-                                            <i class="bi bi-twitter"></i>
-                                            <i class="bi bi-instagram"></i>
-                                            <i class="bi bi-share-fill"></i>
+                                        <div class="col-md-6 p-3 d-flex flex-column justify-content-between">
+                                            <div>
+                                                <h6 class="text-green fw-bold">{{ $daanCampaign->campaign_title }}</h6>
+                                                <p class="text-muted small">{!! Str::limit(strip_tags($daanCampaign->campaign_description), 120) !!}</p>
+                                            </div>
+                                            <div>
+                                                <a href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
+                                                    <button class="btn btn-sm btn-orange me-2">Donate Now</button>
+                                                </a>
+                                                <a href="{{ route('campaign.daan_details_slug', ['slug' => $daanCampaign->slug]) }}">
+                                                    <button class="btn btn-sm btn-outline-orange">Read More</button>
+                                                </a>
+                                            </div>
+                                            <div class="social-icons mt-2">
+                                                <i class="bi bi-facebook"></i>
+                                                <i class="bi bi-twitter"></i>
+                                                <i class="bi bi-instagram"></i>
+                                                <i class="bi bi-share-fill"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,96 +102,44 @@
 </div>
 
 @push('style')
-    <style>
+<style>
+    .text-orange { color: #ff7c1f; }
+    .bg-orange { background-color: #ff7c1f !important; }
+    .btn-orange {
+        background-color: #ff7c1f;
+        color: #fff;
+        border: none;
+    }
+    .btn-orange:hover {
+        background-color: #e96b10;
+    }
+    .btn-outline-orange {
+        border: 1px solid #ff7c1f;
+        color: #ff7c1f;
+    }
+    .btn-outline-orange:hover {
+        background-color: #ff7c1f;
+        color: #fff;
+    }
+    .text-green { color: #4e5b31; }
+
+    .carousel-control {
+        background-color: #ff7c1f;
+        padding: 5px;
+        border-radius: 4px;
+    }
+
+    .social-icons i {
+        color: #4e5b31;
+        margin-right: 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
         .upcomming-events .event-card {
-            display: flex;
-            flex-direction: row;
+            flex-direction: column;
         }
-
-        .upcomming-events .event-date {
-            background-color: #ff4a00;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            width: 60px;
-            border-radius: 5px;
-        }
-
-        .upcomming-events .event-date .day {
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .upcomming-events .event-date .month {
-            text-transform: uppercase;
-        }
-
-        .upcomming-events .donation-bar {
-            background: rgba(255, 74, 0, 0.85);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            border-bottom-left-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-        .upcomming-events .social-icons i {
-            font-size: 1.2rem;
-            margin-right: 10px;
-            color: #ff4a00;
-            cursor: pointer;
-        }
-
-        .upcomming-events .image-container {
-            height: 250px;
-            overflow: hidden;
-            margin-right: 15px;
-        }
-
-        .upcomming-events .event-card-img {
-            width: 100%;
-            object-fit: contain;
-            object-position: center;
-            height: 100%;
-        }
-
-        .upcomming-events .carousel-navigation {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-
-        .upcomming-events .carousel-navigation .carousel-control {
-            background-color: #de7c00;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px 0px;
-            border-radius: 5px;
-        }
-        .upcomming-events .carousel-navigation .carousel-control>span {
-            height: 1.5rem;
-            width: 1.5rem;
-        }
-        .upcomming-events .featured-cause-description {
-            height: 250px;
-            overflow: hidden;
-        }
-        
-        @media (max-width: 768px){
-            .upcoming-title{
-                padding-top:15px;
-            }
-        }
-        
-        @media (min-width: 775px) and (max-width:995px){
-            .donate-amt{
-                padding-bottom: 15px;
-            }
-        }
-    </style>
+    }
+</style>
 @endpush

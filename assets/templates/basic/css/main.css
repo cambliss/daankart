@@ -2423,8 +2423,8 @@ span.menu-toggle:hover {
     left: 0;
     width: 20px;
     height: 10px;
-    border-left: 1px solid #13c366;
-    border-bottom: 1px solid #13c366;
+    border-left: 5px solid #4e5b31;
+    border-bottom: 5px solid #4e5b31;
     -webkit-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
