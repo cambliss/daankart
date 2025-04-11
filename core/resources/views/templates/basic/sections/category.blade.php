@@ -117,7 +117,6 @@
     </style>
 </head>
 
-<!-- Category Section -->
 <section>
     <div class="banner-slider">
         <div class="container">
@@ -147,7 +146,6 @@
     </div>
 </section>
 
-<!-- "Why Daankart?" Section -->
 <section class="why-section">
     <h2 class="why-title">Why Daankart?</h2>
     <div class="why-grid">
