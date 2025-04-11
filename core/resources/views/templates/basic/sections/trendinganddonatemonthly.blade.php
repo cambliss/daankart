@@ -63,7 +63,7 @@
                                         <img class="w-100" src="{{ getImage(getFilePath('campaign') . '/' . $campaign->image) }}" alt="image">
         <div class="event-card__content">
             <div class="event-cart__top">
-                <a class="user-profile" href="/profile/daankart_organization">
+                <a class="user-profile"  href="javascript:void(0)">
                     <div class="user-profile__thumb">
                         @if ($campaign->user->enable_org)
                             <img src="{{ avatar(@$campaign->user->organization->image ? getFilePath('orgProfile') . '/' . @$campaign->user->organization->image : null) }}" alt="org-cover-avatar">
