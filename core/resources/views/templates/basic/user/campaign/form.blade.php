@@ -21,7 +21,14 @@
         margin-bottom: 30px;
         position: relative;
     }
-
+    
+    @media (max-width:1200px){
+         .step-indicator {
+             display: flex;
+             justify-content: center;
+         }         
+    }
+    
     .step {
         width: 40px;
         height: 40px;
@@ -84,6 +91,12 @@
         justify-content: center;
         height: 100%;
     }
+    
+    @media (max-width:990px){
+         .video-container {
+             padding-top: 20px;
+         }         
+    }
 
     iframe {
         width: 100%;
@@ -94,7 +107,7 @@
     .fundraiser-container {
         padding-top: 50px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1200px) {
         .fundraiser-container .step-indicator>div>.step, .step-indicator>div>.step+div {
             display: none;
         }

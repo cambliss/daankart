@@ -17,13 +17,18 @@ $mappedBanner = [
             object-fit: contain;
         }
         
-         @media(max-width:420px){
+         @media(max-width:1200px){
         .page-banner-section .banner-image {
             padding-top: 25px;
             padding-bottom: 25px;
             }
         }
         @media(max-width:420px){
+        .banner-section-image {
+            padding-bottom: 10px;
+            }
+        }
+        @media(max-width:1200px){
         .banner-section-image {
             padding-bottom: 10px;
             }

@@ -38,8 +38,11 @@
             <div class="bg-light p-3 rounded">
                 <p>Submit your KYC documents to get your fundraiser approved and continue fundraising and withdraw
                     money.</p>
-                <button class="btn btn-danger" onclick="handleKYC()">Complete KYC</button>
-                <button class="btn btn-outline-warning">Campaign Link</button>
+               <span class="kyc-complete">        
+                  <button class="btn btn-danger" onclick="handleKYC()">Complete KYC</button>
+                </span>  
+                  <button class="btn btn-outline-warning">Campaign Link</button>
+                
             </div>
         </div>
     </div>
@@ -61,7 +64,7 @@
         </div>
     </div>
 </div>
-<div id="kyc-container" style="display: none;">
+<div id="kyc-container" style="display: block; padding-top: 25px;">
     <form action="{{ route('user.campaign.fundrise.save', ['action' => 'upload-kyc', 'id' => $id ?? 0]) }}"
         method="post" class="card" enctype="multipart/form-data" >
         @csrf
@@ -98,6 +101,20 @@
         <button type="submit" class="submit-btn mt-3">Submit</button>
     </form>
 </div>
+
+@push('style')
+    <style>
+    
+     @media (max-width:480px){
+    .kyc-complete{
+        padding-bottom: 15px;
+      }
+    }
+
+    </style>
+@endpush  
+
+
 @push('script')
     <script>
         function handleKYC() {

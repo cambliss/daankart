@@ -180,7 +180,9 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
             cursor: pointer;
             white-space: nowrap;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        ">
+        "
+        
+        >
         DONATE NOW
     </button>
 
@@ -355,7 +357,8 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
 
 
     <button type="button" class="btn btn-outline-light btn-lg fw-bold px-4 shadow-sm" 
-        style="border-radius: 50px;">
+        style="border-radius: 50px;" data-bs-toggle="modal" 
+        data-bs-target="#shareModal">
         Share a Mission
     </button>
 </div>
@@ -489,7 +492,8 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
 
         <div class="mt-5">
             <a href="#" class="btn btn-light btn-lg fw-bold px-4 rounded-pill openDonateModal">Donate Now</a>
-            <a href="#" class="btn btn-outline-light btn-lg fw-bold px-4 rounded-pill">Share the Mission</a>
+            <a href="#" class="btn btn-outline-light btn-lg fw-bold px-4 rounded-pill" data-bs-toggle="modal" 
+        data-bs-target="#shareModal">Share the Mission</a>
         </div>
     </div>
 </div>
@@ -1355,7 +1359,76 @@ background: rgba(255, 255, 255, 0.4); /* Whitish semi-transparent */
     </div>
 </div>
 @endif
+<!-- Share Modal -->
+<div class="modal fade" id="shareModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Share this mission</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!--<h6>What Is Starship? SpaceX Builds Its...</h6>-->
+                <!--<p class="text-muted">The giant, gleaming spacecraft is being designed to carry NASA astronauts to the moon, as well as...</p>-->
+                
+                <!-- Social Share Buttons -->
+                <div class="d-flex flex-wrap justify-content-center gap-3 my-4">
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/?text={{ urlencode('Check out this mission: ' . url()->current()) }}" 
+                       target="_blank" class="btn btn-outline-success rounded-circle p-3">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
+                       target="_blank" class="btn btn-outline-primary rounded-circle p-3">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    
+                    <!-- Twitter -->
+                    <a href="https://twitter.com/intent/tweet?text={{ urlencode('Check out this mission: ' . url()->current()) }}" 
+                       target="_blank" class="btn btn-outline-info rounded-circle p-3">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" 
+                       target="_blank" class="btn btn-outline-secondary rounded-circle p-3">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    
+                    <!-- Telegram -->
+                    <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&text={{ urlencode('Check this out: ') }}" 
+                       target="_blank" class="btn btn-outline-primary rounded-circle p-3">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+                
+                <!-- Copy Link -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="shareableLink" value="{{ url()->current() }}" readonly>
+                    <button class="btn btn-outline-dark" onclick="copyLink()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+
+<!-- Script for Copy Link -->
+<script>
+function copyLink() {
+    const linkInput = document.getElementById('shareableLink');
+    linkInput.select();
+    document.execCommand('copy');
+    alert('Link copied to clipboard!');
+}
+</script>
+
+
+
 
 @push('style')
 <style>
@@ -1674,3 +1747,5 @@ p{
 </style>
 
 @endpush
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">-->

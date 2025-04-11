@@ -42,5 +42,17 @@
             padding-bottom: 10px;
             }
         }
+        
+        @media(max-width:1200px){
+        .banner-section-image {
+            padding-bottom: 10px;
+            }
+        }
+        
+        @media (min-width:775px) and (max-width:1200px){
+            .banner-section-image {
+            padding-top: 55px;
+            }
+        }
     </style>
 @endpush  

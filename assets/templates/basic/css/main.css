@@ -178,12 +178,10 @@ img {
     height: auto;
 }
 
-.site-logo {
-    max-width: 200px;
-    max-height: 53px;
-}
+
 .site-logo img {
-    max-height: 52px;
+    max-height: 30px;
+    margin-top: -10px !important;
 }
 
 ul,
@@ -5266,16 +5264,29 @@ input[type=file]::file-selector-button {
     overflow: hidden;
 }
 
-.taxstrip {
+.tax-benefits-container {
     position: absolute;
     top: 0;
     right: 0;
-    background: hsl(var(--base));
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.taxstrip {
     color: white;
     padding: 5px 10px;
     border-radius: 0px 5px 0px 5px;
     font-size: small;
     cursor: pointer;
+}
+
+.taxstrip:nth-child(1) {
+    background:  hsl(var(--base));
+}
+
+.taxstrip:nth-child(2) {
+    background: #4e5b31;
 }
 
 .event-details-wrapper .icon.heart-icon {
