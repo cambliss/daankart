@@ -630,7 +630,7 @@ use Illuminate\Support\Str;
                             <div class="donation-wrapper">
                                 <div class="event-cart__top">
                                     <p class="mb-0">Organized By &#8599;</p>
-                                    <a class="user-profile" href="https://daankart.com/profile/daankart_organization">
+                                    <a class="user-profile"  href="javascript:void(0)">
                                         <div class="user-profile__thumb">
                                             <img src="https://daankart.com/assets/images/user/avatar.png"
                                                 alt="user-avatar">
